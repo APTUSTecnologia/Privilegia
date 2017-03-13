@@ -32,11 +32,13 @@ namespace Privilegia.Models.Productos
         public float PremioValor { get; set; }
 
         [Required]
+        [StringLength(1)]
         [Display(Name = "Tipo de premio")]
-        public char TipoPremio { get; set; }
+        public string TipoPremio { get; set; }
 
         [Display(Name = "Tipo de Comision Indirecta")]
-        public char TipoComisionIndirecta { get; set; }
+        [StringLength(1)]
+        public string TipoComisionIndirecta { get; set; }
 
         [Display(Name = "Valor de la comision")]
         public float ComisionValor { get; set; }
@@ -48,8 +50,9 @@ namespace Privilegia.Models.Productos
         public float ImporteMutualista { get; set; }
 
         [Display(Name = "Tipo de comisión")]
+        [StringLength(1)]
         [Required]
-        public char TipoComision { get; set; }
+        public string TipoComision { get; set; }
 
         [Required]
         [Display(Name = "Partner")]

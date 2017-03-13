@@ -7,13 +7,13 @@ namespace Privilegia.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class anadidoIdPartnerEnDireccionSecundaria : IMigrationMetadata
+    public sealed partial class inicial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(anadidoIdPartnerEnDireccionSecundaria));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(inicial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201702271502178_anadidoIdPartnerEnDireccionSecundaria"; }
+            get { return "201703130717102_inicial"; }
         }
         
         string IMigrationMetadata.Source

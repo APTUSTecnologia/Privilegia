@@ -27,6 +27,8 @@ namespace Privilegia.Models
         [Display(Name = "Estado")]
         public string Estado { get; set; }
 
+        public string Logo { get; set; }
+
         [Display(Name = "Fecha de acuerdo")]
         [Required]
         public string FechaAlta { get; set; }
@@ -64,9 +66,6 @@ namespace Privilegia.Models
         [Display(Name = "Observaciones")]
         [StringLength(100)]
         public string Observaciones { get; set; }
-
-        public string Logo { get; set; }
-
     }
 
     public class PartnerExterno : PartnerModel

@@ -152,81 +152,9 @@
     </Compile>
     <Compile Include="Helpers\MyHelpers.cs" />
     <Compile Include="IBaseRepository.cs" />
-    <Compile Include="Migrations\201702151159252_metemosDirecciones.cs" />
-    <Compile Include="Migrations\201702151159252_metemosDirecciones.Designer.cs">
-      <DependentUpon>201702151159252_metemosDirecciones.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702170735239_modificadoPartnerConFechaAltayBaja.cs" />
-    <Compile Include="Migrations\201702170735239_modificadoPartnerConFechaAltayBaja.Designer.cs">
-      <DependentUpon>201702170735239_modificadoPartnerConFechaAltayBaja.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702271502178_anadidoIdPartnerEnDireccionSecundaria.cs" />
-    <Compile Include="Migrations\201702271502178_anadidoIdPartnerEnDireccionSecundaria.Designer.cs">
-      <DependentUpon>201702271502178_anadidoIdPartnerEnDireccionSecundaria.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702271526512_quitadoPartnerInternoDireccionSecundaria.cs" />
-    <Compile Include="Migrations\201702271526512_quitadoPartnerInternoDireccionSecundaria.Designer.cs">
-      <DependentUpon>201702271526512_quitadoPartnerInternoDireccionSecundaria.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702280650457_update.cs" />
-    <Compile Include="Migrations\201702280650457_update.Designer.cs">
-      <DependentUpon>201702280650457_update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702280932212_anadidapersonadecontacto.cs" />
-    <Compile Include="Migrations\201702280932212_anadidapersonadecontacto.Designer.cs">
-      <DependentUpon>201702280932212_anadidapersonadecontacto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702281518304_modificadasDirecciones.cs" />
-    <Compile Include="Migrations\201702281518304_modificadasDirecciones.Designer.cs">
-      <DependentUpon>201702281518304_modificadasDirecciones.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703011007511_anadidoproductos.cs" />
-    <Compile Include="Migrations\201703011007511_anadidoproductos.Designer.cs">
-      <DependentUpon>201703011007511_anadidoproductos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703021000473_modificadoproductos.cs" />
-    <Compile Include="Migrations\201703021000473_modificadoproductos.Designer.cs">
-      <DependentUpon>201703021000473_modificadoproductos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703021107053_anadidoTipoEnExterno.cs" />
-    <Compile Include="Migrations\201703021107053_anadidoTipoEnExterno.Designer.cs">
-      <DependentUpon>201703021107053_anadidoTipoEnExterno.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703021515460_modificadoTipoEnexterno.cs" />
-    <Compile Include="Migrations\201703021515460_modificadoTipoEnexterno.Designer.cs">
-      <DependentUpon>201703021515460_modificadoTipoEnexterno.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703031233503_anadidoPublicidad.cs" />
-    <Compile Include="Migrations\201703031233503_anadidoPublicidad.Designer.cs">
-      <DependentUpon>201703031233503_anadidoPublicidad.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703060742109_modificadoPublicidad.cs" />
-    <Compile Include="Migrations\201703060742109_modificadoPublicidad.Designer.cs">
-      <DependentUpon>201703060742109_modificadoPublicidad.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703070915501_anadidoFacturacionPublicidad.cs" />
-    <Compile Include="Migrations\201703070915501_anadidoFacturacionPublicidad.Designer.cs">
-      <DependentUpon>201703070915501_anadidoFacturacionPublicidad.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703071314058_modificadoFacturarionPublicidad.cs" />
-    <Compile Include="Migrations\201703071314058_modificadoFacturarionPublicidad.Designer.cs">
-      <DependentUpon>201703071314058_modificadoFacturarionPublicidad.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703081457311_modificadoProductoComisiones.cs" />
-    <Compile Include="Migrations\201703081457311_modificadoProductoComisiones.Designer.cs">
-      <DependentUpon>201703081457311_modificadoProductoComisiones.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703081528038_modificadoProductoComisionesIndirectas.cs" />
-    <Compile Include="Migrations\201703081528038_modificadoProductoComisionesIndirectas.Designer.cs">
-      <DependentUpon>201703081528038_modificadoProductoComisionesIndirectas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703100927264_modificadoPartnerInternoExterno.cs" />
-    <Compile Include="Migrations\201703100927264_modificadoPartnerInternoExterno.Designer.cs">
-      <DependentUpon>201703100927264_modificadoPartnerInternoExterno.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703130656433_update1.cs" />
-    <Compile Include="Migrations\201703130656433_update1.Designer.cs">
-      <DependentUpon>201703130656433_update1.cs</DependentUpon>
+    <Compile Include="Migrations\201703130717102_inicial.cs" />
+    <Compile Include="Migrations\201703130717102_inicial.Designer.cs">
+      <DependentUpon>201703130717102_inicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Direcciones\DireccionModel.cs" />
@@ -660,62 +588,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201702151159252_metemosDirecciones.resx">
-      <DependentUpon>201702151159252_metemosDirecciones.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702170735239_modificadoPartnerConFechaAltayBaja.resx">
-      <DependentUpon>201702170735239_modificadoPartnerConFechaAltayBaja.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702271502178_anadidoIdPartnerEnDireccionSecundaria.resx">
-      <DependentUpon>201702271502178_anadidoIdPartnerEnDireccionSecundaria.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702271526512_quitadoPartnerInternoDireccionSecundaria.resx">
-      <DependentUpon>201702271526512_quitadoPartnerInternoDireccionSecundaria.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702280650457_update.resx">
-      <DependentUpon>201702280650457_update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702280932212_anadidapersonadecontacto.resx">
-      <DependentUpon>201702280932212_anadidapersonadecontacto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702281518304_modificadasDirecciones.resx">
-      <DependentUpon>201702281518304_modificadasDirecciones.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703011007511_anadidoproductos.resx">
-      <DependentUpon>201703011007511_anadidoproductos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703021000473_modificadoproductos.resx">
-      <DependentUpon>201703021000473_modificadoproductos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703021107053_anadidoTipoEnExterno.resx">
-      <DependentUpon>201703021107053_anadidoTipoEnExterno.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703021515460_modificadoTipoEnexterno.resx">
-      <DependentUpon>201703021515460_modificadoTipoEnexterno.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703031233503_anadidoPublicidad.resx">
-      <DependentUpon>201703031233503_anadidoPublicidad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703060742109_modificadoPublicidad.resx">
-      <DependentUpon>201703060742109_modificadoPublicidad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703070915501_anadidoFacturacionPublicidad.resx">
-      <DependentUpon>201703070915501_anadidoFacturacionPublicidad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703071314058_modificadoFacturarionPublicidad.resx">
-      <DependentUpon>201703071314058_modificadoFacturarionPublicidad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703081457311_modificadoProductoComisiones.resx">
-      <DependentUpon>201703081457311_modificadoProductoComisiones.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703081528038_modificadoProductoComisionesIndirectas.resx">
-      <DependentUpon>201703081528038_modificadoProductoComisionesIndirectas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703100927264_modificadoPartnerInternoExterno.resx">
-      <DependentUpon>201703100927264_modificadoPartnerInternoExterno.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703130656433_update1.resx">
-      <DependentUpon>201703130656433_update1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703130717102_inicial.resx">
+      <DependentUpon>201703130717102_inicial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
