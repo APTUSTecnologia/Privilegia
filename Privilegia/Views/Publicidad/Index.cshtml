@@ -39,9 +39,10 @@
                             <th>Nombre Empresa</th>
                             <th>Fecha de Inicio</th>
                             <th>Fecha de Fin</th>
-                            <th>Espacio</th>
-                            <th>Parte</th>
-                            <th>Importe €</th>
+                            <th>Soporte</th>
+                            <th>Publicidad</th>
+                            <th>Plan de Medios</th>
+                            <th>Total €</th>
                             <th>Factura</th>
                             <th>
                                 <div class="pull-right">
@@ -82,7 +83,17 @@
                         { "sName": "FechaFin" },
                         { "sName": "NombreEspacioPublicidad" },
                         { "sName": "NombreParteEspacioPublicidad" },
-                        { "sName": "Importe" },
+                        {
+                            "sName": "PlanDeMedios",
+                            "render": function(data) {
+                                if (data) {
+                                    return '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+                                } else {
+                                    return '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
+                                }
+                            }
+                        },
+                        { "sName": "Total" },
                         { "sName": "idFactura", "bVisible": false, "bSearchable": false },
                         {
                             "mData": null,
@@ -92,7 +103,7 @@
                                 var urlBorrar = '@Url.Action("Detalles", "Publicidad")/' + row[0];
                                 var urlVer = '@Url.Action("Detalles", "Publicidad")/' + row[0];
 
-                                if (row[7] !== null) {
+                                if (row[8] !== null) {
                                     //Tengo Factura
                                     var urlFactura = '@Url.Action("VerFactura", "Informes")/' + row[7];
 

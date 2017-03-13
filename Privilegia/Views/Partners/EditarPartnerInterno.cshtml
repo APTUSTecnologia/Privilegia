@@ -1,17 +1,39 @@
-﻿@model Privilegia.Models.PartnerInterno
+﻿@using Privilegia.Models
+@model Privilegia.Models.PartnerInterno
 
 <div class="modal-header">
     <h3>Añadir nuevo Partner Interno</h3>
 </div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("EditarPartnerInterno", "Partners", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
     @Html.HiddenFor(m => m.DireccionPrincipal.PartnerId)
     @Html.HiddenFor(m => m.DireccionPrincipal.Id)
-
+    if (Model.Logo != null)
+    {
+        @Html.HiddenFor(m => m.Logo.Id)
+        @Html.HiddenFor(m => m.Logo.FileType)
+    }
     <div class="modal-body">
+        <div class="row">
+            @if (Model.Logo != null && Model.Logo.FileType == FileType.Logo)
+            {
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <img src="~/Logos?id=@Model.Logo.Id" alt="logo" width="150px" height="50px" />
+                    </div>
+                </div>
+            }
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.Label("Cargar Logo", new { @class = "control-label" })
+                    <input type="file" id="Logo" name="imagen" />
+                </div>
+
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
@@ -71,11 +93,11 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Comisiones, new { @class = "control-label" })
                     @Html.DropDownListFor(m => m.Comisiones,
-                new List<SelectListItem>
-                {
-                    new SelectListItem {Text = "NO", Value = "false"},
-                    new SelectListItem {Text = "SI", Value = "true"}
-                }, "Selecciona..", new { @class = "form-control" })
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem {Text = "NO", Value = "false"},
+                        new SelectListItem {Text = "SI", Value = "true"}
+                    }, "Selecciona..", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Comisiones, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -84,15 +106,16 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Premios, new { @class = "control-label" })
                     @Html.DropDownListFor(m => m.Premios,
-                        new List<SelectListItem>
-                        {
-                            new SelectListItem {Text = "NO", Value = "false"},
-                            new SelectListItem {Text = "SI", Value = "true"}
-                        }, "Selecciona..", new { @class = "form-control" })
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem {Text = "NO", Value = "false"},
+                        new SelectListItem {Text = "SI", Value = "true"}
+                    }, "Selecciona..", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Premios, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12">
                 <h3>

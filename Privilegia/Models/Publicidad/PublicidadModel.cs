@@ -19,7 +19,16 @@ namespace Privilegia.Models
 
         [Required]
         public string Importe { get; set; }
-        
+
+        public string Descuento { get; set; }
+
+        [Required]
+        [Display(Name = "Plan de medios")]
+        public bool PlanDeMedios { get; set; }
+
+        [Required]
+        public string Total { get; set; }
+
         [Required]
         [Display(Name = "Fecha de Inicio")]
         public string FechaInicio { get; set; }
@@ -29,11 +38,11 @@ namespace Privilegia.Models
         public string FechaFin { get; set; }
 
         [Required]
-        [Display(Name = "Espacio")]
+        [Display(Name = "Soporte")]
         public string NombreEspacioPublicidad { get; set; }
 
         [Required]
-        [Display(Name = "Lugar")]
+        [Display(Name = "Publicidad")]
         public string NombreParteEspacioPublicidad { get; set; }
 
         public string IdFactura { get; set; }

@@ -4,7 +4,7 @@
     <h3>Añadir nuevo Partner Interno</h3>
 </div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateInterno","Partners" , null , FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
@@ -34,14 +34,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label>Estado</label>
                     @Html.DropDownListFor(m => m.Estado,
                     new List<SelectListItem>
                     {
                         new SelectListItem {Text = "Alta", Value = "Alta"}
-                    }, new { @class = "form-control required" })
+                    }, new { @class = "form-control " })
                     @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -55,13 +55,13 @@
 
             </div>
             @*<div class="col-md-2">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.FechaBaja, new { @class = "control-label" })<span class="glyphicon glyphicon-calendar en_formulario"></span>
-                    @Html.TextBoxFor(model => model.FechaBaja, new { @id = "bajadatepicker", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.FechaBaja, "", new { @class = "text-danger" })
-                </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FechaBaja, new { @class = "control-label" })<span class="glyphicon glyphicon-calendar en_formulario"></span>
+                        @Html.TextBoxFor(model => model.FechaBaja, new { @id = "bajadatepicker", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FechaBaja, "", new { @class = "text-danger" })
+                    </div>
 
-            </div>*@
+                </div>*@
 
 
             <div class="col-md-2">
@@ -88,6 +88,14 @@
                         }, "Selecciona..", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Premios, "", new { @class = "text-danger" })
                 </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.Label("Logo", new { @class = "control-label" })
+                    <input type="file" id="Logo" name="image" />
+                </div>
+
             </div>
         </div>
         <div class="row">
@@ -198,7 +206,7 @@
                 <br />
             </div>
         </div>
-       
+
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -209,34 +217,34 @@
             </div>
         </div>
         @*<div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label>Plan de Medios</label>
-                    <select class="form-control" id="Comisiones">
-                        <option value="Planmedios_no">NO</option>
-                        <option value="Planmedios_si">SI</option>
-                    </select>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Plan de Medios</label>
+                        <select class="form-control" id="Comisiones">
+                            <option value="Planmedios_no">NO</option>
+                            <option value="Planmedios_si">SI</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="TipoPublicidad">Espacios contratados</label>
-                    <select class="form-control" id="TipoPublicidad">
-                        <option value="TipoPublicidad_01">Ninguno</option>
-                        <option value="TipoPublicidad_01">Revista</option>
-                        <option value="TipoPublicidad_02">Web</option>
-                        <option value="TipoPublicidad_03">Boletin</option>
-                    </select>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="TipoPublicidad">Espacios contratados</label>
+                        <select class="form-control" id="TipoPublicidad">
+                            <option value="TipoPublicidad_01">Ninguno</option>
+                            <option value="TipoPublicidad_01">Revista</option>
+                            <option value="TipoPublicidad_02">Web</option>
+                            <option value="TipoPublicidad_03">Boletin</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label>Importe</label>
-                    <input type="text" class="form-control" id="Importe" placeholder="€">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Importe</label>
+                        <input type="text" class="form-control" id="Importe" placeholder="€">
+                    </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
     </div>
     <div class="modal-footer">
         <span id="progress" class="text-center" style="display: none;">

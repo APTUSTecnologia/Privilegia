@@ -3,7 +3,7 @@
     FECHA CREACION:                 		09/01/2017                           
     FECHA ULTIMA MODIFICACION:      		02/02/2017                      
     MODIFICADO POR:                 		APTUS                         
-************************************************************************/ 
+************************************************************************/
 
 /* RESET CSS
 
@@ -105,8 +105,8 @@ input, select {
 /* PARAMETROS CSS PRINCIPAL */
 
 /* CONTENEDORES */
-header{
-	background-color:#b0b5b9;
+header {
+    background-color: #b0b5b9;
 }
 
 footer {
@@ -117,44 +117,44 @@ footer {
     z-index: 9999;
 }
 
-footer p{
-	background-color: #ddd;
-	padding:20px;
-	margin-top:15px;
-	box-shadow: 0px -3px 5px #aaa;
-	margin-bottom:0px;
+    footer p {
+        background-color: #ddd;
+        padding: 20px;
+        margin-top: 15px;
+        box-shadow: 0px -3px 5px #aaa;
+        margin-bottom: 0px;
+    }
+
+.container {
+    margin-bottom: 50px;
 }
 
-.container{
-	margin-bottom:50px;
-}
- 
-.navbar .container, header .container{
-	margin-bottom:0px;
+.navbar .container, header .container {
+    margin-bottom: 0px;
 }
 
-header .container .row{
-	background-image: url('/Images/fondo_privilegia.png');
-	background-repeat: no-repeat;
-	background-position: top left;
-	padding:0;
-	margin:0;
-}
+    header .container .row {
+        background-image: url('/Images/fondo_privilegia.png');
+        background-repeat: no-repeat;
+        background-position: top left;
+        padding: 0;
+        margin: 0;
+    }
 
 header {
-	background-image: url('/Images/subfondo_privilegia.png');
-	background-repeat: repeat-y;
-	background-position: top center;
+    background-image: url('/Images/subfondo_privilegia.png');
+    background-repeat: repeat-y;
+    background-position: top center;
 }
 
 
 
 /* JUMBOTRON */
 
-.container .jumbotron, .container-fluid .jumbotron{
-	padding:20px;
-	margin-bottom:30px;
-	box-shadow: 3px 3px 5px #aaa;
+.container .jumbotron, .container-fluid .jumbotron {
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 3px 3px 5px #aaa;
     margin-top: 15px;
 }
 
@@ -165,34 +165,34 @@ header {
 
 /* HEADERS */
 
-h1, h2, h3, h4, h5, h6{
-	font-weight:bold;
-	font-size:150%;
-	margin: 15px 0;
-	text-align: left;
-	font-family: Verdana, Arial, Helvetica, Georgia;	
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    font-size: 150%;
+    margin: 15px 0;
+    text-align: left;
+    font-family: Verdana, Arial, Helvetica, Georgia;
 }
 
-h1{
-	font-size:150%;	
-	font-weight: normal;
+h1 {
+    font-size: 150%;
+    font-weight: normal;
 }
 
-h2{
+h2 {
     /*background-color: #0069b0;*/
     color: black;
     font-weight: normal;
     margin-top: 0;
     padding: 10px;
-	font-size:110%;	
+    font-size: 110%;
 }
 
-h3{
+h3 {
     background-color: #bbb;
     color: #000;
     margin-top: 0;
     padding: 10px;
-	font-size:100%;
+    font-size: 100%;
 }
 
 
@@ -200,24 +200,24 @@ h3{
 /*NAVBAR */
 
 .navbar {
-	margin-bottom:0px;
-		box-shadow: 3px 3px 5px #aaa;
+    margin-bottom: 0px;
+    box-shadow: 3px 3px 5px #aaa;
 }
 
 
 
 /* PANELES */
 
-.panel{
-	background-color: #ddd;
+.panel {
+    background-color: #ddd;
     padding: 10px;
-	box-shadow: 3px 3px 5px #aaa;
+    box-shadow: 3px 3px 5px #aaa;
 }
 
-.panel p{
-	padding-left: 10px;
-	padding-right:10px;
-}
+    .panel p {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
 /* LOGOTIPOS */
 
@@ -225,43 +225,42 @@ h3{
     height: 75px;
     margin: 10px;
     padding: 2px;
-	background-color:#fff;
+    background-color: #fff;
 }
 
-.navbar-brand >img{
-	height:100%;
+    .navbar-brand > img {
+        height: 100%;
+    }
+
+.nav > li > a {
+    font-weight: bold;
 }
 
-.nav > li > a{
-	font-weight:bold;
-}
-
-.nav > li.active > a{
-	background-color:#fff;
+.nav > li.active > a {
+    background-color: #fff;
 }
 
 
-.nav > li > a:hover{
-	background-color:#ccc;
-	font-weight:bold;
+.nav > li > a:hover {
+    background-color: #ccc;
+    font-weight: bold;
 }
 
-.navbar-light{
-	background-color:#eee;
-
+.navbar-light {
+    background-color: #eee;
 }
 
 /* PARRAFOS */
 
 p {
     margin: 0 0 20px;
-	font-size:95%;
+    font-size: 95%;
 }
 
 /* ALINEACIONES */
 
-.alinea_derecha{
-	float:right;
+.alinea_derecha {
+    float: right;
 }
 
 /* BOTONES */
@@ -275,51 +274,48 @@ p {
 	font-size:90%;
 }*/
 
-.btn-alpie{
-	margin-top:25px;
+.btn-alpie {
+    margin-top: 25px;
 }
 
-.btn-default.disabled{
-	background-color: #e00027;
+.btn-default.disabled {
+    background-color: #e00027;
 }
 
 /* GLYPHICONS */
 
-.glyphicon{
-	vertical-align: baseline;
-	font-size: 90%;
-	margin-right: 10px;
-	margin-left: 5px;
+.glyphicon {
+    vertical-align: baseline;
+    font-size: 90%;
+    margin-right: 10px;
+    margin-left: 5px;
 }
 
 /* DESHABILITADO */
 .deshabilitado {
-	opacity:.5;
+    opacity: .5;
 }
 
 /*  FILA  */
 
-.row{
-	margin-bottom: 15px;
+.row {
+    margin-bottom: 15px;
 }
 
-.panel th{
-	background-color:#eee;
+.panel th {
+    background-color: #eee;
 }
 
-.panel td{
-	background-color:#fff;
+.panel td {
+    background-color: #fff;
 }
 
 /* ROJO (SPAN) */
 
 
 #enproceso {
-
-background-color: #E20A0A;
-
-color: #ffffff;
-
+    background-color: #E20A0A;
+    color: #ffffff;
 }
 
 /*
@@ -333,29 +329,28 @@ select::-ms-expand { /* for IE 11
     display: none;
 }*/
 
-span.en_formulario{
-	float:right;
-	top:36px;
+span.en_formulario {
+    float: right;
+    top: 36px;
 }
 
-span.en_formulario_sinlabel{
-	float:right;
-	top:16px;
+span.en_formulario_sinlabel {
+    float: right;
+    top: 16px;
 }
 
 
 @media only screen and (max-width : 991px) {
-	.navbar-brand{
-		background-color: transparent;
-	}
-	
-	.navbar-brand img {
-		width:auto;
-		height:60px;
-		background-color:#fff;
-		margin-top:5px;
-	}
-	
+    .navbar-brand {
+        background-color: transparent;
+    }
+
+        .navbar-brand img {
+            width: auto;
+            height: 60px;
+            background-color: #fff;
+            margin-top: 5px;
+        }
 }
 
 /************************************************************************
@@ -363,7 +358,7 @@ span.en_formulario_sinlabel{
     FECHA CREACION:                 		09/01/2017                           
     FECHA ULTIMA MODIFICACION:      		24/01/2017                      
     MODIFICADO POR:                 		APTUS                         
-************************************************************************/ 
+************************************************************************/
 
 /* RESET CSS
 
@@ -465,8 +460,8 @@ input, select {
 /* PARAMETROS CSS PRINCIPAL */
 
 /* CONTENEDORES */
-header{
-	background-color:#b0b5b9;
+header {
+    background-color: #b0b5b9;
 }
 
 footer {
@@ -476,44 +471,44 @@ footer {
     width: 100%;
 }
 
-footer p{
-	background-color: #ddd;
-	padding:20px;
-	margin-top:15px;
-	box-shadow: 0px -3px 5px #aaa;
-	margin-bottom:0px;
+    footer p {
+        background-color: #ddd;
+        padding: 20px;
+        margin-top: 15px;
+        box-shadow: 0px -3px 5px #aaa;
+        margin-bottom: 0px;
+    }
+
+.container {
+    margin-bottom: 50px;
 }
 
-.container{
-	margin-bottom:50px;
-}
- 
-.navbar .container, header .container{
-	margin-bottom:0px;
+.navbar .container, header .container {
+    margin-bottom: 0px;
 }
 
-header .container .row{
-	background-image: url('/Images/fondo_privilegia.png');
-	background-repeat: no-repeat;
-	background-position: top left;
-	padding:0;
-	margin:0;
-}
+    header .container .row {
+        background-image: url('/Images/fondo_privilegia.png');
+        background-repeat: no-repeat;
+        background-position: top left;
+        padding: 0;
+        margin: 0;
+    }
 
 header {
-	background-image: url('/Images/subfondo_privilegia.png');
-	background-repeat: repeat-y;
-	background-position: top center;
+    background-image: url('/Images/subfondo_privilegia.png');
+    background-repeat: repeat-y;
+    background-position: top center;
 }
 
 
 
 /* JUMBOTRON */
 
-.container .jumbotron, .container-fluid .jumbotron{
-	padding:20px;
-	margin-bottom:30px;
-	box-shadow: 3px 3px 5px #aaa;
+.container .jumbotron, .container-fluid .jumbotron {
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 3px 3px 5px #aaa;
 }
 
 .jumbotron p {
@@ -523,33 +518,33 @@ header {
 
 /* HEADERS */
 
-h1, h2, h3, h4, h5, h6{
-	font-weight:bold;
-	font-size:150%;
-	margin: 15px 0;
-	text-align: left;
-	font-family: Verdana, Arial, Helvetica, Georgia;	
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    font-size: 150%;
+    margin: 15px 0;
+    text-align: left;
+    font-family: Verdana, Arial, Helvetica, Georgia;
 }
 
-h1{
-	font-size:150%;	
-	font-weight: normal;
+h1 {
+    font-size: 150%;
+    font-weight: normal;
 }
 
-h2{
+h2 {
     /*background-color: #0069b0;*/
     color: black;
     font-weight: normal;
     padding: 10px;
-	font-size:110%;	
+    font-size: 110%;
 }
 
-h3{
+h3 {
     background-color: #bbb;
     color: #000;
     margin-top: 0;
     padding: 10px;
-	font-size:100%;
+    font-size: 100%;
 }
 
 
@@ -557,24 +552,24 @@ h3{
 /*NAVBAR */
 
 .navbar {
-	margin-bottom:0px;
-		box-shadow: 3px 3px 5px #aaa;
+    margin-bottom: 0px;
+    box-shadow: 3px 3px 5px #aaa;
 }
 
 
 
 /* PANELES */
 
-.panel{
-	background-color: #ddd;
+.panel {
+    background-color: #ddd;
     padding: 10px;
-	box-shadow: 3px 3px 5px #aaa;
+    box-shadow: 3px 3px 5px #aaa;
 }
 
-.panel p{
-	padding-left: 10px;
-	padding-right:10px;
-}
+    .panel p {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
 /* LOGOTIPOS */
 
@@ -582,43 +577,42 @@ h3{
     height: 75px;
     margin: 10px;
     padding: 2px;
-	background-color:#fff;
+    background-color: #fff;
 }
 
-.navbar-brand >img{
-	height:100%;
+    .navbar-brand > img {
+        height: 100%;
+    }
+
+.nav > li > a {
+    font-weight: bold;
 }
 
-.nav > li > a{
-	font-weight:bold;
-}
-
-.nav > li.active > a{
-	background-color:#fff;
+.nav > li.active > a {
+    background-color: #fff;
 }
 
 
-.nav > li > a:hover{
-	background-color:#ccc;
-	font-weight:bold;
+.nav > li > a:hover {
+    background-color: #ccc;
+    font-weight: bold;
 }
 
-.navbar-light{
-	background-color:#eee;
-
+.navbar-light {
+    background-color: #eee;
 }
 
 /* PARRAFOS */
 
 p {
     margin: 0 0 20px;
-	font-size:95%;
+    font-size: 95%;
 }
 
 /* ALINEACIONES */
 
-.alinea_derecha{
-	float:right;
+.alinea_derecha {
+    float: right;
 }
 
 /* BOTONES */
@@ -632,51 +626,48 @@ p {
 	font-size:90%;
 }*/
 
-.btn-alpie{
-	margin-top:25px;
+.btn-alpie {
+    margin-top: 25px;
 }
 
-.btn-default.disabled{
-	background-color: #e00027;
+.btn-default.disabled {
+    background-color: #e00027;
 }
 
 /* GLYPHICONS */
 
-.glyphicon{
-	vertical-align: baseline;
-	font-size: 90%;
-	margin-right: 10px;
-	margin-left: 5px;
+.glyphicon {
+    vertical-align: baseline;
+    font-size: 90%;
+    margin-right: 10px;
+    margin-left: 5px;
 }
 
 /* DESHABILITADO */
 .deshabilitado {
-	opacity:.5;
+    opacity: .5;
 }
 
 /*  FILA  */
 
-.row{
-	margin-bottom: 15px;
+.row {
+    margin-bottom: 15px;
 }
 
-.panel th{
-	background-color:#eee;
+.panel th {
+    background-color: #eee;
 }
 
-.panel td{
-	background-color:#fff;
+.panel td {
+    background-color: #fff;
 }
 
 /* ROJO (SPAN) */
 
 
 #enproceso {
-
-background-color: #E20A0A;
-
-color: #ffffff;
-
+    background-color: #E20A0A;
+    color: #ffffff;
 }
 
 /*
@@ -690,156 +681,163 @@ select::-ms-expand { /* for IE 11
     display: none;
 }*/
 
-span.en_formulario{
-	float:right;
-	top:36px;
+span.en_formulario {
+    float: right;
+    top: 36px;
 }
 
-span.en_formulario_sinlabel{
-	float:right;
-	top:16px;
+span.en_formulario_sinlabel {
+    float: right;
+    top: 16px;
 }
 
-.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus
-{
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
     background-color: #0069b0;
     border-color: #0069b0;
-	font-weight:bold;
-	
+    font-weight: bold;
 }
 
-.desborde_tabla{
-	overflow-x:scroll;
+.desborde_tabla {
+    overflow-x: scroll;
 }
 
 
-.table{
-white-space: nowrap;
-	
+.table {
+    white-space: nowrap;
 }
 
-.paginador h2{
-	margin-top: 20px;
+.paginador h2 {
+    margin-top: 20px;
 }
 
-		.doc_factura {
-			width:80%;
+.doc_factura {
+    width: 80%;
+}
 
-		}
-		
-		.doc_factura h2{
-            background-color: #0069b0;
-		    color: #fff;
-			font-size:18px;
-			margin-top: 30px;
-			padding-top:20px;
-			padding-bottom:20px;
-			margin-bottom: 30px;
+    .doc_factura h2 {
+        background-color: #0069b0;
+        color: #fff;
+        font-size: 18px;
+        margin-top: 30px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+    }
 
-		}
-		
-		.doc_factura p{
-					font-size:14px;
-					}
-					
-		.encabezado{
-			height:100px;
-			margin-top:30px;
-		}
-		
-		.encabezado img{
-			height:100%;
-		}
+    .doc_factura p {
+        font-size: 14px;
+    }
 
-		table.factura {
-			margin-bottom:50px;
-		}
-				
-		table.factura  td{
-			border:none !important;
-			border-right: 1px solid #ccc !important;
-		}
+.encabezado {
+    height: 100px;
+    margin-top: 30px;
+}
 
-		table.factura  th{
-			border-right: 1px solid #ccc !important;
-			background-color:#ddd;
-			border-bottom-color:#aaa !important;
-			font-size:16px;
-		}
-		
+    .encabezado img {
+        height: 100%;
+    }
 
-		
-		table.factura  tr{	
-			border: 1px solid #ccc !important;
-			height:2.5em !important;
-		}	
-		
-		table.factura tr.borde_oscuro{
-			border-top: 2px solid #aaa!important;
-		}	
-		
+table.factura {
+    margin-bottom: 50px;
+}
 
-		table.factura strong{
-			font-size:16px;
-		}	
-		
-		.direcciones p{
-		margin-left:20px;
-		}
-		
-		.direcciones p.facturado{
-		margin-left: 50px;}
+    table.factura td {
+        border: none !important;
+        border-right: 1px solid #ccc !important;
+    }
+
+    table.factura th {
+        border-right: 1px solid #ccc !important;
+        background-color: #ddd;
+        border-bottom-color: #aaa !important;
+        font-size: 16px;
+    }
 
 
+
+    table.factura tr {
+        border: 1px solid #ccc !important;
+        height: 2.5em !important;
+    }
+
+        table.factura tr.borde_oscuro {
+            border-top: 2px solid #aaa !important;
+        }
+
+
+    table.factura strong {
+        font-size: 16px;
+    }
+
+.direcciones p {
+    margin-left: 20px;
+}
+
+    .direcciones p.facturado {
+        margin-left: 50px;
+    }
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
 
 @media only screen and (max-width : 991px) {
-	.navbar-brand{
-		background-color: transparent;
-	}
-	
-	.navbar-brand img {
-		width:auto;
-		height:60px;
-		background-color:#fff;
-		margin-top:5px;
-	}
-	
+    .navbar-brand {
+        background-color: transparent;
+    }
+
+        .navbar-brand img {
+            width: auto;
+            height: 60px;
+            background-color: #fff;
+            margin-top: 5px;
+        }
 }
 
 @media only screen and (max-width : 767px) {
-	.navbar-brand{
-		background-color: transparent;
-	}
-	
-	.navbar-brand img {
-		width:auto;
-		height:50px;
-		background-color:#fff;
-		margin-top:10px;
-	}
-	
+    .navbar-brand {
+        background-color: transparent;
+    }
+
+        .navbar-brand img {
+            width: auto;
+            height: 50px;
+            background-color: #fff;
+            margin-top: 10px;
+        }
 }
 
 @media only screen and (max-width : 710px) {
-	.navbar-brand{
-		background-color: transparent;
-	}
-	
-	.navbar-brand img {
-		display:none;
-	}
-	
+    .navbar-brand {
+        background-color: transparent;
+    }
+
+        .navbar-brand img {
+            display: none;
+        }
 }
 
 @media only screen and (max-width : 993px) {
-	.btn{
-		display:block;
-		width:80%;
-		margin:0 auto 15px;
-	}
-	
+    .btn {
+        display: block;
+        width: 80%;
+        margin: 0 auto 15px;
+    }
 }
-
-
-
-

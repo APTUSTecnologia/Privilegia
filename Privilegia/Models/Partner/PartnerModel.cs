@@ -27,7 +27,7 @@ namespace Privilegia.Models
         [Display(Name = "Estado")]
         public string Estado { get; set; }
 
-        public string Logo { get; set; }
+        public virtual Logo Logo { get; set; }
 
         [Display(Name = "Fecha de acuerdo")]
         [Required]
@@ -47,13 +47,6 @@ namespace Privilegia.Models
 
         //public DireccionSecundaria DireccionSecundaria { get; set; }
         public ICollection<PersonaContactoModel> PersonasDeContacto { get; set; }
-
-        [Display(Name = "Teléfono")]
-        public string Telefono { get; set; }
-
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
 
         [Required]
         [Display(Name = "G.comisiones")]

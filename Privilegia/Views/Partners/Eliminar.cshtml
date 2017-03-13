@@ -25,11 +25,11 @@
             @Html.DisplayFor(model => model.Cif)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.FechaCreacion)
+            @Html.DisplayNameFor(model => model.FechaAlta)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FechaCreacion)
+            @Html.DisplayFor(model => model.FechaAlta)
         </dd>
     </dl>
 
@@ -38,8 +38,8 @@
         @Html.AntiForgeryToken()
 
         <p>
-            <a class="btn btn-danger" href='@Url.Action("Eliminar","Partners", new {id = Model.Id})'>Editar</a>
-            <a class="btn btn-warning" href='@Url.Action("Index","Productos")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+            <a class="btn btn-danger" href='@Url.Action("Eliminar","Partners", new {id = Model.Id})'>Eliminar</a>
+            <a class="btn btn-warning" href='@Url.Action("Index","Partners")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
         </p>
     }
 </div>

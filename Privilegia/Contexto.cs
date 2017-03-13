@@ -4,20 +4,23 @@ using System.Data.Entity.ModelConfiguration;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Privilegia.Models;
-using Privilegia.Models.FacturacionPublicidad;
 using Privilegia.Models.Productos;
 using Privilegia.Models.Tipos;
+
 
 namespace Privilegia
 {// Puede agregar datos del perfil del usuario agregando más propiedades a la clase ApplicationUser. Para más información, visite http://go.microsoft.com/fwlink/?LinkID=317594.
 
     public class Contexto : DbContext
     {
+
         public Contexto()
             : base("name=Contexto")
         {
-
+            Configuration.ProxyCreationEnabled = false;
         }
+
+        public DbSet<Logo> Logos { get; set; }
         public DbSet<PartnerModel> Partners { get; set; }
         public DbSet<DireccionModel> Direcciones { get; set; }
         public DbSet<PersonaContactoModel> PersonasDeContacto { get; set; }
@@ -27,6 +30,7 @@ namespace Privilegia
         public DbSet<EspacioPublicidadModel> EspaciosPublicidad { get; set; }
         public DbSet<ParteEspacioPublicidadModel> PartesEspaciosPublicidad { get; set; }
         public DbSet<FacturacionPublicidadModel> FacturacionPublicidad { get; set; }
+       
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

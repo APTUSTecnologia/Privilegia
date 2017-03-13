@@ -13,6 +13,7 @@ using JQueryDataTables.Models;
 using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 using Privilegia.Models;
+using Privilegia.Models.Archivos;
 using Privilegia.Models.Direcciones;
 using Privilegia.Models.Partner;
 using Privilegia.Models.PersonasDeContacto;
@@ -30,6 +31,7 @@ namespace Privilegia.Controllers
         private IDireccionRepository _direccionRepository;
         private IPersonaDeContactoRepository _personaDeContactoRepository;
         private ITiposRepository _tiposRepository;
+        private ILogoRepository _logoRepository;
 
         public PartnersController()
         {
@@ -37,6 +39,7 @@ namespace Privilegia.Controllers
             _direccionRepository = new DireccionRepository();
             _personaDeContactoRepository = new PersonaDeContactoRepository();
             _tiposRepository = new TiposRepository();
+            _logoRepository = new LogoRepository();
 
         }
 
@@ -60,6 +63,9 @@ namespace Privilegia.Controllers
             {
                 return HttpNotFound();
             }
+
+            partner.Logo = _logoRepository.ObtenerLogoPorIdPartner(id);
+
             return View(partner);
         }
 
@@ -119,7 +125,7 @@ namespace Privilegia.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateExterno(PartnerExterno modelo)
+        public ActionResult CreateExterno(PartnerExterno modelo, HttpPostedFileBase image)
         {
             try
             {
@@ -129,7 +135,29 @@ namespace Privilegia.Controllers
                     modelo.FechaCreacion = DateTime.Today.ToLongDateString();
                     modelo.DireccionPrincipal.Id = Guid.NewGuid();
                     modelo.DireccionPrincipal.PartnerId = modelo.Id.ToString();
+
+                    if (image != null && image.ContentLength > 0)
+                    {
+                        var logo = new Logo
+                        {
+                            FileName = System.IO.Path.GetFileName(image.FileName),
+                            FileType = FileType.Logo,
+                            ContentType = image.ContentType
+                        };
+                        using (var reader = new System.IO.BinaryReader(image.InputStream))
+                        {
+                            logo.Content = reader.ReadBytes(image.ContentLength);
+                        }
+                        //modelo.Logo = logo;
+                        logo.Id = Guid.NewGuid();
+                        logo.IdPartner = modelo.Id.ToString();
+
+                        _logoRepository.Insertar(logo);
+                    }
+
                     _partnerRepository.Insertar(modelo);
+
+
 
                     return RedirectToAction("Index");
                 }
@@ -150,7 +178,7 @@ namespace Privilegia.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateInterno(PartnerInterno modelo)
+        public ActionResult CreateInterno(PartnerInterno modelo, HttpPostedFileBase image)
         {
             try
             {
@@ -159,15 +187,37 @@ namespace Privilegia.Controllers
                     modelo.FechaCreacion = DateTime.Today.ToLongDateString();
                     modelo.DireccionPrincipal.Id = Guid.NewGuid();
                     modelo.DireccionPrincipal.PartnerId = modelo.Id.ToString();
+
+                    //modelo.Logo.IdPartner = modelo.Id.ToString();
+
+                    if (image != null && image.ContentLength > 0)
+                    {
+                        var logo = new Logo
+                        {
+                            FileName = System.IO.Path.GetFileName(image.FileName),
+                            FileType = FileType.Logo,
+                            ContentType = image.ContentType
+                        };
+                        using (var reader = new System.IO.BinaryReader(image.InputStream))
+                        {
+                            logo.Content = reader.ReadBytes(image.ContentLength);
+                        }
+                        //modelo.Logo = logo;
+                        logo.Id = Guid.NewGuid();
+                        logo.IdPartner = modelo.Id.ToString();
+
+                        _logoRepository.Insertar(logo);
+                    }
                     //modelo.DireccionSecundaria.Id = Guid.NewGuid();
 
+                   
                     _partnerRepository.Insertar(modelo);
 
                     return RedirectToAction("Index");
                 }
                 return View(modelo);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return View(modelo);
                 throw;
@@ -175,7 +225,7 @@ namespace Privilegia.Controllers
         }
 
         // GET: PartnerInterno/Edit/5
-        public ActionResult EditarPartnerInterno(string id)
+        public ActionResult EditarPartnerInterno(string id )
         {
             if (id == null)
             {
@@ -192,6 +242,8 @@ namespace Privilegia.Controllers
                 return HttpNotFound();
             }
 
+            partner.Logo = _logoRepository.ObtenerLogoPorIdPartner(id);
+
             return View(partner);
         }
 
@@ -200,10 +252,33 @@ namespace Privilegia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarPartnerInterno(PartnerInterno partner)
+        public ActionResult EditarPartnerInterno(PartnerInterno partner, HttpPostedFileBase imagen)
         {
             if (ModelState.IsValid)
             {
+                if (imagen != null && imagen.ContentLength > 0)
+                {
+                    if (partner.Logo != null && partner.Logo.FileType == FileType.Logo)
+                    {
+                        _logoRepository.Eliminar(_logoRepository.ObtenerLogoPorId(partner.Logo.Id.ToString()));
+                    }
+                    var logo = new Logo
+                    {
+                        FileName = System.IO.Path.GetFileName(imagen.FileName),
+                        FileType = FileType.Logo,
+                        ContentType = imagen.ContentType
+                    };
+                    using (var reader = new System.IO.BinaryReader(imagen.InputStream))
+                    {
+                        logo.Content = reader.ReadBytes(imagen.ContentLength);
+                    }
+                    logo.Id = partner.Logo != null ? partner.Logo.Id : Guid.NewGuid();
+                    logo.IdPartner = partner.Id.ToString();
+                    partner.Logo = logo;
+
+                    _logoRepository.Insertar(logo);
+                }
+
                 _partnerRepository.Actualizar(partner);
 
                 return RedirectToAction("Index");
@@ -227,7 +302,7 @@ namespace Privilegia.Controllers
                                                 orderby li.Nombre
                                                 select li).ToList(), "Nombre", "Nombre");
 
-            var partner = _partnerRepository.ObtenerPartnerPorId(id);
+            var partner = _partnerRepository.ObtenerPartnersExternos().First(p => p.Id == Guid.Parse(id));
 
             partner.DireccionPrincipal = direccion;
 
@@ -235,6 +310,7 @@ namespace Privilegia.Controllers
             {
                 return HttpNotFound();
             }
+            partner.Logo = _logoRepository.ObtenerLogoPorIdPartner(id);
 
             return View(partner);
         }
@@ -244,10 +320,35 @@ namespace Privilegia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarPartnerExterno(PartnerExterno partner)
+        public ActionResult EditarPartnerExterno(PartnerExterno partner, HttpPostedFileBase imagen)
         {
             if (ModelState.IsValid)
             {
+               
+
+                if (imagen != null && imagen.ContentLength > 0)
+                {
+                    if (partner.Logo != null && partner.Logo.FileType == FileType.Logo)
+                    {
+                        _logoRepository.Eliminar(_logoRepository.ObtenerLogoPorId(partner.Logo.Id.ToString()));
+                    }
+                    var logo = new Logo
+                    {
+                        FileName = System.IO.Path.GetFileName(imagen.FileName),
+                        FileType = FileType.Logo,
+                        ContentType = imagen.ContentType
+                    };
+                    using (var reader = new System.IO.BinaryReader(imagen.InputStream))
+                    {
+                        logo.Content = reader.ReadBytes(imagen.ContentLength);
+                    }
+                    logo.Id = partner.Logo != null ? partner.Logo.Id : Guid.NewGuid();
+                    logo.IdPartner = partner.Id.ToString();
+                    partner.Logo = logo;
+
+                    _logoRepository.Insertar(logo);
+                }
+
                 _partnerRepository.Actualizar(partner);
 
                 return RedirectToAction("Index");
@@ -275,6 +376,9 @@ namespace Privilegia.Controllers
             {
                 return HttpNotFound();
             }
+
+            partner.Logo = _logoRepository.ObtenerLogoPorIdPartner(id);
+
             return View(partner);
         }
 
@@ -391,20 +495,16 @@ namespace Privilegia.Controllers
             {
                 //Used if particulare columns are filtered 
                 var nombreFilter = Convert.ToString(Request["sSearch_1"]);
-                var cifFilter = Convert.ToString(Request["sSearch_2"]);
-                var tipoFilter = Convert.ToString(Request["sSearch_3"]);
+                var tipoFilter = Convert.ToString(Request["sSearch_2"]);
 
 
                 //Optionally check whether the columns are searchable at all 
                 var isNombreSearchable = Convert.ToBoolean(Request["bSearchable_1"]);
-                var isCifSearchable = Convert.ToBoolean(Request["bSearchable_2"]);
                 var isTipoSearchable = Convert.ToBoolean(Request["bSearchable_3"]);
 
 
                 filteredCompanies = listExternos?.ToList()
                     .Where(c => isNombreSearchable && c.Nombre.ToLower().Contains(param.sSearch.ToLower())
-                                ||
-                                isCifSearchable && c.Cif.ToLower().Contains(param.sSearch.ToLower())
                                 ||
                                 isTipoSearchable && c.Tipo.ToLower().Contains(param.sSearch.ToLower()));
             }
@@ -414,11 +514,10 @@ namespace Privilegia.Controllers
             }
 
             var isNombreSortable = Convert.ToBoolean(Request["bSortable_1"]);
-            var isCifSortable = Convert.ToBoolean(Request["bSortable_2"]);
-            var isTipoSortable = Convert.ToBoolean(Request["bSortable_3"]);
+            var isTipoSortable = Convert.ToBoolean(Request["bSortable_2"]);
             var sortColumnIndex = Convert.ToInt32(Request["iSortCol_0"]);
             Func<PartnerExterno, string> orderingFunction = (c => sortColumnIndex == 1 && isNombreSortable 
-                ? c.Nombre: sortColumnIndex == 2 && isCifSortable ? c.Tipo : sortColumnIndex == 3 && isTipoSortable
+                ? c.Nombre: sortColumnIndex == 2 && isTipoSortable
                        ? c.FechaAlta: "");
 
             var sortDirection = Request["sSortDir_0"]; // asc or desc

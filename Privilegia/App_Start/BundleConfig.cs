@@ -14,10 +14,9 @@ namespace Privilegia
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery-ui-{version}.js",
                          "~/Scripts/Calendar/fullcalendar.js",
-                         "~/Scripts/Calendar/locale/es.js",
+                        "~/Scripts/Calendar/locale/es.js",
                         "~/Scripts/jquery.dataTables.yadcf.js",
-                        "~/Scripts/DataTables/jquery.dataTables.js",
-                        "~/Scripts/AppJs/Privilegia.js"));
+                        "~/Scripts/DataTables/jquery.dataTables.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                          "~/Scripts/jquery.validate*",
@@ -35,6 +34,7 @@ namespace Privilegia
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/font-awesome.min.css",
                       "~/Content/bootstrap-select.css",
                       "~/Content/Calendar/fullcalendar.css",
                       "~/Content/privilegia.css",

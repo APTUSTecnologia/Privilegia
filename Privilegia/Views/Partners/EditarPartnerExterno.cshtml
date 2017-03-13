@@ -1,118 +1,144 @@
-﻿@model Privilegia.Models.PartnerExterno
+﻿@using Privilegia.Models
+@model Privilegia.Models.PartnerExterno
 
 <div class="modal-header">
     <h3>Editar Partner Externo</h3>
 </div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("EditarPartnerExterno", "Partners", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
+    if (Model.Logo != null)
+    {
+        @Html.HiddenFor(m => m.Logo.Id)
+        @Html.HiddenFor(m => m.Logo.FileType)
+    }
+
+    @Html.HiddenFor(m => m.DireccionPrincipal.PartnerId)
+    @Html.HiddenFor(m => m.DireccionPrincipal.Id)
     <div class="modal-body">
         <div class="row">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="col-md-4">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Cif, new { @class = "control-label" })
-                    @Html.TextBoxFor(model => model.Cif, new { @class = "form-control required", @placeholder = "Introduzca el C.I.F." })
-                    @Html.ValidationMessageFor(model => model.Cif, "", new { @class = "text-danger" })
+            @if (Model.Logo != null && Model.Logo.FileType == FileType.Logo)
+            {
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <img src="~/Logos?id=@Model.Logo.Id" alt="logo" width="150px" height="50px" />
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
+            }
+            <div class="col-md-3">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Nombre, new { @class = "control-label" })
-                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control required", @placeholder = "Introduzca el Nombre del Partner" })
-                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    @Html.Label("Cargar Logo", new { @class = "control-label" })
+                    <input type="file" id="Logo" name="imagen" />
                 </div>
 
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Tipo, new { @class = "control-label" })
-                    @Html.DropDownListFor(model => model.Tipo, ViewBag.listTipos as SelectList, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-1">
-                <div class="form-group">
-                    <label>--</label>
-                    <a class="btn btn-success" onclick="anadirTipo();" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </a>
-                </div>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label>Estado</label>
-                    @Html.DropDownListFor(m => m.Estado,
+            <div class="row">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cif, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Cif, new { @class = "form-control ", @placeholder = "Introduzca el C.I.F." })
+                        @Html.ValidationMessageFor(model => model.Cif, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nombre, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control ", @placeholder = "Introduzca el Nombre del Partner" })
+                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Tipo, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.Tipo, ViewBag.listTipos as SelectList, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label>--</label>
+                        <a class="btn btn-success" onclick="anadirTipo();" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Estado</label>
+                        @Html.DropDownListFor(m => m.Estado,
                         new List<SelectListItem>
                         {
                             new SelectListItem {Text = "Alta", Value = "Alta"}
-                        }, new { @class = "form-control required" })
-                    @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                        }, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FechaAlta, new { @class = "control-label" })<span class="glyphicon glyphicon-calendar en_formulario"></span>
+                        @Html.TextBoxFor(model => model.FechaAlta, new { @id = "datepickeralta", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FechaAlta, "", new { @class = "text-danger" })
+                    </div>
+
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>
+                        <span class="glyphicon glyphicon-map-marker"></span>Dirección Principal
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DireccionPrincipal.Calle, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DireccionPrincipal.Calle, new { @class = "form-control", @placeholder = "Introduzca la Calle" })
+                        @Html.ValidationMessageFor(model => model.DireccionPrincipal.Calle, "", new { @class = "text-danger" })
+                    </div>
 
-            <div class="col-md-2">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.FechaAlta, new { @class = "control-label" })<span class="glyphicon glyphicon-calendar en_formulario"></span>
-                    @Html.TextBoxFor(model => model.FechaAlta, new { @id = "datepickeralta", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.FechaAlta, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DireccionPrincipal.Numero, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DireccionPrincipal.Numero, new { @class = "form-control", @placeholder = "Nº" })
+                        @Html.ValidationMessageFor(model => model.DireccionPrincipal.Numero, "", new { @class = "text-danger" })
+                    </div>
                 </div>
 
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DireccionPrincipal.CodigoPostal, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DireccionPrincipal.CodigoPostal, new { @class = "form-control", @placeholder = "C.P." })
+                        @Html.ValidationMessageFor(model => model.DireccionPrincipal.CodigoPostal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DireccionPrincipal.Provincia, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DireccionPrincipal.Provincia, new { @class = "form-control", @placeholder = "Introduzca la Provincia" })
+                        @Html.ValidationMessageFor(model => model.DireccionPrincipal.Provincia, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DireccionPrincipal.Municipio, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DireccionPrincipal.Municipio, new { @class = "form-control", @placeholder = "Introduzca el Municipio" })
+                        @Html.ValidationMessageFor(model => model.DireccionPrincipal.Municipio, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h3>
-                    <span class="glyphicon glyphicon-map-marker"></span>Dirección Principal
-                </h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.DireccionPrincipal.Calle, new { @class = "control-label" })
-                    @Html.TextBoxFor(model => model.DireccionPrincipal.Calle, new { @class = "form-control", @placeholder = "Introduzca la Calle" })
-                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.Calle, "", new { @class = "text-danger" })
-                </div>
-
-            </div>
-            <div class="col-md-1">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.DireccionPrincipal.Numero, new { @class = "control-label" })
-                    @Html.TextBoxFor(model => model.DireccionPrincipal.Numero, new { @class = "form-control", @placeholder = "Nº" })
-                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.Numero, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.DireccionPrincipal.CodigoPostal, new { @class = "control-label" })
-                    @Html.TextBoxFor(model => model.DireccionPrincipal.CodigoPostal, new { @class = "form-control", @placeholder = "C.P." })
-                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.CodigoPostal, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.DireccionPrincipal.Provincia, new { @class = "control-label" })
-                    @Html.TextBoxFor(model => model.DireccionPrincipal.Provincia, new { @class = "form-control", @placeholder = "Introduzca la Provincia" })
-                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.Provincia, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.DireccionPrincipal.Municipio, new { @class = "control-label" })
-                    @Html.TextBoxFor(model => model.DireccionPrincipal.Municipio, new { @class = "form-control", @placeholder = "Introduzca el Municipio" })
-                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.Municipio, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
 
         <div class="modal-footer">
             <span id="progress" class="text-center" style="display: none;">

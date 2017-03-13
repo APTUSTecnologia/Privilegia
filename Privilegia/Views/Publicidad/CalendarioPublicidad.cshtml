@@ -33,13 +33,13 @@
 
 <script type="text/javascript">
 
-    $('document').ready(function () {
-
+    $(function () {
+        window.scrollTo(0, document.body.scrollHeight);
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,basicWeek,basicDay'
+                right: 'listYear,month,basicWeek,basicDay'
             },
             locale: 'es',
             navLinks: true, // can click day/week names to navigate views
@@ -47,14 +47,12 @@
             eventLimit: true, // allow "more" link when too many events
             events: "/Publicidad/GetEventosCalendario/",
             eventClick: function (event, jsEvent, view) {
-                console.log(event);
                 $('#modalTitle').html(event.title);
                 $('#modalBody').html(event.descripcion);
                // $('#eventUrl').attr('href', '@Url.Action("EditarPublicidad", "Publicidad")/' + event.id);
                 $('#fullCalModal').modal();
             }
         });
-
     });
 </script>
 

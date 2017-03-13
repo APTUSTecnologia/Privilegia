@@ -143,6 +143,7 @@
     <Compile Include="Controllers\FacturacionPublicidadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformesController.cs" />
+    <Compile Include="Controllers\LogosController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PersonasDeContactoController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
@@ -152,11 +153,22 @@
     </Compile>
     <Compile Include="Helpers\MyHelpers.cs" />
     <Compile Include="IBaseRepository.cs" />
-    <Compile Include="Migrations\201703130717102_inicial.cs" />
-    <Compile Include="Migrations\201703130717102_inicial.Designer.cs">
-      <DependentUpon>201703130717102_inicial.cs</DependentUpon>
+    <Compile Include="Migrations\201703130923246_inicial.cs" />
+    <Compile Include="Migrations\201703130923246_inicial.Designer.cs">
+      <DependentUpon>201703130923246_inicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703131210103_modificadaPublicidad.cs" />
+    <Compile Include="Migrations\201703131210103_modificadaPublicidad.Designer.cs">
+      <DependentUpon>201703131210103_modificadaPublicidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703131324045_modificadaPublicidadTotal.cs" />
+    <Compile Include="Migrations\201703131324045_modificadaPublicidadTotal.Designer.cs">
+      <DependentUpon>201703131324045_modificadaPublicidadTotal.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Archivos\ILogoRepository.cs" />
+    <Compile Include="Models\Archivos\Logo.cs" />
+    <Compile Include="Models\Archivos\LogoRepository.cs" />
     <Compile Include="Models\Direcciones\DireccionModel.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="Models\Direcciones\DireccionPrincipalRepository.cs" />
@@ -346,6 +358,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\privilegia.css" />
     <Content Include="Content\sweetalert2.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -390,6 +403,7 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\Calendar\locale\es.js" />
@@ -510,6 +524,11 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="App_Browsers\qt.browser" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\Privilegia.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -577,9 +596,11 @@
     <Content Include="Views\Publicidad\CalendarioPublicidad.cshtml" />
     <Content Include="Views\FacturacionPublicidad\Index.cshtml" />
     <Content Include="Views\Informes\VerFactura.cshtml" />
+    <Content Include="Views\Informes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Logos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -588,8 +609,14 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703130717102_inicial.resx">
-      <DependentUpon>201703130717102_inicial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703130923246_inicial.resx">
+      <DependentUpon>201703130923246_inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703131210103_modificadaPublicidad.resx">
+      <DependentUpon>201703131210103_modificadaPublicidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703131324045_modificadaPublicidadTotal.resx">
+      <DependentUpon>201703131324045_modificadaPublicidadTotal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

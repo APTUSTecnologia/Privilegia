@@ -33,7 +33,7 @@ namespace Privilegia.Controllers
         public ActionResult Index()
         {
 
-            var listaPartners = _partnerRepository.ObtenerPartnersInternos();
+            var listaPartners = _partnerRepository.ObtenerPartners();
 
             ViewBag.listPartners = listaPartners.ToList().OrderBy(m => m.Nombre).Where(m => m.FechaBaja == null);
 
@@ -67,7 +67,7 @@ namespace Privilegia.Controllers
         {
             var publicidad = new PublicidadModel();
 
-            var partners = _partnerRepository.ObtenerPartnersInternos().Where(m => m.FechaBaja == null);
+            var partners = _partnerRepository.ObtenerPartners().Where(m => m.FechaBaja == null);
 
             ViewBag.partners = new SelectList((from li in partners
                 orderby li.Nombre
@@ -118,7 +118,7 @@ namespace Privilegia.Controllers
                     return RedirectToAction("Index");
                 }
 
-                var partners = _partnerRepository.ObtenerPartnersInternos().Where(m => m.FechaBaja == null);
+                var partners = _partnerRepository.ObtenerPartners().Where(m => m.FechaBaja == null);
 
                 ViewBag.partners = new SelectList((from li in partners
                     orderby li.Nombre
@@ -152,7 +152,7 @@ namespace Privilegia.Controllers
             var partner = _partnerRepository.ObtenerPartnerPorId(publicidad.IdPartner);
             publicidad.Partner = partner;
 
-            var partners = _partnerRepository.ObtenerPartnersInternos().Where(m => m.FechaBaja == null);
+            var partners = _partnerRepository.ObtenerPartners().Where(m => m.FechaBaja == null);
             ViewBag.partners = new SelectList((from li in partners
                 orderby li.Nombre
                 select li).ToList(), "Id", "Nombre");
@@ -209,7 +209,7 @@ namespace Privilegia.Controllers
             try
             {
                 var listaPublicidad = _publicidadRepository.ObtenerTodaLaPublicidad();
-                var listaPartners = _partnerRepository.ObtenerPartnersInternos().Where(m => m.FechaBaja == null).ToList();
+                var listaPartners = _partnerRepository.ObtenerPartners().Where(m => m.FechaBaja == null).ToList();
 
                 List<TimeTableModel> myList = new List<TimeTableModel>();
                 foreach (var publicidad in listaPublicidad)
@@ -332,7 +332,7 @@ namespace Privilegia.Controllers
                 filteredCompanies = filteredCompanies.OrderByDescending(orderingFunction);
 
             var displayedCompanies = filteredCompanies.Skip(param.iDisplayStart).Take(param.iDisplayLength);
-            var result = from c in displayedCompanies select new[] { Convert.ToString(c.Id), c.Partner.Nombre, c.FechaInicio, c.FechaFin , c.NombreEspacioPublicidad, c.NombreParteEspacioPublicidad, c.Importe , c.IdFactura};
+            var result = from c in displayedCompanies select new[] { Convert.ToString(c.Id), c.Partner.Nombre, c.FechaInicio, c.FechaFin , c.NombreEspacioPublicidad, c.NombreParteEspacioPublicidad,c.PlanDeMedios.ToString(), c.Total , c.IdFactura};
             return Json(new
             {
                 sEcho = param.sEcho,

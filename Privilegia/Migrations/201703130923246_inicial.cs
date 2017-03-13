@@ -62,18 +62,31 @@ namespace Privilegia.Migrations
                         FechaCreacion = c.String(),
                         Tipo = c.String(),
                         ActividadProfesional = c.String(),
-                        Telefono = c.String(),
-                        Email = c.String(),
                         Comisiones = c.Boolean(),
                         Premios = c.Boolean(),
                         Observaciones = c.String(maxLength: 100),
-                        Logo = c.String(),
                         DireccionPrincipal_Id = c.Guid(),
+                        Logo_Id = c.Guid(),
                         Type = c.String(maxLength: 1, fixedLength: true, unicode: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DireccionModels", t => t.DireccionPrincipal_Id)
-                .Index(t => t.DireccionPrincipal_Id);
+                .ForeignKey("dbo.Logoes", t => t.Logo_Id)
+                .Index(t => t.DireccionPrincipal_Id)
+                .Index(t => t.Logo_Id);
+            
+            CreateTable(
+                "dbo.Logoes",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        FileName = c.String(maxLength: 255),
+                        ContentType = c.String(maxLength: 100),
+                        Content = c.Binary(),
+                        FileType = c.Int(nullable: false),
+                        IdPartner = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.PersonaContactoModels",
@@ -165,10 +178,12 @@ namespace Privilegia.Migrations
             DropForeignKey("dbo.PublicidadModels", "Partner_Id", "dbo.PartnerModels");
             DropForeignKey("dbo.FacturacionPublicidadModels", "Partner_Id", "dbo.PartnerModels");
             DropForeignKey("dbo.PersonaContactoModels", "PartnerInterno_Id", "dbo.PartnerModels");
+            DropForeignKey("dbo.PartnerModels", "Logo_Id", "dbo.Logoes");
             DropForeignKey("dbo.PartnerModels", "DireccionPrincipal_Id", "dbo.DireccionModels");
             DropIndex("dbo.ProductoModels", new[] { "Partner_Id" });
             DropIndex("dbo.PublicidadModels", new[] { "Partner_Id" });
             DropIndex("dbo.PersonaContactoModels", new[] { "PartnerInterno_Id" });
+            DropIndex("dbo.PartnerModels", new[] { "Logo_Id" });
             DropIndex("dbo.PartnerModels", new[] { "DireccionPrincipal_Id" });
             DropIndex("dbo.FacturacionPublicidadModels", new[] { "Publicidad_Id" });
             DropIndex("dbo.FacturacionPublicidadModels", new[] { "Partner_Id" });
@@ -177,6 +192,7 @@ namespace Privilegia.Migrations
             DropTable("dbo.ParteEspacioPublicidadModels");
             DropTable("dbo.PublicidadModels");
             DropTable("dbo.PersonaContactoModels");
+            DropTable("dbo.Logoes");
             DropTable("dbo.PartnerModels");
             DropTable("dbo.FacturacionPublicidadModels");
             DropTable("dbo.EspacioPublicidadModels");
