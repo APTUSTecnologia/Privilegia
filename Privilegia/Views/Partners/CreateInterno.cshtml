@@ -1,0 +1,280 @@
+﻿@model Privilegia.Models.PartnerInterno
+
+<div class="modal-header">
+    <h3>Añadir nuevo Partner Interno</h3>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Cif, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Cif, new { @class = "form-control", @placeholder = "Introduzca el N.I.F." })
+                    @Html.ValidationMessageFor(model => model.Cif, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nombre, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Introduzca el Nombre del Partner" })
+                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ActividadProfesional, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.ActividadProfesional, new { @class = "form-control", @placeholder = "Introduzca la Actividad Profesional" })
+                    @Html.ValidationMessageFor(model => model.ActividadProfesional, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Estado</label>
+                    @Html.DropDownListFor(m => m.Estado,
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem {Text = "Alta", Value = "Alta"}
+                    }, new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FechaAlta, new { @class = "control-label" })<span class="glyphicon glyphicon-calendar en_formulario"></span>
+                    @Html.TextBoxFor(model => model.FechaAlta, new { @id = "datepickeralta", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FechaAlta, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            @*<div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FechaBaja, new { @class = "control-label" })<span class="glyphicon glyphicon-calendar en_formulario"></span>
+                    @Html.TextBoxFor(model => model.FechaBaja, new { @id = "bajadatepicker", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FechaBaja, "", new { @class = "text-danger" })
+                </div>
+
+            </div>*@
+
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Comisiones, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Comisiones,
+                new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "NO", Value = "false"},
+                    new SelectListItem {Text = "SI", Value = "true"}
+                }, "Selecciona..", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Comisiones, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Premios, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Premios,
+                        new List<SelectListItem>
+                        {
+                            new SelectListItem {Text = "NO", Value = "false"},
+                            new SelectListItem {Text = "SI", Value = "true"}
+                        }, "Selecciona..", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Premios, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>
+                    <span class="glyphicon glyphicon-map-marker"></span>Dirección Principal
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DireccionPrincipal.Calle, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DireccionPrincipal.Calle, new { @class = "form-control", @placeholder = "Introduzca la Calle" })
+                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.Calle, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DireccionPrincipal.Numero, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DireccionPrincipal.Numero, new { @class = "form-control", @placeholder = "Nº" })
+                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.Numero, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DireccionPrincipal.CodigoPostal, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DireccionPrincipal.CodigoPostal, new { @class = "form-control", @placeholder = "C.P." })
+                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.CodigoPostal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DireccionPrincipal.Provincia, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DireccionPrincipal.Provincia, new { @class = "form-control", @placeholder = "Introduzca la Provincia" })
+                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.Provincia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DireccionPrincipal.Municipio, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DireccionPrincipal.Municipio, new { @class = "form-control", @placeholder = "Introduzca el Municipio" })
+                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.Municipio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @*<div class="col-md-12">
+                    <h3>
+                        <span class="glyphicon glyphicon-map-marker"></span>Dirección Secundaria
+                    </h3>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DireccionSecundaria.Calle, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DireccionSecundaria.Calle, new { @class = "form-control", @placeholder = "Introduzca la Calle" })
+                        @Html.ValidationMessageFor(model => model.DireccionSecundaria.Calle, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DireccionSecundaria.Numero, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DireccionSecundaria.Numero, new { @class = "form-control", @placeholder = "Nº" })
+                        @Html.ValidationMessageFor(model => model.DireccionSecundaria.Numero, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DireccionSecundaria.CodigoPostal, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DireccionSecundaria.CodigoPostal, new { @class = "form-control", @placeholder = "C.P." })
+                        @Html.ValidationMessageFor(model => model.DireccionSecundaria.CodigoPostal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DireccionSecundaria.Provincia, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DireccionSecundaria.Provincia, new { @class = "form-control", @placeholder = "Introduzca la Provincia" })
+                        @Html.ValidationMessageFor(model => model.DireccionSecundaria.Provincia, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DireccionSecundaria.Municipio, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DireccionSecundaria.Municipio, new { @class = "form-control", @placeholder = "Introduzca el Municipio" })
+                        @Html.ValidationMessageFor(model => model.DireccionSecundaria.Municipio, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>
+                    <span class="glyphicon glyphicon-map-marker"></span>Personas de Contacto
+                </h3>
+                <!-- Button trigger modal -->
+                <div class="row">
+                    <div class="col-md-12" id="replacetarget">
+                        @{ Html.RenderAction("Index", "PersonasDeContacto", new { idPartner = Model.Id }); }
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Observaciones, new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.Observaciones, new { @class = "form-control", @placeholder = "¿Alguna observación?" })
+                    @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        @*<div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Plan de Medios</label>
+                    <select class="form-control" id="Comisiones">
+                        <option value="Planmedios_no">NO</option>
+                        <option value="Planmedios_si">SI</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="TipoPublicidad">Espacios contratados</label>
+                    <select class="form-control" id="TipoPublicidad">
+                        <option value="TipoPublicidad_01">Ninguno</option>
+                        <option value="TipoPublicidad_01">Revista</option>
+                        <option value="TipoPublicidad_02">Web</option>
+                        <option value="TipoPublicidad_03">Boletin</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Importe</label>
+                    <input type="text" class="form-control" id="Importe" placeholder="€">
+                </div>
+            </div>
+        </div>*@
+    </div>
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;">
+            <img src="/images/wait.gif" alt="wiat" />
+            Espere...
+        </span>
+
+        <input class="btn btn-primary" type="submit" value="Guardar" />
+        <a class="btn btn-warning" href="@Url.Action("Index", "Partners")">Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+    </div>
+
+                            }
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $('document').ready(function () {
+
+        $("#datepickeralta").datepicker({
+            format: "dd/mm/yyyy",
+            changeMonth: true,
+            changeYear: true
+        });
+
+        $("#bajadatepicker").datepicker({
+            format: "dd/mm/yyyy",
+            changeMonth: true,
+            changeYear: true
+        });
+
+
+    });
+</script>

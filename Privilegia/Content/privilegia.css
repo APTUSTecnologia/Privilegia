@@ -1,0 +1,845 @@
+﻿/************************************************************************
+    CLIENTE:                        		MUTUALIDAD ABOGACIA - PRIVILEGIA                                  
+    FECHA CREACION:                 		09/01/2017                           
+    FECHA ULTIMA MODIFICACION:      		02/02/2017                      
+    MODIFICADO POR:                 		APTUS                         
+************************************************************************/ 
+
+/* RESET CSS
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:auto;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}*/
+
+/* change colours to suit your needs 
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}*/
+
+/* change colours to suit your needs
+mark {
+    background-color:#ff9;
+    color:#000; 
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+} */
+
+/* change border colour to suit your needs 
+hr {
+    display:block;
+    height:1px;
+    border:0;   
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}*/
+
+/* PARAMETROS CSS PRINCIPAL */
+
+/* CONTENEDORES */
+header{
+	background-color:#b0b5b9;
+}
+
+footer {
+    /*background-color: #f5f5f5;*/
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+}
+
+footer p{
+	background-color: #ddd;
+	padding:20px;
+	margin-top:15px;
+	box-shadow: 0px -3px 5px #aaa;
+	margin-bottom:0px;
+}
+
+.container{
+	margin-bottom:50px;
+}
+ 
+.navbar .container, header .container{
+	margin-bottom:0px;
+}
+
+header .container .row{
+	background-image: url('/Images/fondo_privilegia.png');
+	background-repeat: no-repeat;
+	background-position: top left;
+	padding:0;
+	margin:0;
+}
+
+header {
+	background-image: url('/Images/subfondo_privilegia.png');
+	background-repeat: repeat-y;
+	background-position: top center;
+}
+
+
+
+/* JUMBOTRON */
+
+.container .jumbotron, .container-fluid .jumbotron{
+	padding:20px;
+	margin-bottom:30px;
+	box-shadow: 3px 3px 5px #aaa;
+    margin-top: 15px;
+}
+
+.jumbotron p {
+    font-size: 95%;
+    font-weight: normal;
+}
+
+/* HEADERS */
+
+h1, h2, h3, h4, h5, h6{
+	font-weight:bold;
+	font-size:150%;
+	margin: 15px 0;
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, Georgia;	
+}
+
+h1{
+	font-size:150%;	
+	font-weight: normal;
+}
+
+h2{
+    /*background-color: #0069b0;*/
+    color: black;
+    font-weight: normal;
+    margin-top: 0;
+    padding: 10px;
+	font-size:110%;	
+}
+
+h3{
+    background-color: #bbb;
+    color: #000;
+    margin-top: 0;
+    padding: 10px;
+	font-size:100%;
+}
+
+
+
+/*NAVBAR */
+
+.navbar {
+	margin-bottom:0px;
+		box-shadow: 3px 3px 5px #aaa;
+}
+
+
+
+/* PANELES */
+
+.panel{
+	background-color: #ddd;
+    padding: 10px;
+	box-shadow: 3px 3px 5px #aaa;
+}
+
+.panel p{
+	padding-left: 10px;
+	padding-right:10px;
+}
+
+/* LOGOTIPOS */
+
+.navbar-brand {
+    height: 75px;
+    margin: 10px;
+    padding: 2px;
+	background-color:#fff;
+}
+
+.navbar-brand >img{
+	height:100%;
+}
+
+.nav > li > a{
+	font-weight:bold;
+}
+
+.nav > li.active > a{
+	background-color:#fff;
+}
+
+
+.nav > li > a:hover{
+	background-color:#ccc;
+	font-weight:bold;
+}
+
+.navbar-light{
+	background-color:#eee;
+
+}
+
+/* PARRAFOS */
+
+p {
+    margin: 0 0 20px;
+	font-size:95%;
+}
+
+/* ALINEACIONES */
+
+.alinea_derecha{
+	float:right;
+}
+
+/* BOTONES */
+
+/*.btn{
+	border-radius:5px;
+	box-shadow: 3px 3px 5px #aaa;
+	background-color: #e00027;
+	font-weight:bold;
+	color: #fff;
+	font-size:90%;
+}*/
+
+.btn-alpie{
+	margin-top:25px;
+}
+
+.btn-default.disabled{
+	background-color: #e00027;
+}
+
+/* GLYPHICONS */
+
+.glyphicon{
+	vertical-align: baseline;
+	font-size: 90%;
+	margin-right: 10px;
+	margin-left: 5px;
+}
+
+/* DESHABILITADO */
+.deshabilitado {
+	opacity:.5;
+}
+
+/*  FILA  */
+
+.row{
+	margin-bottom: 15px;
+}
+
+.panel th{
+	background-color:#eee;
+}
+
+.panel td{
+	background-color:#fff;
+}
+
+/* ROJO (SPAN) */
+
+
+#enproceso {
+
+background-color: #E20A0A;
+
+color: #ffffff;
+
+}
+
+/*
+select {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}
+
+select::-ms-expand { /* for IE 11 
+    display: none;
+}*/
+
+span.en_formulario{
+	float:right;
+	top:36px;
+}
+
+span.en_formulario_sinlabel{
+	float:right;
+	top:16px;
+}
+
+
+@media only screen and (max-width : 991px) {
+	.navbar-brand{
+		background-color: transparent;
+	}
+	
+	.navbar-brand img {
+		width:auto;
+		height:60px;
+		background-color:#fff;
+		margin-top:5px;
+	}
+	
+}
+
+/************************************************************************
+    CLIENTE:                        		MUTUALIDAD ABOGACIA - PRIVILEGIA                                  
+    FECHA CREACION:                 		09/01/2017                           
+    FECHA ULTIMA MODIFICACION:      		24/01/2017                      
+    MODIFICADO POR:                 		APTUS                         
+************************************************************************/ 
+
+/* RESET CSS
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:auto;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}*/
+
+/* change colours to suit your needs 
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}*/
+
+/* change colours to suit your needs
+mark {
+    background-color:#ff9;
+    color:#000; 
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+} */
+
+/* change border colour to suit your needs 
+hr {
+    display:block;
+    height:1px;
+    border:0;   
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}*/
+
+/* PARAMETROS CSS PRINCIPAL */
+
+/* CONTENEDORES */
+header{
+	background-color:#b0b5b9;
+}
+
+footer {
+    /*background-color: #f5f5f5;*/
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+}
+
+footer p{
+	background-color: #ddd;
+	padding:20px;
+	margin-top:15px;
+	box-shadow: 0px -3px 5px #aaa;
+	margin-bottom:0px;
+}
+
+.container{
+	margin-bottom:50px;
+}
+ 
+.navbar .container, header .container{
+	margin-bottom:0px;
+}
+
+header .container .row{
+	background-image: url('/Images/fondo_privilegia.png');
+	background-repeat: no-repeat;
+	background-position: top left;
+	padding:0;
+	margin:0;
+}
+
+header {
+	background-image: url('/Images/subfondo_privilegia.png');
+	background-repeat: repeat-y;
+	background-position: top center;
+}
+
+
+
+/* JUMBOTRON */
+
+.container .jumbotron, .container-fluid .jumbotron{
+	padding:20px;
+	margin-bottom:30px;
+	box-shadow: 3px 3px 5px #aaa;
+}
+
+.jumbotron p {
+    font-size: 95%;
+    font-weight: normal;
+}
+
+/* HEADERS */
+
+h1, h2, h3, h4, h5, h6{
+	font-weight:bold;
+	font-size:150%;
+	margin: 15px 0;
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, Georgia;	
+}
+
+h1{
+	font-size:150%;	
+	font-weight: normal;
+}
+
+h2{
+    /*background-color: #0069b0;*/
+    color: black;
+    font-weight: normal;
+    padding: 10px;
+	font-size:110%;	
+}
+
+h3{
+    background-color: #bbb;
+    color: #000;
+    margin-top: 0;
+    padding: 10px;
+	font-size:100%;
+}
+
+
+
+/*NAVBAR */
+
+.navbar {
+	margin-bottom:0px;
+		box-shadow: 3px 3px 5px #aaa;
+}
+
+
+
+/* PANELES */
+
+.panel{
+	background-color: #ddd;
+    padding: 10px;
+	box-shadow: 3px 3px 5px #aaa;
+}
+
+.panel p{
+	padding-left: 10px;
+	padding-right:10px;
+}
+
+/* LOGOTIPOS */
+
+.navbar-brand {
+    height: 75px;
+    margin: 10px;
+    padding: 2px;
+	background-color:#fff;
+}
+
+.navbar-brand >img{
+	height:100%;
+}
+
+.nav > li > a{
+	font-weight:bold;
+}
+
+.nav > li.active > a{
+	background-color:#fff;
+}
+
+
+.nav > li > a:hover{
+	background-color:#ccc;
+	font-weight:bold;
+}
+
+.navbar-light{
+	background-color:#eee;
+
+}
+
+/* PARRAFOS */
+
+p {
+    margin: 0 0 20px;
+	font-size:95%;
+}
+
+/* ALINEACIONES */
+
+.alinea_derecha{
+	float:right;
+}
+
+/* BOTONES */
+
+/*.btn{
+	border-radius:5px;
+	box-shadow: 3px 3px 5px #aaa;
+	background-color: #e00027;
+	font-weight:bold;
+	color: #fff;
+	font-size:90%;
+}*/
+
+.btn-alpie{
+	margin-top:25px;
+}
+
+.btn-default.disabled{
+	background-color: #e00027;
+}
+
+/* GLYPHICONS */
+
+.glyphicon{
+	vertical-align: baseline;
+	font-size: 90%;
+	margin-right: 10px;
+	margin-left: 5px;
+}
+
+/* DESHABILITADO */
+.deshabilitado {
+	opacity:.5;
+}
+
+/*  FILA  */
+
+.row{
+	margin-bottom: 15px;
+}
+
+.panel th{
+	background-color:#eee;
+}
+
+.panel td{
+	background-color:#fff;
+}
+
+/* ROJO (SPAN) */
+
+
+#enproceso {
+
+background-color: #E20A0A;
+
+color: #ffffff;
+
+}
+
+/*
+select {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}
+
+select::-ms-expand { /* for IE 11 
+    display: none;
+}*/
+
+span.en_formulario{
+	float:right;
+	top:36px;
+}
+
+span.en_formulario_sinlabel{
+	float:right;
+	top:16px;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus
+{
+    background-color: #0069b0;
+    border-color: #0069b0;
+	font-weight:bold;
+	
+}
+
+.desborde_tabla{
+	overflow-x:scroll;
+}
+
+
+.table{
+white-space: nowrap;
+	
+}
+
+.paginador h2{
+	margin-top: 20px;
+}
+
+		.doc_factura {
+			width:80%;
+
+		}
+		
+		.doc_factura h2{
+            background-color: #0069b0;
+		    color: #fff;
+			font-size:18px;
+			margin-top: 30px;
+			padding-top:20px;
+			padding-bottom:20px;
+			margin-bottom: 30px;
+
+		}
+		
+		.doc_factura p{
+					font-size:14px;
+					}
+					
+		.encabezado{
+			height:100px;
+			margin-top:30px;
+		}
+		
+		.encabezado img{
+			height:100%;
+		}
+
+		table.factura {
+			margin-bottom:50px;
+		}
+				
+		table.factura  td{
+			border:none !important;
+			border-right: 1px solid #ccc !important;
+		}
+
+		table.factura  th{
+			border-right: 1px solid #ccc !important;
+			background-color:#ddd;
+			border-bottom-color:#aaa !important;
+			font-size:16px;
+		}
+		
+
+		
+		table.factura  tr{	
+			border: 1px solid #ccc !important;
+			height:2.5em !important;
+		}	
+		
+		table.factura tr.borde_oscuro{
+			border-top: 2px solid #aaa!important;
+		}	
+		
+
+		table.factura strong{
+			font-size:16px;
+		}	
+		
+		.direcciones p{
+		margin-left:20px;
+		}
+		
+		.direcciones p.facturado{
+		margin-left: 50px;}
+
+
+
+@media only screen and (max-width : 991px) {
+	.navbar-brand{
+		background-color: transparent;
+	}
+	
+	.navbar-brand img {
+		width:auto;
+		height:60px;
+		background-color:#fff;
+		margin-top:5px;
+	}
+	
+}
+
+@media only screen and (max-width : 767px) {
+	.navbar-brand{
+		background-color: transparent;
+	}
+	
+	.navbar-brand img {
+		width:auto;
+		height:50px;
+		background-color:#fff;
+		margin-top:10px;
+	}
+	
+}
+
+@media only screen and (max-width : 710px) {
+	.navbar-brand{
+		background-color: transparent;
+	}
+	
+	.navbar-brand img {
+		display:none;
+	}
+	
+}
+
+@media only screen and (max-width : 993px) {
+	.btn{
+		display:block;
+		width:80%;
+		margin:0 auto 15px;
+	}
+	
+}
+
+
+
+

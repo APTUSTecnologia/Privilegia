@@ -1,0 +1,227 @@
+﻿@model Privilegia.Models.Productos.ProductoModel
+
+<div class="modal-header">
+    <h3>Añadir nuevo Producto</h3>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    <div class="modal-body">
+        <div class="row">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nombre, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control input-inset", @placeholder = "Nombre del producto" })
+                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdPartner, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.IdPartner, ViewBag.partners as SelectList, new { @class = "form-control input-inset" })
+                    @Html.ValidationMessageFor(model => model.IdPartner, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Codigo, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Codigo, new { @class = "form-control input-inset", @placeholder = " Codigo del producto" })
+                    @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Estado</label>
+                    @Html.DropDownListFor(m => m.Estado,
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem {Text = "Alta", Value = "Alta"}
+
+                    }, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FechaAlta, new { @class = "control-label" })<span class="glyphicon glyphicon-calendar en_formulario"></span>
+                    @Html.TextBoxFor(model => model.FechaAlta, new { @id = "datepickeralta", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FechaAlta, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Tipo de Premio</label>
+                    @Html.DropDownListFor(m => m.TipoPremio,
+                        new List<SelectListItem>
+                        {
+                            new SelectListItem {Text = "En Porcentaje (%)", Value = "P"},
+                            new SelectListItem {Text = "En Euros (€)", Value = "E"}
+                        }, "Selecciona..", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TipoPremio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PremioValor, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.PremioValor, new { @class = "form-control input-inset", @placeholder = "" })
+                    @Html.ValidationMessageFor(model => model.PremioValor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Tipo de comision</label>
+                    @Html.DropDownListFor(m => m.TipoComision,
+                        new List<SelectListItem>
+                        {
+                            new SelectListItem {Text = "Directa", Value = "D"},
+                            new SelectListItem {Text = "Indirecta", Value = "I"}
+                        }, "Selecciona..", new { @class = "form-control", @onchange = "comisionCambio()" })
+                    @Html.ValidationMessageFor(model => model.TipoComision, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group" id="valorcomision">
+                    @Html.LabelFor(model => model.ComisionValor, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.ComisionValor, new { @class = "form-control input-inset", @placeholder = "" })
+                    @Html.ValidationMessageFor(model => model.ComisionValor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-4">
+                <div class="form-group" id="tipoComisionIndirecta">
+                    @Html.LabelFor(model => model.TipoComisionIndirecta, new {@class = "control-label"})
+                    @Html.DropDownListFor(m => m.TipoComisionIndirecta,
+                        new List<SelectListItem>
+                        {
+                            new SelectListItem {Text = "En Porcentaje (%)", Value = "P"},
+                            new SelectListItem {Text = "En Euros (€)", Value = "E"}
+                        }, "Selecciona..", new {@class = "form-control", @onchange = "comisionIndirectaCambio()"})
+                    @Html.ValidationMessageFor(model => model.TipoComisionIndirecta, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group" id="ImporteMutualidad">
+                    @Html.LabelFor(model => model.ImporteMutualidad, new {@class = "control-label"})
+                    @Html.TextBoxFor(model => model.ImporteMutualidad, new {@class = "form-control input-inset", @placeholder = ""})
+                    @Html.ValidationMessageFor(model => model.ImporteMutualidad, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group" id="ImporteMutualista">
+                    @Html.LabelFor(model => model.ImporteMutualista, new {@class = "control-label"})
+                    @Html.TextBoxFor(model => model.ImporteMutualista, new {@class = "form-control input-inset", @placeholder = ""})
+                    @Html.ValidationMessageFor(model => model.ImporteMutualista, "", new {@class = "text-danger"})
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descripcion, new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", @placeholder = "¿Alguna observación?" })
+                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;">
+            <img src="/images/wait.gif" alt="wiat" />
+            Espere...
+        </span>
+
+        <input class="btn btn-primary" type="submit" value="Crear" />
+        <a class="btn btn-warning" href="@Url.Action("Index", "Productos")">Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+    </div>
+
+
+
+}
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function comisionCambio() {
+        var tipoComision = $('#TipoComision').val();
+        if (tipoComision === 'D') {
+            $("#valorcomision").show();
+            $("#tipoComisionIndirecta").hide();
+            $("#ImporteMutualista").hide();
+            $("#ImporteMutualidad").hide();
+
+        } else if (tipoComision === 'I') {
+            //quitamos el valor de comision
+            $("#valorcomision").hide();
+            $("#ImporteMutualista").hide();
+            $("#ImporteMutualidad").hide();
+            $("#tipoComisionIndirecta").show();
+
+        } else {
+            $("#valorcomision").hide();
+            $("#tipoComisionIndirecta").hide();
+            $("#ImporteMutualista").hide();
+            $("#ImporteMutualidad").hide();
+        }
+
+    }
+    function comisionIndirectaCambio() {
+        var tipoComision = $('#TipoComisionIndirecta').val();
+        if (tipoComision === 'P') {
+            $("#valorcomision").hide();
+            $("#ImporteMutualista").show();
+            $("#ImporteMutualidad").show();
+
+        } else if (tipoComision === 'E') {
+            //quitamos el valor de comision
+            $("#valorcomision").show();
+            $("#ImporteMutualista").hide();
+            $("#ImporteMutualidad").hide();
+
+        } else {
+            $("#valorcomision").hide();
+            $("#ImporteMutualista").hide();
+            $("#ImporteMutualidad").hide();
+        }
+
+    }
+
+
+    $('document').ready(function () {
+
+
+        $("#valorcomision").hide();
+        $("#tipoComisionIndirecta").hide();
+        $("#ImporteMutualista").hide();
+        $("#ImporteMutualidad").hide();
+        // $("#item").show();
+
+        $("#datepickeralta").datepicker({
+            format: "dd/mm/yyyy",
+            changeMonth: true,
+            changeYear: true
+        });
+
+        $("#bajadatepicker").datepicker({
+            format: "dd/mm/yyyy",
+            changeMonth: true,
+            changeYear: true
+        });
+
+
+    });
+</script>

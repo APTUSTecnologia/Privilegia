@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h3>Bienvenido al Programa Privilegia</h3>
+    <p class="lead">
+        Privilegia es el Club exclusivo de la Mutualidad de la Abogacía, gracias al cual los
+        mutualistas pueden disfrutar de grandes ventajas dentro de una amplia gama de productos.
+        Todos los mutualistas pertenecen al Club Privilegia siempre que no hayan expresado su voluntad
+        de no recibir ofertas de terceros en la solicitud de alta. La condición de socio Privilegia la
+        otorga la Mutualidad de forma automática no siendo necesario realizar ningún trámite administrativo.
+    </p>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h3>Totales Publicidad</h3>
+        <div id="chartPubli">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h3>Totales Productos</h3>
+        <div id="chartProdu">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h3>Partners</h3>
+        <div id="chartPartner">
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    //google.load("visualization", "1", { packages: ["corechart"] });
+    //google.setOnLoadCallback(drawChartPubli);
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChartPubli);
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(drawChartProductos);
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChartPartners);
+    function drawChartPubli() {
+        $.ajax({
+            type: "POST",
+            url: "/Home/AjaxMethodPublicidad",
+            data: '{}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                var data = google.visualization.arrayToDataTable(r);
+
+                var options = {
+                    //title: 'Publicidad Contratada',
+                    is3D: true,
+                    animation: {
+                        duration: 1000,
+                        easing: 'in'
+                    }
+                };
+
+                var chart = new google.visualization.PieChart($("#chartPubli")[0]);
+                chart.draw(data, options);
+            },
+            failure: function (r) {
+                alert(r.d);
+            },
+            error: function (r) {
+                alert(r.d);
+            }
+        });
+    }
+    function drawChartProductos() {
+        $.ajax({
+            type: "POST",
+            url: "/Home/AjaxMethodProductos",
+            data: '{}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                var data = google.visualization.arrayToDataTable(r);
+
+                var options = {
+                    //title: 'Numero de Productos',
+                    chartArea: { width: '30%' },
+                    hAxis: {
+                        title: 'Total',
+                        minValue: 0
+                    },
+                    vAxis: {
+                        title: 'Partner'
+                    },
+                    is3D: true,
+                    animation: {
+                        duration: 1000,
+                        easing: 'in'
+                    }
+                };
+                //var chart = new google.visualization.BarChart(document.getElementById('chartProdu'));
+                //chart.draw(data, options);
+
+                var chart = new google.charts.Bar(document.getElementById('chartProdu'));
+                chart.draw(data, options);
+
+
+            },
+            failure: function (r) {
+                alert(r.d);
+            },
+            error: function (r) {
+                alert(r.d);
+            }
+        });
+
+    }
+    function drawChartPartners() {
+        $.ajax({
+            type: "POST",
+            url: "/Home/AjaxMethodPartners",
+            data: '{}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                var data = google.visualization.arrayToDataTable(r);
+
+                var options = {
+                    pieHole: 0.4,
+                    animation: {
+                        duration: 1000,
+                        easing: 'in'
+                    }
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('chartPartner'));
+                chart.draw(data, options);
+
+            },
+            failure: function (r) {
+                alert(r.d);
+            },
+            error: function (r) {
+                alert(r.d);
+            }
+        });
+
+    }
+</script>

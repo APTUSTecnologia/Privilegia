@@ -1,0 +1,190 @@
+﻿@model Privilegia.Models.PartnerExterno
+
+<div class="modal-header">
+    <h3>Añadir nuevo Partner Externo</h3>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    <div class="modal-body">
+        <div class="row">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Cif, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Cif, new { @class = "form-control required", @placeholder = "Introduzca el C.I.F." })
+                    @Html.ValidationMessageFor(model => model.Cif, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nombre, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control required", @placeholder = "Introduzca el Nombre del Partner" })
+                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Tipo, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.Tipo, ViewBag.listTipos as SelectList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label>--</label>
+                    <a class="btn btn-success" onclick="anadirTipo();" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Estado</label>
+                    @Html.DropDownListFor(m => m.Estado,
+                        new List<SelectListItem>
+                        {
+                            new SelectListItem {Text = "Alta", Value = "Alta"}
+                        }, new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FechaAlta, new { @class = "control-label" })<span class="glyphicon glyphicon-calendar en_formulario"></span>
+                    @Html.TextBoxFor(model => model.FechaAlta, new { @id = "datepickeralta", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FechaAlta, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>
+                    <span class="glyphicon glyphicon-map-marker"></span>Dirección Principal
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DireccionPrincipal.Calle, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DireccionPrincipal.Calle, new { @class = "form-control", @placeholder = "Introduzca la Calle" })
+                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.Calle, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DireccionPrincipal.Numero, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DireccionPrincipal.Numero, new { @class = "form-control", @placeholder = "Nº" })
+                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.Numero, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DireccionPrincipal.CodigoPostal, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DireccionPrincipal.CodigoPostal, new { @class = "form-control", @placeholder = "C.P." })
+                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.CodigoPostal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DireccionPrincipal.Provincia, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DireccionPrincipal.Provincia, new { @class = "form-control", @placeholder = "Introduzca la Provincia" })
+                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.Provincia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DireccionPrincipal.Municipio, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DireccionPrincipal.Municipio, new { @class = "form-control", @placeholder = "Introduzca el Municipio" })
+                    @Html.ValidationMessageFor(model => model.DireccionPrincipal.Municipio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;">
+            <img src="/images/wait.gif" alt="wiat" />
+            Espere...
+        </span>
+
+        <input class="btn btn-primary" type="submit" value="Guardar" />
+        <a class="btn btn-warning" href="@Url.Action("Index", "Partners")">Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+
+    </div>
+
+
+
+}
+
+<script type="text/javascript">
+    function anadirTipo() {
+        swal({
+            title: 'Introduce el nuevo tipo',
+            input: 'text',
+            showCancelButton: true,
+            confirmButtonText: 'Guardar',
+            cancelButtonText: 'Cancelar',
+            showLoaderOnConfirm: true,
+            preConfirm: function (nombre) {
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        $.ajax({
+                            url: '/Partners/GuardarTipo',
+                            type: 'POST',
+                            data: {
+                                'nombre': nombre
+                            },
+                            success: function (data) {
+                                // Create an Option object
+                                var opt = document.createElement("option");
+
+                                // Assign text and value to Option object
+                                opt.text = nombre;
+                                opt.value = data.id;
+
+                                // Add an Option object to Drop Down List Box
+                                document.getElementById('Tipo').options.add(opt);
+                                resolve();
+                            },
+                            error: function () {
+                                //Si hemos tenido error
+                            }
+                        });
+
+                    },
+                        2000);
+                });
+            },
+            allowOutsideClick: false
+        })
+            .then(function (nombre) {
+                swal({
+                    type: 'success',
+                    title: 'Tipo añadido correctamente',
+                    html: 'Nombre: ' + nombre
+                });
+            });
+    }
+
+
+    $('document').ready(function () {
+
+        $("#datepickeralta").datepicker({
+            format: "dd/mm/yyyy",
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+</script>

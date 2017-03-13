@@ -1,0 +1,68 @@
+﻿@model Privilegia.Models.PublicidadModel
+
+<div>
+    <h2>Publicidad: @Html.DisplayFor(model => model.Partner.Nombre)</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Partner.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Partner.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Importe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Importe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreEspacioPublicidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreEspacioPublicidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreParteEspacioPublicidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreParteEspacioPublicidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a class="btn btn-primary" href='@Url.Action("EditarPublicidad","Publicidad", new {id = Model.Id})'>Editar</a>
+    <a class="btn btn-warning" href='@Url.Action("Index","Publicidad")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+</p>

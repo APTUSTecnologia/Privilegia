@@ -1,0 +1,141 @@
+﻿@model Privilegia.Models.PublicidadModel
+
+<div class="modal-header">
+    <h3>Añadir nueva Publicidad</h3>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    <div class="modal-body">
+        <div class="row">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdPartner, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.IdPartner, ViewBag.partners as SelectList, "Selecciona...", new { @class = "form-control input-inset" })
+                    @Html.ValidationMessageFor(model => model.IdPartner, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NombreEspacioPublicidad, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.NombreEspacioPublicidad, ViewBag.espacios as SelectList, "Selecciona...", new { @class = "form-control input-inset" , @onchange = "cargarPartes(this);" })
+                    @Html.ValidationMessageFor(model => model.NombreEspacioPublicidad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NombreParteEspacioPublicidad, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.NombreParteEspacioPublicidad, new List<SelectListItem>(),"Selecciona...", new {@id="partes", @class = "form-control input-inset" })
+                    @Html.ValidationMessageFor(model => model.NombreParteEspacioPublicidad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FechaInicio, new { @class = "control-label" })<span class="glyphicon glyphicon-calendar en_formulario"></span>
+                    @Html.TextBoxFor(model => model.FechaInicio, new { @id = "fechaInicioDatePicker", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FechaFin, new { @class = "control-label" })<span class="glyphicon glyphicon-calendar en_formulario"></span>
+                    @Html.TextBoxFor(model => model.FechaFin, new { @id = "fechaFinDatePicker", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Importe, new { @class = "control-label" })<span class="glyphicon glyphicon-eur en_formulario"></span>
+                    @Html.TextBoxFor(model => model.Importe, new {@class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Importe, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;">
+            <img src="/images/wait.gif" alt="wiat" />
+            Espere...
+        </span>
+
+        <input class="btn btn-primary" type="submit" value="Crear" />
+        <a class="btn btn-warning" href="@Url.Action("Index", "Publicidad")">Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+    </div>
+
+
+
+}
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function cargarPartes(espacio) {
+
+        if (espacio.value !== "") {
+
+            $.ajax({
+                url: '/Publicidad/CargarPartes',
+                type: 'POST',
+                data: {
+                    'espacio': espacio.value
+                },
+                success: function (data) {
+                    // Create an Option object    
+                    $('#partes').html('');
+                    for (var i = 0; i < data.lista.length; i++) {
+                        console.log(data.lista[i]);
+
+                        var opt = document.createElement("option");
+
+                        // Assign text and value to Option object
+                        opt.text = data.lista[i].Nombre;
+                        opt.value = data.lista[i].Nombre;
+
+                        // Add an Option object to Drop Down List Box
+                        document.getElementById('partes').options.add(opt);
+                    }
+                    
+                },
+                error: function () {
+                    //Si hemos tenido error
+                }
+            });
+        }
+
+        
+
+
+
+        return true;
+
+    }
+
+    $('document').ready(function () {
+
+        $("#fechaInicioDatePicker").datepicker({
+            format: "dd/mm/yyyy",
+            changeMonth: true,
+            changeYear: true
+        });
+
+        $("#fechaFinDatePicker").datepicker({
+            format: "dd/mm/yyyy",
+            changeMonth: true,
+            changeYear: true
+        });
+
+
+    });
+</script>
+

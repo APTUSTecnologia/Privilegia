@@ -1,0 +1,56 @@
+﻿@using Privilegia.Models
+@model Privilegia.Models.PartnerModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Partner @Model.Nombre</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cif)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions">          
+
+            @{
+                if (Model.GetType() == typeof(PartnerInterno))
+                {
+                    <a class="btn btn-primary" href='@Url.Action("EditarPartnerInterno","Partners", new {id = Model.Id})'>Editar</a>
+                }
+                else
+                {
+                    <a class="btn btn-primary" href='@Url.Action("EditarPartnerExterno","Partners", new {id = Model.Id})'>Editar</a>
+                }
+            }
+            <a class="btn btn-warning " href="@Url.Action("Index","Partners")">Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+        </div>
+    }
+</div>
+
+

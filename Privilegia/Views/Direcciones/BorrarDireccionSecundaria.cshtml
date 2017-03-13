@@ -1,0 +1,45 @@
+﻿@model Privilegia.Models.DireccionSecundaria
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Borrar</h2>
+
+<h3>Estas seguro de borrar esta direccion?</h3>
+<div>
+    <h4>Direccion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Calle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoPostal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Provincia)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Municipio)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button class="btn btn-danger">Borrar</button>
+            <a class="btn btn-warning" href='@Url.Action("Index","Direcciones")'>Volver al listado<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+        </div>
+    }
+</div>
+

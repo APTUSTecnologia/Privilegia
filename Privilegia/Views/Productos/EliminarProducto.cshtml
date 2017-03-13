@@ -1,0 +1,100 @@
+﻿@model Privilegia.Models.Productos.ProductoModel
+
+<div>
+    <h2>Borrar Producto</h2>
+
+    <h4>Estas seguro de borrar este producto con todos sus elementos?</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Partner.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Partner.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaAlta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaAlta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaBaja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaBaja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PremioValor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PremioValor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoPremio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoPremio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComisionValor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComisionValor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoComision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoComision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <button class="btn btn-danger">Borrar</button>
+    <a class="btn btn-warning" href='@Url.Action("Index","Productos")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+</p>
+

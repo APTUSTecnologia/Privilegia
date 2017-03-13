@@ -1,0 +1,46 @@
+﻿@model Privilegia.Models.PartnerModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Borrar Partner</h2>
+
+<h4>Estas seguro de borrar este Partner con todos sus elementos?</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cif)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <p>
+            <a class="btn btn-danger" href='@Url.Action("Eliminar","Partners", new {id = Model.Id})'>Editar</a>
+            <a class="btn btn-warning" href='@Url.Action("Index","Productos")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+        </p>
+    }
+</div>
+

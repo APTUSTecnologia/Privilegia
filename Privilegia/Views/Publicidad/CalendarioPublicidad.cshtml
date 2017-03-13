@@ -1,0 +1,61 @@
+﻿<div class="modal-header ">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <a class="btn btn-warning" href='@Url.Action("Index","Publicidad")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div id='calendar'></div>
+        </div>
+    </div>
+</div>
+
+<div id="fullCalModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">Cerrar</span></button>
+                <h4 id="modalTitle" class="modal-title"></h4>
+            </div>
+            <div id="modalBody" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                 @*<a class="btn btn-default" id="eventUrl" target="_blank">Editar</a>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $('document').ready(function () {
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,basicWeek,basicDay'
+            },
+            locale: 'es',
+            navLinks: true, // can click day/week names to navigate views
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: "/Publicidad/GetEventosCalendario/",
+            eventClick: function (event, jsEvent, view) {
+                console.log(event);
+                $('#modalTitle').html(event.title);
+                $('#modalBody').html(event.descripcion);
+               // $('#eventUrl').attr('href', '@Url.Action("EditarPublicidad", "Publicidad")/' + event.id);
+                $('#fullCalModal').modal();
+            }
+        });
+
+    });
+</script>
+
+
