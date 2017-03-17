@@ -23,6 +23,10 @@ namespace Privilegia.Models
 
         public PublicidadModel Publicidad { get; set; }
 
+        public bool PlanDeMedios { get; set;  }
+
+        public string Total { get; set; }
+
         public string FechaCreacion { get; set; }
 
     }

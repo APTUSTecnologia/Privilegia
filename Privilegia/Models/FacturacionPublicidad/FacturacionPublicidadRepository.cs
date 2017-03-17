@@ -19,7 +19,14 @@ namespace Privilegia.Models.FacturacionPublicidad
         {
             using (Contexto context = new Contexto())
             {
-                return context.FacturacionPublicidad.OfType<FacturacionPublicidadModel>().Where(d => d.IdPartner == idPartner).ToList();
+                var lista = context.FacturacionPublicidad.OfType<FacturacionPublicidadModel>().Where(d => d.IdPartner == idPartner).ToList();
+                var listaFinal = new List<FacturacionPublicidadModel>();
+                foreach (var item in lista.GroupBy(m => m.IdFactura))
+                {
+                    listaFinal.Add(item.First());
+                }
+
+                return listaFinal;
             }
         }
 

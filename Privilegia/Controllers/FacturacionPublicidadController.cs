@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -28,20 +29,20 @@ namespace Privilegia.Controllers
         // GET: Facturacion
         public ActionResult Index()
         {
-            var listaPartners = _partnerRepository.ObtenerPartnersInternos();
+            var listaPartners = _partnerRepository.ObtenerPartners();
 
             ViewBag.listPartners = listaPartners.ToList().OrderBy(m => m.Nombre).Where(m => m.FechaBaja == null);
 
             return View();
         }
 
-        public ActionResult CargarPublicidad(string idPartner, string mes)
+        public ActionResult CargarPublicidad(string idPartner, bool medios)
         {
 
-            var listaPublicidad = _publicidadRepository.ObtenerPublicidadPorIdPartner(idPartner);
-            List<PublicidadModel> listafinal = new List<PublicidadModel>();
+            var listaPublicidad = _publicidadRepository.ObtenerPublicidadPorIdPartner(idPartner).Where(m => m.PlanDeMedios == medios).ToList();
+            var listafinal = new List<PublicidadModel>();
 
-            if (listaPublicidad != null && listaPublicidad.Count > 0)
+            if (listaPublicidad.Count > 0)
             {
                 foreach (var producto in listaPublicidad)
                 {
@@ -52,8 +53,8 @@ namespace Privilegia.Controllers
 
             foreach (var publi in listaPublicidad)
             {
-                var prueba = DateTime.Parse(publi.FechaInicio).Month.ToString();
-                if (prueba.Equals(mes))
+                var anioPubli = DateTime.Parse(publi.FechaInicio).Year;
+                if (anioPubli.Equals(DateTime.Today.Year))
                 {
                     // Estamos en el mes correcto 
                     listafinal.Add(publi);
@@ -66,43 +67,36 @@ namespace Privilegia.Controllers
                          new[]
                          {
                     Convert.ToString(c.Id), c.Partner.Nombre, c.FechaInicio, c.FechaFin, c.NombreEspacioPublicidad,
-                    c.NombreParteEspacioPublicidad, c.Importe
+                    c.NombreParteEspacioPublicidad, c.PlanDeMedios.ToString(), c.Total
                          };
 
             return Json(new
             {
                 iTotalRecords = listaPublicidad?.Count(),
-                iTotalDisplayRecords = listafinal.Count(),
+                iTotalDisplayRecords = listaPublicidad.Count(),
                 aaData = result
             },
                 JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult ExisteFactura(string idPartner, string mes)
+        public ActionResult ExisteFactura(string idPartner, bool medios)
         {
-            var listaPublicidad = _publicidadRepository.ObtenerPublicidadPorIdPartner(idPartner);
-            List<PublicidadModel> listafinal = new List<PublicidadModel>();
+            var listaPublicidad = _publicidadRepository.ObtenerPublicidadPorIdPartner(idPartner).Where(m => m.PlanDeMedios == medios);
             string idFactura = "";
             var generada = false;
             foreach (var publi in listaPublicidad)
             {
-                var prueba = DateTime.Parse(publi.FechaInicio).Month.ToString();
-                if (prueba.Equals(mes))
+                if (publi.IdFactura != null)
                 {
-                    // Estamos en el mes correcto 
-                    listafinal.Add(publi);
-                    if (publi.IdFactura != null)
-                    {
-                        idFactura = publi.IdFactura;
-                        //Ya tenemos factura asociada
-                        generada = true;
-                    }
+                    idFactura = publi.IdFactura;
+                    //Ya tenemos factura asociada
+                    generada = true;
                 }
             }
 
             if (generada)
             {
-                return Json(new { success = false, responseText = "Esta factura ya ha sido generada" , idFactura = idFactura},
+                return Json(new { success = false, responseText = "Esta factura ya ha sido generada", idFactura = idFactura },
                     JsonRequestBehavior.AllowGet);
             }
             else
@@ -112,21 +106,24 @@ namespace Privilegia.Controllers
 
         }
 
-        public ActionResult CrearFactura(string idPartner, string mes)
+        public ActionResult CrearFactura(string idPartner, bool medios)
         {
-            var listaPublicidad = _publicidadRepository.ObtenerPublicidadPorIdPartner(idPartner);
+            var listaPublicidad = _publicidadRepository.ObtenerPublicidadPorIdPartner(idPartner).Where(m => m.PlanDeMedios == medios);
             var listafinal = new List<PublicidadModel>();
             var existeFactura = false;
             string idFacturaExistente = null;
+            var total = 0.0;
             foreach (var publi in listaPublicidad)
             {
-                var mesFechaInicioPubliCtx = DateTime.Parse(publi.FechaInicio).Month.ToString();
-                if (mesFechaInicioPubliCtx.Equals(mes))
+                // Estamos en el mes correcto 
+                //Añadimos producto a la lista
+
+                var anioPubli = DateTime.Parse(publi.FechaInicio).Year;
+                if (anioPubli.Equals(DateTime.Today.Year))
                 {
                     // Estamos en el mes correcto 
-                    //Añadimos producto a la lista
                     listafinal.Add(publi);
-
+                    total = total + Double.Parse(publi.Total, CultureInfo.InvariantCulture);
                     if (publi.IdFactura != null)
                     {
                         idFacturaExistente = publi.IdFactura;
@@ -134,10 +131,14 @@ namespace Privilegia.Controllers
                     }
 
                 }
+
+               
             }
 
             try
             {
+                total = total + (total*0.21);
+                total = Math.Round(total, 2);
                 if (existeFactura)
                 {
                     //Tenemos Factura la actualizamos
@@ -150,8 +151,11 @@ namespace Privilegia.Controllers
 
                         if (registro != null)
                         {
-                             _facturacionPublicidadRepository.Eliminar(registro);
+                            _facturacionPublicidadRepository.Eliminar(registro);
                         }
+
+                        //Aqui le metemos el iva al total
+
 
                         //nos recoremos la lista para ponerle el id de la factura a al objeto publicidad
                         publi.IdFactura = idFacturaExistente;
@@ -161,7 +165,9 @@ namespace Privilegia.Controllers
                             IdFactura = publi.IdFactura,
                             IdPartner = idPartner,
                             FechaCreacion = DateTime.Today.ToLongDateString(),
-                            IdPublicidad = publi.Id.ToString()
+                            IdPublicidad = publi.Id.ToString(),
+                            PlanDeMedios = medios,
+                            Total = total.ToString("##.##")
                         };
 
                         //Insertamos los registros de la factura 
@@ -170,7 +176,7 @@ namespace Privilegia.Controllers
                         _publicidadRepository.Actualizar(publi);
 
                     }
-                    return Json(new { success = true, responseText = "Correcta Creacion" , idFactura = idFacturaExistente }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = true, responseText = "Correcta Creacion", idFactura = idFacturaExistente }, JsonRequestBehavior.AllowGet);
 
                 }
                 else
@@ -180,6 +186,7 @@ namespace Privilegia.Controllers
 
                     foreach (var publi in listafinal)
                     {
+                        
                         //nos recoremos la lista para ponerle el id de la factura a al objeto publicidad
                         publi.IdFactura = idFacturaExistente;
                         var registroFactura = new FacturacionPublicidadModel()
@@ -188,7 +195,9 @@ namespace Privilegia.Controllers
                             IdFactura = publi.IdFactura,
                             IdPartner = idPartner,
                             FechaCreacion = DateTime.Today.ToLongDateString(),
-                            IdPublicidad = publi.Id.ToString()
+                            IdPublicidad = publi.Id.ToString(),
+                            PlanDeMedios = medios,
+                            Total = total.ToString("##.###")
                         };
 
                         //Insertamos los registros de la factura 
@@ -197,12 +206,12 @@ namespace Privilegia.Controllers
                         _publicidadRepository.Actualizar(publi);
 
                     }
-                    return Json(new { success = true, responseText = "Correcta Creacion" , idFactura= idFacturaExistente }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = true, responseText = "Correcta Creacion", idFactura = idFacturaExistente }, JsonRequestBehavior.AllowGet);
 
                 }
 
 
-               
+
             }
             catch (Exception)
             {

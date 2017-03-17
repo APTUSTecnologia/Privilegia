@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "SubidaFicheros";
+}
+
+<div class="modal-header">
+    <h2><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Subida de Ficheros</h2>
+</div>
+@using (Html.BeginForm("CargarArchivo", "SubidaArchivos", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.Label("Archivo", new { @class = "control-label" })
+                    <input type="file" id="Archivo" name="archivo" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.Label("Proveedor", new { @class = "control-label" })
+                    <select class="form-control" name="proveedor">
+                        <option value="Guijuelo">Guijuelo</option>
+                        <option value="YoRespondo">YoRespondo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;">
+            <img src="/images/wait.gif" alt="wiat" />
+            Espere...
+        </span>
+
+        <input class="btn btn-primary" type="submit" value="Cargar" onclick="window.simple()" />
+    </div>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        
+    </script>
+}
+
+

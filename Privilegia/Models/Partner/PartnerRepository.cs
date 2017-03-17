@@ -43,6 +43,15 @@ namespace Privilegia.Models.Partner
                 return context.Set<PartnerModel>().FirstOrDefault(x => x.Id == guid);
             }
         }
- 
+
+        public bool ExistePartner(string cif)
+        {
+            using (Contexto context = new Contexto())
+            {
+                var partner = context.Set<PartnerModel>().FirstOrDefault(x => x.Cif == cif);
+
+                return partner != null;
+            }
+        }
     }
 }

@@ -15,6 +15,8 @@ namespace Privilegia.Models.Partner
 
         PartnerModel ObtenerPartnerPorId(string id);
 
+        bool ExistePartner(string cif);
+
     }
 
     

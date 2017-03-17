@@ -1,0 +1,163 @@
+﻿@using Privilegia.Helpers
+@model IEnumerable<Privilegia.Models.FacturacionPublicidadModel>
+@{
+    ViewBag.Title = "FacturacionPublicidad";
+}
+<div class="row">
+    <div class="col-md-12">
+        <h2 align="center"><span class="glyphicon glyphicon-list"></span> Facturación Publicidad</h2>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <label>Listado de Partners:</label>
+        <select class="selectpicker" id="selectpickerPartner" data-live-search="true" title="Selecciona un Partner...">
+            @{
+                if (ViewBag.listPartners != null)
+                {
+                    var lista = ViewBag.listPartners;
+
+                    foreach (var partner in lista)
+                    {
+                        <option value="@partner.Id">@partner.Nombre</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table id="Publicidad" class="display">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre Empresa</th>
+                            <th>Fecha Creacion</th>
+                            <th>Plan de Medios</th>
+                            <th>Total €</th>
+                            <th>Factura</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    @Scripts.Render("~/scripts/AppJs/Privilegia.js")
+    <script>
+        var otable;
+
+        $(function() {
+            otable = $('#Publicidad')
+                .dataTable({
+                    "bAutoWidth": false,
+                    "aoColumns": [
+                        { "sName": "Id", "bVisible": false, "bSearchable": false },
+                        { "sName": "Partner.Nombre" },
+                        { "sName": "FechaCreacion" },
+                        {
+                            "sName": "PlanDeMedios",
+                            "render": function(data) {
+                                if (data === "True") {
+                                    return '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+                                } else {
+                                    return '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
+                                }
+                            }
+                        },
+                        {
+                            "sName": "Total",
+                            "render": function (data) {
+                                return data + " €";
+                            }
+                        },
+                        {
+                            "sName": "idFactura",
+                            "bSearchable": false,
+                            "render": function(data, type, row) {
+                                //return '<a href=\"LinkedAccountsDetails/' + data + '\">Edit</a>';
+                                var UrlFactura = '@Url.Action("VerFactura", "Informes")/' + row[5];
+                                return '<a href=\"' +
+                                    UrlFactura +
+                                    '\" class=\"btn btn-success btn-sm\" target=\"_blank\"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a> ';
+                            }
+                        }
+                    ],
+                    "oLanguage": {
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron productos.",
+                        "sEmptyTable": "Ningún producto disponible.",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Buscar:",
+                        "sUrl": "",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    }
+                });
+
+        });
+
+        function filterme() {
+
+            var partner = $('#selectpickerPartner').val();
+
+            if (typeof partner !== "undefined") {
+                //Tenemos partner
+                $.ajax({
+                    type: "GET",
+                    url: "/Informes/CargarFacturas",
+                    data: { idPartner: partner },
+                    success: function(data) {
+                        if (data.iTotalDisplayRecords > 0) {
+                            //botoncrearfactura
+                            otable.fnClearTable();
+                            otable.fnAddData(data.aaData);
+                            otable.fnDraw();
+                        } else {
+                            otable.fnClearTable();
+                            otable.fnDraw();
+                        }
+
+
+                    }
+                });
+            } else {
+                //No tenemos partner
+
+            }
+
+        }
+
+        $(document)
+            .ready(function() {
+
+                $('#selectpickerPartner')
+                    .change(function() {
+                        filterme();
+                    });
+            });
+
+    </script>
+}

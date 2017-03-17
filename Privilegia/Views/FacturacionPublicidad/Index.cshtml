@@ -1,18 +1,18 @@
 ﻿@using Privilegia.Helpers
 @model IEnumerable<Privilegia.Models.FacturacionPublicidadModel>
 @{
-    ViewBag.Title = "FacturacionPublicidad";
+    ViewBag.Title = "CreacionFacturacionPublicidad";
 }
 <div class="row">
     <div class="col-md-12">
-        <h2 align="center"><span class="glyphicon glyphicon-list"></span> Facturación Publicidad</h2>
+        <h2 align="center"><span class="glyphicon glyphicon-list"></span>Creacion Facturación Publicidad</h2>
         <hr />
     </div>
 </div>
 <div class="row">
     <div class="col-md-4">
         <label>Listado de Partners:</label>
-        <select class="selectpicker" id="selectpickerPartner" data-live-search="true" title="Selecciona un Partner...">
+        <select class="selectpicker" id="selectpickerPartner" data-live-search="true" title="Selecciona un Partner..." onchange="filterme()">
             @{
                 if (ViewBag.listPartners != null)
                 {
@@ -26,7 +26,7 @@
             }
         </select>
     </div>
-    <div class="col-md-4">
+    @*<div class="col-md-4">
         <label>Periodo:</label>
         <select class="selectpicker" id="selectpickerMes" data-live-search="true" onchange="filterme()" title="Selecciona un Mes...">
             <option value="1">Enero</option>
@@ -42,29 +42,52 @@
             <option value="11">Nombiembre</option>
             <option value="12">Diciembre</option>
         </select>
+    </div>*@
+    <div class="col-md-4 ">
+        <div class="[ form-group ]">
+            <input type="checkbox" id="PlanDeMedios" autocomplete="off"  value="false"/>
+            <div class="[ btn-group ]">
+                <label for="PlanDeMedios" class="[ btn btn-default ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                </label>
+                <label for="PlanDeMedios" class="[ btn btn-default active ]">
+                    Plan de Medios
+                </label>
+            </div>
+        </div>
+        @*<div class="form-group">
+            <label>Plan de Medios : </label>
+            <input type="checkbox" id="PlanDeMedios" name="acceptRules" class="checkbox" value="false">
+            <div id="checkbox-value"></div>
+        </div>*@
     </div>
-    <div class="col-md-4">
+    <div class="col-md-2">
         <a class="btn btn-warning" id="botoncrearfactura" onclick="crearFactura();">Generar Factura<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
     </div>
 </div>
 
 <div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Elementos Incluidos en la factura:</strong>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
                 <table id="Publicidad" class="display">
                     <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre Empresa</th>
-                            <th>Fecha de Inicio</th>
-                            <th>Fecha de Fin</th>
-                            <th>Espacio</th>
-                            <th>Parte</th>
-                            <th>Importe €</th>
-                            <th>
-                            </th>
-                        </tr>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre Empresa</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Fecha de Fin</th>
+                        <th>Soporte</th>
+                        <th>Publicidad</th>
+                        <th>Plan de Medios</th>
+                        <th>Total</th>
+                        <th>
+                        </th>
+                    </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
@@ -90,7 +113,17 @@
                         { "sName": "FechaFin" },
                         { "sName": "NombreEspacioPublicidad" },
                         { "sName": "NombreParteEspacioPublicidad" },
-                        { "sName": "Importe" },
+                        {
+                            "sName": "PlanDeMedios",
+                            "render": function (data) {
+                                if (data === "True") {
+                                    return '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+                                } else {
+                                    return '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
+                                }
+                            }
+                        },
+                        { "sName": "Total" },
                         {
                             "mData": null,
                             "bSortable": false,
@@ -133,21 +166,20 @@
 
         function crearFactura() {
             var partner = $('#selectpickerPartner').val();
-            var mes = $('#selectpickerMes').val();
-
-            if (typeof partner !== "undefined" && mes !== "undefined") {
+            var plan = $('#PlanDeMedios').val();
+            if (partner !== "") {
                 //Tenemos partner
                 $.ajax({
                     type: "GET",
                     url: "/FacturacionPublicidad/ExisteFactura",
-                    data: { idPartner: partner, mes: mes },
+                    data: { idPartner: partner, medios: plan },
                     success: function (response) {
                         if (response != null && response.success) {
                             //Creamos la factura
                             $.ajax({
                                 type: "GET",
                                 url: "/FacturacionPublicidad/CrearFactura",
-                                data: { idPartner: partner, mes: mes },
+                                data: { idPartner: partner, medios: plan },
                                 success: function (response) {
                                     if (response != null && response.success) {
                                         swal({
@@ -185,7 +217,7 @@
                                     $.ajax({
                                         type: "GET",
                                         url: "/FacturacionPublicidad/CrearFactura",
-                                        data: { idPartner: partner, mes: mes },
+                                        data: { idPartner: partner, medios: plan },
                                         success: function (response) {
                                             if (response != null && response.success) {
                                                 var urlFactura = '@Url.Action("VerFactura", "Informes")/' + response.idFactura;
@@ -224,14 +256,14 @@
         function filterme() {
 
             var partner = $('#selectpickerPartner').val();
-            var mes = $('#selectpickerMes').val();
+            var plan = $('#PlanDeMedios').val();
 
-            if (typeof partner !== "undefined" && mes !== "undefined") {
+            if (typeof partner !== "undefined") {
                 //Tenemos partner
                 $.ajax({
                     type: "GET",
                     url: "/FacturacionPublicidad/CargarPublicidad",
-                    data: { idPartner: partner, mes: mes },
+                    data: { idPartner: partner, Medios: plan},
                     success: function (data) {
                         if (data.iTotalDisplayRecords > 0) {
                             //botoncrearfactura
@@ -255,7 +287,21 @@
 
         $(document)
             .ready(function () {
+                $('#checkbox-value').text("No");
 
+                $("#PlanDeMedios").on('change', function () {
+                    if ($(this).is(':checked')) {
+                        $(this).attr('value', 'true');
+                        $('#checkbox-value').text("Si");
+                        filterme();
+                    } else {
+                        $(this).attr('value', 'false');
+                        $('#checkbox-value').text("No");
+                        filterme();
+                    }
+
+                   
+                });
             });
 
     </script>

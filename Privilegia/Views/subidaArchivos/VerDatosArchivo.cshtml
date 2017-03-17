@@ -1,0 +1,58 @@
+﻿@using FileHelpers
+@model Privilegia.ViewModels.FicheroViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ContenidoArchivo)
+    <h2><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Subida de Ficheros</h2>
+    <hr />
+
+    var registrosTotales = Model.RegistrosCorrectos + Model.Errores.Count;
+
+    <h2>Registros procesados @Model.RegistrosCorrectos de @registrosTotales </h2>
+    <div class="panel">
+        <div class="panel-heading">
+            Errores Encontrados
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Estado</th>
+                            <th>Linea</th>
+                            <th>Descripción error</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (ErrorInfo t in Model.Errores)
+                        {
+                            <tr>
+                                <td><span class="glyphicon glyphicon-warning-sign"></span></td>
+                                <td>
+                                    @t.LineNumber
+                                </td>
+                                <td>
+                                    @t.ExceptionInfo.Message
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(document)
+            .ready(function () {
+
+            });
+    </script>
+}

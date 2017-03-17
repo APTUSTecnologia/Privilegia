@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Privilegia.Models;
+using Privilegia.Models.Direcciones;
 using Privilegia.Models.FacturacionPublicidad;
 using Privilegia.Models.Partner;
 using Privilegia.Models.Productos;
@@ -19,6 +20,7 @@ namespace Privilegia.Controllers
         private IProductosRespository _productosRespository;
         private IPublicidadRepository _publicidadRepository;
         private IFacturacionPublicidadRepository _facturacionPublicidadRepository;
+        private IDireccionRepository _direccionRepository;
 
         public InformesController()
         {
@@ -26,6 +28,7 @@ namespace Privilegia.Controllers
             _productosRespository = new ProductosRespository();
             _publicidadRepository = new PublicidadRepository();
             _facturacionPublicidadRepository = new FacturacionPublicidadRepository();
+            _direccionRepository = new DireccionRepository();
         }
         // GET: Informes
         public ActionResult Index()
@@ -37,6 +40,9 @@ namespace Privilegia.Controllers
         {
             var temp = _facturacionPublicidadRepository.ObtenerFacturacion().First(m => m.IdFactura == id);
             var partner = _partnerRepository.ObtenerPartnerPorId(temp.IdPartner);
+
+            partner.DireccionPrincipal =
+                (DireccionPrincipal) _direccionRepository.ObtenerDireccionPorIdPartner(partner.Id.ToString());
 
             var modelo = new FacturaPublicidadViewModel()
             {
@@ -56,6 +62,44 @@ namespace Privilegia.Controllers
             }
 
             return new Rotativa.PartialViewAsPdf(modelo);
+        }
+
+        public ActionResult Publicidad()
+        {
+            var listaPartners = _partnerRepository.ObtenerPartners();
+
+            ViewBag.listPartners = listaPartners.ToList().OrderBy(m => m.Nombre).Where(m => m.FechaBaja == null);
+
+            return View();
+        }
+
+        public ActionResult CargarFacturas(string idPartner)
+        {
+
+            var listaFacturas = _facturacionPublicidadRepository.ObtenerFacturacionPorIdPartner(idPartner);
+
+            if (listaFacturas.Count > 0)
+            {
+                foreach (var producto in listaFacturas)
+                {
+                    var partner = _partnerRepository.ObtenerPartnerPorId(producto.IdPartner);
+                    producto.Partner = partner;
+                }
+            }
+
+            var result = from c in listaFacturas
+                         select new[] {
+                    Convert.ToString(c.Id), c.Partner.Nombre, c.FechaCreacion, c.PlanDeMedios.ToString(), c.Total,
+                    c.IdFactura
+                         };
+
+            return Json(new
+            {
+                iTotalRecords = listaFacturas?.Count(),
+                iTotalDisplayRecords = listaFacturas.Count(),
+                aaData = result
+            },
+                JsonRequestBehavior.AllowGet);
         }
     }
 }

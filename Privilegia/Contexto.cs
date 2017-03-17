@@ -4,6 +4,7 @@ using System.Data.Entity.ModelConfiguration;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Privilegia.Models;
+using Privilegia.Models.FacturacionPartners;
 using Privilegia.Models.Productos;
 using Privilegia.Models.Tipos;
 
@@ -30,6 +31,9 @@ namespace Privilegia
         public DbSet<EspacioPublicidadModel> EspaciosPublicidad { get; set; }
         public DbSet<ParteEspacioPublicidadModel> PartesEspaciosPublicidad { get; set; }
         public DbSet<FacturacionPublicidadModel> FacturacionPublicidad { get; set; }
+        public DbSet<FacturacionPremiosModel> FacturacionPremios { get; set; }
+
+
        
 
 

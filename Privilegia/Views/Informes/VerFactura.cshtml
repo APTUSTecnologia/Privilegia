@@ -1,4 +1,5 @@
 ﻿@Styles.Render("~/Content/css")
+@using System.Globalization
 @model Privilegia.ViewModels.FacturaPublicidadViewModel
 <div class="container doc_factura">
     <div class="row">
@@ -21,8 +22,8 @@
             <p class="facturado">
                 <strong>
                     @Model.Partner.Nombre<br>
-                    RIBERA DEL LOIRA 60<br>
-                    28042 MADRID<br><br><br>
+                    @Model.Partner.DireccionPrincipal.Calle @Model.Partner.DireccionPrincipal.Numero<br>
+                    @Model.Partner.DireccionPrincipal.CodigoPostal @Model.Partner.DireccionPrincipal.Provincia<br><br><br>
                     CIF.: @Model.Partner.Cif<br><br>
                 </strong>
                 @Model.Fecha
@@ -37,8 +38,7 @@
                 <thead>
                     <tr>
                         <th>CONCEPTO</th>
-                        <th class="text-center">IMPORTE</th>
-
+                        <th class="text-center">IMPORTE TOTAL</th>
                     </tr>
                 </thead>
 
@@ -47,10 +47,10 @@
                         var suma = 0.0;
                         foreach (var publicidad in Model.ListadePublicidad)
                         {
-                            suma = suma + Double.Parse(publicidad.Importe);
+                            suma = suma + Double.Parse(publicidad.Total, CultureInfo.InvariantCulture);
                             <tr>
                                 <td>@publicidad.NombreEspacioPublicidad - @publicidad.NombreParteEspacioPublicidad</td>
-                                <td class="text-center">@publicidad.Importe €</td>
+                                <td class="text-center">@publicidad.Total €</td>
                             </tr>
                         }
                     }
@@ -64,12 +64,12 @@
                     </tr>
                     <tr>
                         <td class="text-right">21% I.V.A.</td>
-                        @{ var iva = suma * 0.21;}
+                        @{ var iva = Math.Round(suma * 0.21, 2);}
                         <td class="text-center">@iva €</td>
                     </tr>
                     <tr>
                         <td class="text-right"><strong>TOTAL FACTURA</strong></td>
-                        @{ var total = suma + iva;}
+                        @{ var total = Math.Round(suma + iva, 2);}
                         <td class="text-center"><strong>@total €</strong></td>
                     </tr>
                 </tbody>
