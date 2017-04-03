@@ -84,7 +84,7 @@
                             "bSearchable": false,
                             "render": function(data, type, row) {
                                 //return '<a href=\"LinkedAccountsDetails/' + data + '\">Edit</a>';
-                                var UrlFactura = '@Url.Action("VerFactura", "Informes")/' + row[5];
+                                var UrlFactura = '@Url.Action("VerFacturaPublicidad", "Informes")/' + row[5];
                                 return '<a href=\"' +
                                     UrlFactura +
                                     '\" class=\"btn btn-success btn-sm\" target=\"_blank\"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a> ';
@@ -127,7 +127,7 @@
                 //Tenemos partner
                 $.ajax({
                     type: "GET",
-                    url: "/Informes/CargarFacturas",
+                    url: "/Informes/CargarFacturasPublicidad",
                     data: { idPartner: partner },
                     success: function(data) {
                         if (data.iTotalDisplayRecords > 0) {

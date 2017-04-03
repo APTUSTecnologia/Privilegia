@@ -3,16 +3,16 @@ namespace Privilegia.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class anadidoTotalEnFacturas : DbMigration
+    public partial class modificadoIncidencia : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.FacturacionPublicidadModels", "Total", c => c.String());
+            AddColumn("dbo.IncidenciaModels", "CampoErroneo", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.FacturacionPublicidadModels", "Total");
+            DropColumn("dbo.IncidenciaModels", "CampoErroneo");
         }
     }
 }

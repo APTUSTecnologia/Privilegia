@@ -14,19 +14,26 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <h3>Totales Publicidad</h3>
-        <div id="chartPubli">
+        <div class="jumbotron">
+            <h3>Totales Publicidad</h3>
+            <div id="chartPubli"></div>
         </div>
     </div>
     <div class="col-md-4">
-        <h3>Totales Productos</h3>
-        <div id="chartProdu">
+        <div class="jumbotron">
+            <h3>Totales Productos</h3>
+            <div id="chartProdu">
+            </div>
         </div>
-    </div>
+           
+        </div>
     <div class="col-md-4">
-        <h3>Partners</h3>
-        <div id="chartPartner">
+        <div class="jumbotron">
+            <h3>Partners</h3>
+            <div id="chartPartner">
+            </div>
         </div>
+       
     </div>
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -51,12 +58,16 @@
                 var data = google.visualization.arrayToDataTable(r);
 
                 var options = {
+                    legend: {
+                        position: 'bottom', textStyle: { color: 'black' }
+                    },
                     //title: 'Publicidad Contratada',
                     is3D: true,
                     animation: {
                         duration: 1000,
                         easing: 'in'
-                    }
+                    },
+                    backgroundColor: '#eee'
                 };
 
                 var chart = new google.visualization.PieChart($("#chartPubli")[0]);
@@ -81,8 +92,12 @@
                 var data = google.visualization.arrayToDataTable(r);
 
                 var options = {
+                    backgroundColor: '#eee',
                     //title: 'Numero de Productos',
-                    chartArea: { width: '30%' },
+                    chartArea: {
+                        width: '30%',
+                        backgroundColor: '#eee'
+                    },
                     hAxis: {
                         title: 'Total',
                         minValue: 0
@@ -100,7 +115,7 @@
                 //chart.draw(data, options);
 
                 var chart = new google.charts.Bar(document.getElementById('chartProdu'));
-                chart.draw(data, options);
+                chart.draw(data, google.charts.Bar.convertOptions(options));
 
 
             },
@@ -128,7 +143,8 @@
                     animation: {
                         duration: 1000,
                         easing: 'in'
-                    }
+                    },
+                    backgroundColor: '#eee'
                 };
 
                 var chart = new google.visualization.PieChart(document.getElementById('chartPartner'));

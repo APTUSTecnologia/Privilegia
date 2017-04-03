@@ -5,7 +5,6 @@
 }
 
 <h2>Borrar Partner</h2>
-
 <h4>Estas seguro de borrar este Partner con todos sus elementos?</h4>
 <div>
     <hr />
@@ -38,7 +37,7 @@
         @Html.AntiForgeryToken()
 
         <p>
-            <a class="btn btn-danger" href='@Url.Action("Eliminar","Partners", new {id = Model.Id})'>Eliminar</a>
+            <a class="btn btn-danger" href='@Url.Action("EliminarConfirmed","Partners", new {id = Model.Id})'>Eliminar</a>
             <a class="btn btn-warning" href='@Url.Action("Index","Partners")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
         </p>
     }

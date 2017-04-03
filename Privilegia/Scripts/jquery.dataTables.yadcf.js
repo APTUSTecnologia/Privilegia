@@ -430,11 +430,11 @@
 			selectElementCustomRefreshFunc,
 			selectElementCustomDestroyFunc,
 			placeholderLang = {
-				'select': 'Select value',
-				'select_multi': 'Select values',
-				'filter': 'Type to filter',
-				'range': ['From', 'To'],
-				'date': 'Select a date'
+				'select': 'Selecciona',
+				'select_multi': 'Selecciona Valores',
+				'filter': 'Pulsa para filtrar',
+				'range': ['desde', 'hasta'],
+				'date': 'Selecciona fecha'
 			},
 			settingsMap = {};
 

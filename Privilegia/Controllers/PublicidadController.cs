@@ -112,7 +112,7 @@ namespace Privilegia.Controllers
                 if (ModelState.IsValid)
                 {
                     modelo.Id = Guid.NewGuid();
-                    modelo.FechaCreacion = DateTime.Today.ToLongDateString();
+                    modelo.FechaCreacion = DateTime.Today.ToShortDateString();
                     _publicidadRepository.Insertar(modelo);
 
                     return RedirectToAction("Index");
@@ -199,8 +199,8 @@ namespace Privilegia.Controllers
             //Get the events
             //You may get from the repository also
             var eventList = GetListaCalendarioPublicidad();
-
             var rows = eventList.ToArray();
+
             return Json(rows, JsonRequestBehavior.AllowGet);
         }
 
@@ -291,13 +291,16 @@ namespace Privilegia.Controllers
                 var isNombreEmpresaSearchable = Convert.ToBoolean(Request["bSearchable_1"]);
                 var isEspacioPublicidadSearchable = Convert.ToBoolean(Request["bSearchable_4"]);
                 var isParteEspacioPublicidadSearchable = Convert.ToBoolean(Request["bSearchable_5"]);
+                var isPlanSearchable = Convert.ToBoolean(Request["bSearchable_6"]);
 
                 filteredCompanies = listPublicidad?.ToList()
                    .Where(c => isNombreEmpresaSearchable && c.Partner.Nombre.ToLower().Contains(param.sSearch.ToLower())
                                ||
                                isEspacioPublicidadSearchable && c.NombreEspacioPublicidad.ToLower().Contains(param.sSearch.ToLower())
                                ||
-                               isParteEspacioPublicidadSearchable && c.NombreParteEspacioPublicidad.ToLower().Contains(param.sSearch.ToLower()));
+                               isParteEspacioPublicidadSearchable && c.NombreParteEspacioPublicidad.ToLower().Contains(param.sSearch.ToLower())
+                               ||
+                               isPlanSearchable && c.PlanDeMedios.ToString().Contains(param.sSearch));
             }
             else
             {
@@ -305,6 +308,7 @@ namespace Privilegia.Controllers
                 var nombreEmpresaFilter = Convert.ToString(Request["sSearch_1"]);
                 var espacioPublicidadFilter = Convert.ToString(Request["sSearch_4"]);
                 var parteEspcioPublicidadFilter = Convert.ToString(Request["sSearch_5"]);
+                var planFilter = Convert.ToString(Request["sSearch_6"]);
 
                 filteredCompanies = listPublicidad?.ToList()
                                     .Where(c => (nombreEmpresaFilter == "" || c.Partner.Nombre.ToLower().Contains(nombreEmpresaFilter.ToLower()))
@@ -312,6 +316,8 @@ namespace Privilegia.Controllers
                                                 (espacioPublicidadFilter == "" || c.NombreEspacioPublicidad.ToLower().Contains(espacioPublicidadFilter.ToLower()))
                                                 &&
                                                 (parteEspcioPublicidadFilter == "" || c.NombreParteEspacioPublicidad.ToLower().Contains(parteEspcioPublicidadFilter.ToLower()))
+                                                &&
+                                                 (planFilter == "" || c.PlanDeMedios.ToString().ToLower().Contains(planFilter.ToLower()))
                                                );
 
             }
@@ -319,10 +325,12 @@ namespace Privilegia.Controllers
             var isNombreEmpresaSortable = Convert.ToBoolean(Request["bSortable_1"]);
             var isEspacioPublicidadSortable = Convert.ToBoolean(Request["bSortable_4"]);
             var isParteEspacioPublicidadSortable = Convert.ToBoolean(Request["bSortable_5"]);
+            var isPlanSortable = Convert.ToBoolean(Request["bSortable_6"]);
             var sortColumnIndex = Convert.ToInt32(Request["iSortCol_0"]);
             Func<PublicidadModel, string> orderingFunction = (c => sortColumnIndex == 1 && isNombreEmpresaSortable ? c.Partner.Nombre :
                                                           sortColumnIndex == 2 && isEspacioPublicidadSortable ? c.NombreEspacioPublicidad :
                                                           sortColumnIndex == 3 && isParteEspacioPublicidadSortable ? c.NombreParteEspacioPublicidad :
+                                                          sortColumnIndex == 6 && isPlanSortable ? c.PlanDeMedios.ToString() :
                                                           "");
 
             var sortDirection = Request["sSortDir_0"]; // asc or desc

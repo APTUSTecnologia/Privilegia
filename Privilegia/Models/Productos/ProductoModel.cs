@@ -43,10 +43,10 @@ namespace Privilegia.Models.Productos
         [Display(Name = "Valor de la comision")]
         public float ComisionValor { get; set; }
 
-        [Display(Name = "% para la Mutualidad")]
+        [Display(Name = "Mutualidad")]
         public float ImporteMutualidad { get; set; }
 
-        [Display(Name = "% para el mutualista")]
+        [Display(Name = "mutualista")]
         public float ImporteMutualista { get; set; }
 
         [Display(Name = "Tipo de comisión")]

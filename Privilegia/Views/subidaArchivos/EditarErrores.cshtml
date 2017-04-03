@@ -1,0 +1,179 @@
+﻿@model Privilegia.ViewModels.FicheroViewModel
+@using (Html.BeginForm("EditarErrores", "SubidaArchivos"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.JsonCorrectos)
+    @Html.HiddenFor(m => m.RegistrosCorrectos)
+   
+    @*@Html.HiddenFor(m => m.ContenidoArchivo)*@
+
+    <h2>
+        <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Editar Errores
+    </h2>
+    <hr />
+
+    var registrosTotales = " Registros correctos:" + Model.RegistrosCorrectos + " - Registros Cargados:" + Model.Cargados.Count + " - Registros erroneos:" + Model.ListaRegistrosConErrores.Count;
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>@registrosTotales</h3>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-warning btn-block" id="guardar" type="submit">Validar <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></button>
+        </div>
+        <div class="col-md-2">
+            <a href='@Url.Action("VerDatosArchivo", "SubidaArchivos" , new { nif = Model.Partner.Cif})' class="btn btn-danger btn-block"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Ver correctos</a>
+        </div>
+        <div class="col-md-2">
+            <a href="/subidaArchivos" type="button" class="btn btn-primary btn-block">
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Nuevo Archivo
+            </a>
+
+        </div>
+    </div>
+    if (Model.Incidencias.Count > 0)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Errores Encontrados @Model.Incidencias.Count</h3>
+                    </div>
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Estado</th>
+                            <th>Linea</th>
+                            <th>Descripción error</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.ListaRegistrosConErrores.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.HiddenFor(model => model.Incidencias[i].Id)
+                                        @Model.Incidencias[i].Id
+                                    </td>
+                                    <td><span class="glyphicon glyphicon-floppy-remove"></span>Error</td>
+                                    <td>
+                                        @Html.HiddenFor(model => model.Incidencias[i].Linea)
+                                        @Model.Incidencias[i].Linea
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(model => model.Incidencias[i].Descripcion)
+                                        @Model.Incidencias[i].Descripcion
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    if (Model.ListaRegistrosConErrores.Count > 0)
+    {
+        for (var i = 0; i < Model.ListaRegistrosConErrores.Count; i++)
+        {
+            @Html.HiddenFor(model => model.ListaRegistrosConErrores[i].Id)
+            @Html.HiddenFor(model => model.ListaRegistrosConErrores[i].FechaPago)
+            @Html.HiddenFor(model => model.ListaRegistrosConErrores[i].IdIncidencia)
+
+        var cont = i + 1;
+            <h3>Editar Error @cont</h3>
+            <div class="panel">
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.Label("Nif Proveed", new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.ListaRegistrosConErrores[i].NifProveed, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ListaRegistrosConErrores[i].NifProveed, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-2">
+                        @Html.Label("Codigo Cliente", new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.ListaRegistrosConErrores[i].CodigoCliente, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ListaRegistrosConErrores[i].CodigoCliente, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-2">
+                        @Html.Label("Codigo Pcto", new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.ListaRegistrosConErrores[i].CodigoPcto, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ListaRegistrosConErrores[i].CodigoPcto, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="col-md-4">
+                        @Html.Label("Descripcion", new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.ListaRegistrosConErrores[i].Descripcion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ListaRegistrosConErrores[i].Descripcion, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="col-md-2">
+                        @Html.Label("Fecha Contratacion", new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.ListaRegistrosConErrores[i].FechaContratacion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ListaRegistrosConErrores[i].FechaContratacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.Label("Numero Pedido", new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.ListaRegistrosConErrores[i].NumeroPedido, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ListaRegistrosConErrores[i].NumeroPedido, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.Label("Comision Pago", new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.ListaRegistrosConErrores[i].ComisionPago, new { @class = "form-control" })
+                            <span class="input-group-addon">€</span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ListaRegistrosConErrores[i].ComisionPago, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        @Html.Label("Situacion", new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.ListaRegistrosConErrores[i].Situacion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ListaRegistrosConErrores[i].Situacion, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.Label("Importe Pago", new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.ListaRegistrosConErrores[i].ImportePago, new { @class = "form-control" })
+                            <span class="input-group-addon">€</span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ListaRegistrosConErrores[i].ImportePago, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.Label("Situacion Pago", new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.ListaRegistrosConErrores[i].SituacionPago, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ListaRegistrosConErrores[i].SituacionPago, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.Label("Numero Mutualista", new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.ListaRegistrosConErrores[i].NumeroMutualista, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ListaRegistrosConErrores[i].NumeroMutualista, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        @Html.Label("Valor", new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.ListaRegistrosConErrores[i].Valor, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ListaRegistrosConErrores[i].Valor, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+
+@section scripts
+{
+    <script>
+         $(document)
+            .ready(function() {
+
+            });
+
+</script>
+   
+}

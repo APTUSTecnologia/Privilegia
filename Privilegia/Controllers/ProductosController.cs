@@ -55,7 +55,7 @@ namespace Privilegia.Controllers
         {
             var producto = new ProductoModel();
 
-            var partners = _partnerRepository.ObtenerPartnersInternos();
+            var partners = _partnerRepository.ObtenerPartnersInternos().Where(m => m.FechaBaja == null); 
 
             ViewBag.partners = new SelectList((from li in partners
                                                orderby li.Nombre
@@ -74,7 +74,7 @@ namespace Privilegia.Controllers
                 if (ModelState.IsValid)
                 {
                     modelo.Id = Guid.NewGuid();
-                    modelo.FechaCreacion = DateTime.Today.ToLongDateString();
+                    modelo.FechaCreacion = DateTime.Today.ToShortDateString();
                     _productosRespository.Insertar(modelo);
 
                     return RedirectToAction("Index");
@@ -167,7 +167,7 @@ namespace Privilegia.Controllers
             
             if (producto != null)
             {
-                producto.FechaBaja = DateTime.Today.ToLongDateString();
+                producto.FechaBaja = DateTime.Today.ToShortDateString();
                 producto.Estado = "Baja";
                 _productosRespository.Actualizar(producto);
             }

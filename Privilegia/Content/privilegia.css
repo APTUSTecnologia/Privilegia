@@ -699,6 +699,8 @@ span.en_formulario_sinlabel {
 
 .desborde_tabla {
     overflow-x: scroll;
+    overflow-y: scroll;
+    height:400px;
 }
 
 

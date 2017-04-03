@@ -146,6 +146,7 @@
     <Compile Include="Controllers\DireccionesController.cs" />
     <Compile Include="Controllers\FacturacionPublicidadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncidenciasController.cs" />
     <Compile Include="Controllers\InformesController.cs" />
     <Compile Include="Controllers\LogosController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
@@ -158,41 +159,21 @@
     </Compile>
     <Compile Include="Helpers\MyHelpers.cs" />
     <Compile Include="IBaseRepository.cs" />
-    <Compile Include="Migrations\201703130923246_inicial.cs" />
-    <Compile Include="Migrations\201703130923246_inicial.Designer.cs">
-      <DependentUpon>201703130923246_inicial.cs</DependentUpon>
+    <Compile Include="Migrations\201703280929144_Inicial.cs" />
+    <Compile Include="Migrations\201703280929144_Inicial.Designer.cs">
+      <DependentUpon>201703280929144_Inicial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703131210103_modificadaPublicidad.cs" />
-    <Compile Include="Migrations\201703131210103_modificadaPublicidad.Designer.cs">
-      <DependentUpon>201703131210103_modificadaPublicidad.cs</DependentUpon>
+    <Compile Include="Migrations\201703281022033_modificadoIncidencia.cs" />
+    <Compile Include="Migrations\201703281022033_modificadoIncidencia.Designer.cs">
+      <DependentUpon>201703281022033_modificadoIncidencia.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703131324045_modificadaPublicidadTotal.cs" />
-    <Compile Include="Migrations\201703131324045_modificadaPublicidadTotal.Designer.cs">
-      <DependentUpon>201703131324045_modificadaPublicidadTotal.cs</DependentUpon>
+    <Compile Include="Migrations\201703281213232_modificadoFacturacionPremiosQuitadoIncidencia.cs" />
+    <Compile Include="Migrations\201703281213232_modificadoFacturacionPremiosQuitadoIncidencia.Designer.cs">
+      <DependentUpon>201703281213232_modificadoFacturacionPremiosQuitadoIncidencia.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703131917444_anadidoPlanDeMediosFacturacion.cs" />
-    <Compile Include="Migrations\201703131917444_anadidoPlanDeMediosFacturacion.Designer.cs">
-      <DependentUpon>201703131917444_anadidoPlanDeMediosFacturacion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703140826173_anadidoTotalEnFacturas.cs" />
-    <Compile Include="Migrations\201703140826173_anadidoTotalEnFacturas.Designer.cs">
-      <DependentUpon>201703140826173_anadidoTotalEnFacturas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703140829269_cambiadoTotalPorImporteFacturasPublicidad.cs" />
-    <Compile Include="Migrations\201703140829269_cambiadoTotalPorImporteFacturasPublicidad.Designer.cs">
-      <DependentUpon>201703140829269_cambiadoTotalPorImporteFacturasPublicidad.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703140844154_cambiadoImportePorTotalFacturasPublicidad.cs" />
-    <Compile Include="Migrations\201703140844154_cambiadoImportePorTotalFacturasPublicidad.Designer.cs">
-      <DependentUpon>201703140844154_cambiadoImportePorTotalFacturasPublicidad.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703171118403_anadidoFacturacionPremios.cs" />
-    <Compile Include="Migrations\201703171118403_anadidoFacturacionPremios.Designer.cs">
-      <DependentUpon>201703171118403_anadidoFacturacionPremios.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703171206305_anadidoFacturacionPremiosFechaCreacion.cs" />
-    <Compile Include="Migrations\201703171206305_anadidoFacturacionPremiosFechaCreacion.Designer.cs">
-      <DependentUpon>201703171206305_anadidoFacturacionPremiosFechaCreacion.cs</DependentUpon>
+    <Compile Include="Migrations\201704030824057_anadidoTemp.cs" />
+    <Compile Include="Migrations\201704030824057_anadidoTemp.Designer.cs">
+      <DependentUpon>201704030824057_anadidoTemp.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Archivos\ILogoRepository.cs" />
@@ -210,8 +191,14 @@
     <Compile Include="Models\FacturacionPublicidad\FacturacionPublicidadModel.cs" />
     <Compile Include="Models\FacturacionPublicidad\FacturacionPublicidadRepository.cs" />
     <Compile Include="Models\FacturacionPublicidad\IFacturacionPublicidadRepository.cs" />
+    <Compile Include="Models\FacturasPremios\FacturasPremiosModel.cs" />
+    <Compile Include="Models\FacturasPremios\FacturasPremiosRepository.cs" />
+    <Compile Include="Models\FacturasPremios\IFacturasPremiosRepository.cs" />
     <Compile Include="Models\Ficheros\FicheroGuijuelo.cs" />
     <Compile Include="Models\Ficheros\FicheroYoRespondo.cs" />
+    <Compile Include="Models\Incidencias\IIncidenciaRepository.cs" />
+    <Compile Include="Models\Incidencias\IncidenciaModel.cs" />
+    <Compile Include="Models\Incidencias\IncidenciasRepository.cs" />
     <Compile Include="Models\JQueryDataTableParamModel.cs" />
     <Compile Include="Models\Partner\IPartnerRepository.cs" />
     <Compile Include="Models\PersonasDeContacto\IPersonaDeContactoRepository.cs" />
@@ -237,8 +224,10 @@
     <Compile Include="Models\Partner\PartnerRepository.cs" />
     <Compile Include="ViewModels\FacturaPublicidadViewModel.cs" />
     <Compile Include="ViewModels\FicheroViewModel.cs" />
+    <Compile Include="ViewModels\InformePremiosPartnerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-select.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -248,6 +237,7 @@
     <Content Include="Content\Calendar\fullcalendar.min.css" />
     <Content Include="Content\Calendar\fullcalendar.print.css" />
     <Content Include="Content\Calendar\fullcalendar.print.min.css" />
+    <Content Include="Content\datatables.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -440,7 +430,13 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Images\sort_asc.png" />
+    <Content Include="Images\sort_asc_disabled.png" />
+    <Content Include="Images\sort_both.png" />
+    <Content Include="Images\sort_desc.png" />
+    <Content Include="Images\sort_desc_disabled.png" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Scripts\Calendar\locale\es.js" />
     <Content Include="Scripts\Calendar\fullcalendar.min.js" />
     <Content Include="Scripts\Calendar\moment.min.js" />
@@ -565,6 +561,7 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\Privilegia.pubxml" />
+    <Content Include="Scripts\datatables.min.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -630,11 +627,16 @@
     <Content Include="Views\Publicidad\Detalles.cshtml" />
     <Content Include="Views\Publicidad\CalendarioPublicidad.cshtml" />
     <Content Include="Views\FacturacionPublicidad\Index.cshtml" />
-    <Content Include="Views\Informes\VerFactura.cshtml" />
+    <Content Include="Views\Informes\VerFacturaPublicidad.cshtml" />
     <Content Include="Views\Informes\Index.cshtml" />
     <Content Include="Views\Informes\Publicidad.cshtml" />
     <Content Include="Views\subidaArchivos\Index.cshtml" />
     <Content Include="Views\subidaArchivos\VerDatosArchivo.cshtml" />
+    <Content Include="Views\Informes\FacturasPremiosPartner.cshtml" />
+    <Content Include="Views\subidaArchivos\EditarErrores.cshtml" />
+    <Content Include="Views\Incidencias\Index.cshtml" />
+    <Content Include="Views\Informes\InformePremiosPorPartner.cshtml" />
+    <Content Include="Views\Informes\InformePremiosProductosPartner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -647,32 +649,17 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703130923246_inicial.resx">
-      <DependentUpon>201703130923246_inicial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703280929144_Inicial.resx">
+      <DependentUpon>201703280929144_Inicial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703131210103_modificadaPublicidad.resx">
-      <DependentUpon>201703131210103_modificadaPublicidad.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703281022033_modificadoIncidencia.resx">
+      <DependentUpon>201703281022033_modificadoIncidencia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703131324045_modificadaPublicidadTotal.resx">
-      <DependentUpon>201703131324045_modificadaPublicidadTotal.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703281213232_modificadoFacturacionPremiosQuitadoIncidencia.resx">
+      <DependentUpon>201703281213232_modificadoFacturacionPremiosQuitadoIncidencia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703131917444_anadidoPlanDeMediosFacturacion.resx">
-      <DependentUpon>201703131917444_anadidoPlanDeMediosFacturacion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703140826173_anadidoTotalEnFacturas.resx">
-      <DependentUpon>201703140826173_anadidoTotalEnFacturas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703140829269_cambiadoTotalPorImporteFacturasPublicidad.resx">
-      <DependentUpon>201703140829269_cambiadoTotalPorImporteFacturasPublicidad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703140844154_cambiadoImportePorTotalFacturasPublicidad.resx">
-      <DependentUpon>201703140844154_cambiadoImportePorTotalFacturasPublicidad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703171118403_anadidoFacturacionPremios.resx">
-      <DependentUpon>201703171118403_anadidoFacturacionPremios.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703171206305_anadidoFacturacionPremiosFechaCreacion.resx">
-      <DependentUpon>201703171206305_anadidoFacturacionPremiosFechaCreacion.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704030824057_anadidoTemp.resx">
+      <DependentUpon>201704030824057_anadidoTemp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

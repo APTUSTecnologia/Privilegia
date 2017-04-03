@@ -62,8 +62,9 @@
             <div id="checkbox-value"></div>
         </div>*@
     </div>
+    <div class="col-md-2"></div>
     <div class="col-md-2">
-        <a class="btn btn-warning" id="botoncrearfactura" onclick="crearFactura();">Generar Factura<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
+        <a class="btn btn-warning btn-block" id="botoncrearfactura" onclick="crearFactura();">Generar Factura<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
     </div>
 </div>
 
@@ -74,7 +75,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
-                <table id="Publicidad" class="display">
+                <table id="Publicidad" class="table table-striped " cellspacing="0" width="100%">
                     <thead>
                     <tr>
                         <th>Id</th>
@@ -220,7 +221,7 @@
                                         data: { idPartner: partner, medios: plan },
                                         success: function (response) {
                                             if (response != null && response.success) {
-                                                var urlFactura = '@Url.Action("VerFactura", "Informes")/' + response.idFactura;
+                                                var urlFactura = '@Url.Action("VerFacturaPublicidad", "Informes")/' + response.idFactura;
                                                 swal({
                                                     title: 'Factura creada correctamente!',
                                                     html: '<label>Puede consultar la factura <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></label><a href=\"' + urlFactura + '\" class=\"btn btn-success btn-sm\" target=\"_blank\"><span class="glyphicon glyphicon-file" aria-hidden="true"> Factura</span></a> ',

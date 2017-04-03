@@ -13,10 +13,11 @@ namespace Privilegia
                         "~/Scripts/sweetalert2.js",
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery-ui-{version}.js",
-                         "~/Scripts/Calendar/fullcalendar.js",
+                         "~/Scripts/Calendar/fullcalendar.min.js",
                         "~/Scripts/Calendar/locale/es.js",
-                        "~/Scripts/jquery.dataTables.yadcf.js",
-                        "~/Scripts/DataTables/jquery.dataTables.js"));
+                         "~/Scripts/dataTables.min.js",
+                         "~/Scripts/jquery.dataTables.yadcf.js",
+                        "~/Scripts/bootstrap-notify.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                          "~/Scripts/jquery.validate*",
@@ -37,10 +38,11 @@ namespace Privilegia
                       "~/Content/font-awesome.min.css",
                       "~/Content/bootstrap-select.css",
                       "~/Content/Calendar/fullcalendar.css",
+                      "~/Content/animate.css",
                       "~/Content/privilegia.css",
                       "~/Content/themes/base/jquery-ui.css",
                       "~/Content/sweetalert2.css",
-                      "~/Content/DataTables/css/jquery.dataTables.css",
+                      "~/Content/dataTables.min.css",
                       "~/Content/bootstrap-toggle.less"));
 
             

@@ -37,6 +37,11 @@ namespace Privilegia.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CrearPersonaDeContacto([Bind(Include = "Id,Nombre,Apellidos,Cargo,Telefono,Principal,PartnerId")] PersonaContactoModel persona)
         {
+            if (persona.Principal == false)
+            {
+                ComprobarPrincipal(persona.PartnerId);
+            }
+            
             if (ModelState.IsValid)
             {
                 persona.Id = Guid.NewGuid();
@@ -48,6 +53,20 @@ namespace Privilegia.Controllers
             }
 
             return PartialView(persona);
+        }
+
+        private void ComprobarPrincipal(string personaPartnerId)
+        {
+            var personas = _personaDeContactoRepository.ObetenerPersonasDeContactoPorIdPartner(personaPartnerId).Where(m => m.Principal);
+
+            if (!personas.Any())
+            {
+                //Tenemos personas
+
+                ModelState.AddModelError("Principal", "Es necesario tener un contacto principal");
+            }
+            //no tenemos ningun principal
+           
         }
 
         public ActionResult EditarPersonaDeContacto(string id)

@@ -132,7 +132,7 @@ namespace Privilegia.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    modelo.FechaCreacion = DateTime.Today.ToLongDateString();
+                    modelo.FechaCreacion = DateTime.Today.ToShortDateString();
                     modelo.DireccionPrincipal.Id = Guid.NewGuid();
                     modelo.DireccionPrincipal.PartnerId = modelo.Id.ToString();
 
@@ -184,7 +184,7 @@ namespace Privilegia.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    modelo.FechaCreacion = DateTime.Today.ToLongDateString();
+                    modelo.FechaCreacion = DateTime.Today.ToShortDateString();
                     modelo.DireccionPrincipal.Id = Guid.NewGuid();
                     modelo.DireccionPrincipal.PartnerId = modelo.Id.ToString();
 
@@ -382,15 +382,12 @@ namespace Privilegia.Controllers
             return View(partner);
         }
 
-        // POST: People/Delete/5
-        [HttpPost, ActionName("Eliminar")]
-        [ValidateAntiForgeryToken]
         public ActionResult EliminarConfirmed(string id)
         {
             PartnerModel partner = _partnerRepository.ObtenerPartnerPorId(id);
 
             partner.Estado = "Baja";
-            partner.FechaBaja = DateTime.Today.ToLongDateString();
+            partner.FechaBaja = DateTime.Today.ToShortDateString();
             
             _partnerRepository.Actualizar(partner);
 

@@ -6,7 +6,7 @@
 <div class="modal-header">
     <h2><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Subida de Ficheros</h2>
 </div>
-@using (Html.BeginForm("CargarArchivo", "SubidaArchivos", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("CargarArchivo", "SubidaArchivos", null, FormMethod.Post, new { enctype = "multipart/form-data", id = "myform" }))
 {
     @Html.AntiForgeryToken()
     <div class="modal-body">
@@ -22,12 +22,15 @@
                 <div class="form-group">
                     @Html.Label("Proveedor", new { @class = "control-label" })
                     <select class="form-control" name="proveedor">
-                        <option value="Guijuelo">Guijuelo</option>
-                        <option value="YoRespondo">YoRespondo</option>
+                        <option value="B85171379">Yo Respondo</option>
                     </select>
                 </div>
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <a class="btn btn-primary btn-alpie" onclick="submit()">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Cargar Archivo
+                </a>
+            </div>
         </div>
     </div>
     <div class="modal-footer">
@@ -35,15 +38,81 @@
             <img src="/images/wait.gif" alt="wiat" />
             Espere...
         </span>
-
-        <input class="btn btn-primary" type="submit" value="Cargar" onclick="window.simple()" />
+       
     </div>
 }
 
 @section scripts
 {
     <script type="text/javascript">
-        
+
+        function cargarNotificaciones() {
+            console.log('@ViewBag.error');
+            if ('@ViewBag.error' !== "null" && '@ViewBag.error' !== "") {
+                $.notify({
+                    icon: 'glyphicon glyphicon-remove',
+                    title: "Error",
+                    message: '<strong>Revise el documento.</strong> \n Puede que el Partner no exista.',
+                    newest_on_top: true
+                }, {
+                    offset: {
+                        y: 100
+                    },
+                    placement: {
+                        from: "bottom",
+                        align: "center"
+                    },
+                    type: 'danger',
+
+                    animate: {
+                        enter: 'animated fadeInRight',
+                        exit: 'animated fadeOutRight'
+                    }
+                });
+            }
+        };
+
+        function submit() {
+            var notify = $.notify('<strong>Cargando</strong> No cierres esta ventana...',
+            {
+                type: 'danger',
+                allow_dismiss: false,
+                showProgressbar: true,
+                offset: {
+                    y: 100
+                },
+                placement: {
+                    from: "bottom",
+                    align: "center"
+                }
+
+            });
+
+            setTimeout(function () {
+                notify.update('message', '<strong>Leyendo registros...</strong>');
+            }, 2000);
+
+            setTimeout(function () {
+                notify.update('message', '<strong>Procesando registros...</strong>');
+            }, 3000);
+
+            setTimeout(function () {
+                notify.update('message', '<strong>Guardando registros...</strong>');
+            }, 4000);
+
+            setTimeout(function () {
+                notify.update('message', '<strong>Finalizando...</strong>');
+                $("#myform").submit();
+            }, 4000);
+            //do something
+
+
+        }
+
+        $(document)
+            .ready(function () {
+                cargarNotificaciones();
+            });
     </script>
 }
 

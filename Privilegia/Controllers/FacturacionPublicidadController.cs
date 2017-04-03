@@ -164,7 +164,7 @@ namespace Privilegia.Controllers
                             Id = Guid.NewGuid(),
                             IdFactura = publi.IdFactura,
                             IdPartner = idPartner,
-                            FechaCreacion = DateTime.Today.ToLongDateString(),
+                            FechaCreacion = DateTime.Today.ToShortDateString(),
                             IdPublicidad = publi.Id.ToString(),
                             PlanDeMedios = medios,
                             Total = total.ToString("##.##")
@@ -194,7 +194,7 @@ namespace Privilegia.Controllers
                             Id = Guid.NewGuid(),
                             IdFactura = publi.IdFactura,
                             IdPartner = idPartner,
-                            FechaCreacion = DateTime.Today.ToLongDateString(),
+                            FechaCreacion = DateTime.Today.ToShortDateString(),
                             IdPublicidad = publi.Id.ToString(),
                             PlanDeMedios = medios,
                             Total = total.ToString("##.###")

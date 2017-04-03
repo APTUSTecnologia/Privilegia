@@ -5,6 +5,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Privilegia.Models;
 using Privilegia.Models.FacturacionPartners;
+using Privilegia.Models.FacturasPremios;
+using Privilegia.Models.Incidencias;
 using Privilegia.Models.Productos;
 using Privilegia.Models.Tipos;
 
@@ -32,6 +34,8 @@ namespace Privilegia
         public DbSet<ParteEspacioPublicidadModel> PartesEspaciosPublicidad { get; set; }
         public DbSet<FacturacionPublicidadModel> FacturacionPublicidad { get; set; }
         public DbSet<FacturacionPremiosModel> FacturacionPremios { get; set; }
+        public DbSet<FacturasPremiosModel> FacturasPremios { get; set; }
+        public DbSet<IncidenciaModel> Incidencias { get; set; }
 
 
        
@@ -42,6 +46,7 @@ namespace Privilegia
             modelBuilder.Configurations.Add(new PartnerMap());
             modelBuilder.Configurations.Add(new DireccionesMap());
 
+           
             //modelBuilder.Entity<DireccionSecundaria>()
             //        .HasRequired<PartnerInterno>(s => s.PartnerInterno) // DireccionSecundaria entity requires PartnerInterno 
             //        .WithMany(s => s.DireccionesSecundarias); // PartnerInterno entity includes many DireccionesSecundarias entities

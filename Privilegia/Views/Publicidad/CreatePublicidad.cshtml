@@ -42,25 +42,28 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Importe, new { @class = "control-label" })<span class="glyphicon glyphicon-eur en_formulario"></span>
-                    @Html.TextBoxFor(model => model.Importe, new { @class = "form-control", @type = "number", @onkeyup = "CalcularTotal();" })
-                    @Html.ValidationMessageFor(model => model.Importe, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Importe, new { @class = "control-label" })
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.Importe, new {@class = "form-control", @type = "number", @onkeyup = "CalcularTotal();"})
+                    <span class="input-group-addon">€</span>
                 </div>
+                @Html.ValidationMessageFor(model => model.Importe, "", new { @class = "text-danger" })
             </div>
             <div class="col-md-2">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Descuento, new { @class = "control-label" })<span class="fa fa-percent en_formulario"></span>
-                    @Html.TextBoxFor(model => model.Descuento, new { @class = "form-control" , @type = "number", @onkeyup = "CalcularTotal();" })
-                    @Html.ValidationMessageFor(model => model.Descuento, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Descuento, new { @class = "control-label" })
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.Descuento, new {@class = "form-control", @type = "number", @onkeyup = "CalcularTotal();"})
+                    <span class="input-group-addon">%</span>
                 </div>
+                @Html.ValidationMessageFor(model => model.Descuento, "", new {@class = "text-danger"})
             </div>
             <div class="col-md-2">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Total, new { @class = "control-label" })<span class="glyphicon glyphicon-eur en_formulario"></span>
-                    @Html.TextBoxFor(model => model.Total, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Total, new { @class = "control-label" })
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.Total, new {@class = "form-control"})
+                    <span class="input-group-addon">€</span>
                 </div>
+                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="row">
@@ -164,6 +167,7 @@
         document.getElementById('Descuento').value = "";
         document.getElementById('Total').value = "";
         document.getElementById('PlanDeMedios').style.display = 'block';
+        document.getElementById('PlanDeMedios').checked = true;
 
         $("#fechaInicioDatePicker").datepicker({
             format: "dd/mm/yyyy",

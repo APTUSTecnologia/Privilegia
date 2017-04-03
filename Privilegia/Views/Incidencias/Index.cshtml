@@ -1,0 +1,125 @@
+﻿@using Privilegia.Helpers
+@model IEnumerable<Privilegia.Models.Incidencias.IncidenciaModel>
+@{
+    ViewBag.Title = "Incidencias";
+}
+<div class="row">
+    <div class="col-md-12">
+        <h2 align="center"><span class="glyphicon glyphicon-list"></span> Historico de Incidencias</h2>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <label>Listado de Incidencias:</label>
+        <select class="selectpicker" data-live-search="true" onchange="filterme()" multiple data-max-options="1" title="Selecciona un Partner">
+            @{
+                if (ViewBag.listPartners != null)
+                {
+                    var lista = ViewBag.listPartners;
+
+                    foreach (var partner in lista)
+                    {
+                        <option data-tokens="@partner.Nombre">@partner.Nombre</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <table id="Incidencias" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Cif Empresa</th>
+                        <th>Fecha de Cracion</th>
+                        <th>Linea</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    @Scripts.Render("~/scripts/AppJs/Privilegia.js")
+    <script>
+
+        var otable;
+       
+        $(function() {
+            otable = $('#Incidencias')
+                .dataTable({
+                    "bServerSide": true,
+                    "sAjaxSource": "Incidencias/CargarIncidencias",
+                    "bProcessing": true,
+                    "bAutoWidth": false,
+                    "aoColumns": [
+                        { "sName": "Id", "bVisible": false, "bSearchable": false},
+                        { "sName": "CifPartner"},
+                        { "sName": "FechaDeCreacion" },
+                        { "sName": "Linea" },
+                        { "sName": "Descripcion" }
+                    ],
+                    "oLanguage": {
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron productos.",
+                        "sEmptyTable": "Ningún producto disponible.",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Buscar:",
+                        "sUrl": "",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    }
+                }).yadcf([{
+                    column_number: 2,
+                    filter_type: "date",
+                    date_format: 'dd-mm-yyyy'
+                }]);
+
+           });
+
+        function filterme() {
+
+            var partner = $('.selectpicker').val()[0];
+
+            if (typeof partner !== "undefined") {
+                otable.fnFilter(partner, 1);
+            } else {
+                partner = "";
+                otable.fnFilter(partner, 1);
+            }
+
+        }
+
+        $(document).ready(function () {
+
+        });
+
+    </script>
+
+
+}
+
+
