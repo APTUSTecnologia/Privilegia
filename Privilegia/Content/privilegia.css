@@ -1,7 +1,7 @@
 ﻿/************************************************************************
     CLIENTE:                        		MUTUALIDAD ABOGACIA - PRIVILEGIA                                  
     FECHA CREACION:                 		09/01/2017                           
-    FECHA ULTIMA MODIFICACION:      		02/02/2017                      
+    FECHA ULTIMA MODIFICACION:      		04/05/2017                      
     MODIFICADO POR:                 		APTUS                         
 ************************************************************************/
 
@@ -103,8 +103,69 @@ input, select {
 }*/
 
 /* PARAMETROS CSS PRINCIPAL */
+.ficha h2 {
+    text-align: center;
+    font-size: 20px;
+    color: #337ab7;
+    padding-bottom: 0px;
+    padding-top: 5px; 
+}
+
+.ficha img {
+    height: 75px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    width: auto;
+}
+
+.ficha .dl-horizontal {
+    text-align: center;
+    width: 500px;
+    left: 50%;
+    position: relative;
+    margin-left: -250px;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #aaa;
+}
+
+.ficha .dl-horizontal dd {
+        border-left: 1px dotted #ccc;
+        padding-bottom: 10px;
+        padding-left: 10px;
+}
+
+.ficha .form-actions {
+    text-align: center; 
+}
+
+.ficha h4{
+	text-align: center;
+	color: red;
+	font-weight: normal;
+	font-size: 16px;
+	width: 300px;
+	border: 1px solid red;
+	padding: 10px;
+	border-radius: 5px;
+	left: 50%;
+	position: relative;
+	margin-left: -150px;
+	margin-bottom: -10px;
+}
+
+.ficha p{
+	text-align:center;
+}
+
 
 /* CONTENEDORES */
+body {
+    font-family: Helvetica, Arial, sans-serif !important;
+}
+
 header {
     background-color: #b0b5b9;
 }
@@ -700,7 +761,7 @@ span.en_formulario_sinlabel {
 .desborde_tabla {
     overflow-x: scroll;
     overflow-y: scroll;
-    height:400px;
+    height: 400px;
 }
 
 
@@ -824,55 +885,64 @@ table.factura {
         display: none;
     }
 
+/* ESTILOS PARA FICHAS DE PARTNERS */
+
+
+
 @media only screen and (max-width: 800px) {
-	
-	/* Force table to not be like tables anymore */
-	#no-more-tables table, 
-	#no-more-tables thead, 
-	#no-more-tables tbody, 
-	#no-more-tables th, 
-	#no-more-tables td, 
-	#no-more-tables tr { 
-		display: block; 
-	}
- 
-	/* Hide table headers (but not display: none;, for accessibility) */
-	#no-more-tables thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
- 
-	#no-more-tables tr { border: 1px solid #ccc; }
- 
-	#no-more-tables td { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-		white-space: normal;
-		text-align:left;
-	}
- 
-	#no-more-tables td:before { 
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-		text-align:left;
-		font-weight: bold;
-	}
- 
-	/*
+
+    /* Force table to not be like tables anymore */
+    #no-more-tables table,
+    #no-more-tables thead,
+    #no-more-tables tbody,
+    #no-more-tables th,
+    #no-more-tables td,
+    #no-more-tables tr {
+        display: block;
+    }
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        #no-more-tables thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+    #no-more-tables tr {
+        border: 1px solid #ccc;
+    }
+
+    #no-more-tables td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-align: left;
+    }
+
+        #no-more-tables td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        /*
 	Label the data
 	*/
-	#no-more-tables td:before { content: attr(data-title); }
+        #no-more-tables td:before {
+            content: attr(data-title);
+        }
 }
+
 @media only screen and (max-width : 991px) {
     .navbar-brand {
         background-color: transparent;

@@ -159,7 +159,6 @@ namespace Privilegia.Controllers
         }
 
         // POST: People/Delete/5
-        [HttpPost, ActionName("EliminarProducto")]
         [ValidateAntiForgeryToken]
         public ActionResult EliminarProductoConfirmed(string id)
         {

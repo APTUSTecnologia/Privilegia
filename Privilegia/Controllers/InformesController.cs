@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
@@ -43,6 +44,29 @@ namespace Privilegia.Controllers
             return View();
         }
 
+        public ActionResult VerFacturaPremios(string id)
+        {
+            var factura = _facturasPremiosRepository.ObtenerFacturaPremiosPorIdFactura(id);
+            var elementos = _facturacionPremiosRepository.ObtenerFacturaPremiosPorIdFactura(id);
+            var partner = _partnerRepository.ObtenerPartnerPorId(factura.IdPartner);
+
+            partner.DireccionPrincipal =
+               (DireccionPrincipal)_direccionRepository.ObtenerDireccionPorIdPartner(partner.Id.ToString());
+
+
+            var modelo = new FacturaPremiosViewModel()
+            {
+                Partner = partner,
+                Lista = elementos,
+                Fecha = factura.FechaDeCreacion,
+                Factura = _facturasPremiosRepository.ObtenerFacturaPremiosPorIdFactura(id)
+
+            };
+
+            return new Rotativa.PartialViewAsPdf(modelo);
+
+        }
+
         public ActionResult VerFacturaPublicidad(string id)
         {
             var temp = _facturacionPublicidadRepository.ObtenerFacturacion().First(m => m.IdFactura == id);
@@ -59,7 +83,10 @@ namespace Privilegia.Controllers
             };
 
 
-            var registrosFactura = _facturacionPublicidadRepository.ObtenerFacturacion().Where(m => m.IdFactura == id);
+
+            var registrosFactura = _facturacionPublicidadRepository.ObtenerFacturacion().Where(m => m.IdFactura == id).ToList();
+
+            modelo.Factura = registrosFactura?.First();
 
             foreach (var registro in registrosFactura)
             {
@@ -69,6 +96,88 @@ namespace Privilegia.Controllers
             }
 
             return new Rotativa.PartialViewAsPdf(modelo);
+        }
+
+        public ActionResult EditarFacturaPremios(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var factura = _facturasPremiosRepository.ObtenerFacturaPremiosPorIdFactura(id);
+
+            if (factura == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View("EditarFacturaPremios", factura);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarFacturaPremios(FacturasPremiosModel factura)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _facturasPremiosRepository.Actualizar(factura);
+                
+                return RedirectToAction("FacturasPremiosPartner");
+
+            }
+
+            return View("EditarFacturaPremios", factura);
+        }
+
+        public ActionResult EditarFacturaPublicidad(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var factura = _facturacionPublicidadRepository.ObtenerFacturaPorIdFactura(id);
+
+            if (factura == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View("EditarFacturaPublicidad", factura);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarFacturaPublicidad(FacturacionPublicidadModel factura)
+        {
+            if (ModelState.IsValid)
+            {
+                var facturas =
+                    _facturacionPublicidadRepository.ObtenerFacturacion().Where(m => m.IdFactura == factura.IdFactura).ToList();
+
+                if (facturas.Any())
+                {
+                    foreach (var item in facturas)
+                    {
+                        item.Titulo = factura.Titulo;
+                        item.Concepto = factura.Concepto;
+                        item.Total = factura.Total;
+                        item.Estado = factura.Estado;
+                        _facturacionPublicidadRepository.Actualizar(item);
+                    }
+
+
+
+                    return RedirectToAction("Publicidad");
+
+                }
+
+                return View("EditarFacturaPublicidad", factura);
+            }
+
+            return View("EditarFacturaPublicidad", factura);
         }
 
         public ActionResult Publicidad()
@@ -106,10 +215,17 @@ namespace Privilegia.Controllers
 
             return View();
         }
+        public ActionResult InformePremiosMutualista()
+        {
+            return View();
+        }
 
         public ActionResult CargarFacturasPremios(string idPartner)
         {
-            var listaFacturas = _facturasPremiosRepository.ObtenerFacturasPremiosPorIdPartner(idPartner);
+            var listaFacturas = new List<FacturasPremiosModel>();
+
+            listaFacturas = idPartner.IsEmpty() ? _facturasPremiosRepository.ObtenerFacturacionPremios() : _facturasPremiosRepository.ObtenerFacturasPremiosPorIdPartner(idPartner);
+
             if (listaFacturas.Count > 0)
             {
                 foreach (var producto in listaFacturas)
@@ -121,7 +237,7 @@ namespace Privilegia.Controllers
 
             var result = from c in listaFacturas
                          select new[] {
-                    Convert.ToString(c.Id), c.Partner.Nombre, c.FechaDeCreacion, c.Estado
+                    Convert.ToString(c.Id), c.Partner.Nombre, c.FechaDeCreacion, c.Estado, c.Total
                          };
 
             return Json(new
@@ -135,8 +251,25 @@ namespace Privilegia.Controllers
 
         public ActionResult CargarFacturasPublicidad(string idPartner)
         {
+            var listaFacturas = new List<FacturacionPublicidadModel>();
 
-            var listaFacturas = _facturacionPublicidadRepository.ObtenerFacturacionPorIdPartner(idPartner);
+            if (!idPartner.IsEmpty())
+            {
+                listaFacturas = _facturacionPublicidadRepository.ObtenerFacturacionPorIdPartner(idPartner);
+            }
+            else
+            {
+                listaFacturas = _facturacionPublicidadRepository.ObtenerFacturacion();
+
+                var listaFinal = new List<FacturacionPublicidadModel>();
+                foreach (var item in listaFacturas.GroupBy(m => m.IdFactura))
+                {
+                    listaFinal.Add(item.First());
+                }
+
+                listaFacturas = listaFinal;
+
+            }
 
             if (listaFacturas.Count > 0)
             {
@@ -149,7 +282,7 @@ namespace Privilegia.Controllers
 
             var result = from c in listaFacturas
                          select new[] {
-                    Convert.ToString(c.Id), c.Partner.Nombre, c.FechaCreacion, c.PlanDeMedios.ToString(), c.Total,
+                    Convert.ToString(c.Id), c.Partner.Nombre, c.FechaCreacion, c.PlanDeMedios.ToString(), c.Total, c.Estado,
                     c.IdFactura
                          };
 
@@ -192,11 +325,11 @@ namespace Privilegia.Controllers
                                 CodigoPcto = producto.Key,
                                 NifProveed = partner.Key,
                                 ComisionPago = sum.ToString("##.###"),
-                                FechaPago =fecha.Key
-                        });
+                                FechaPago = fecha.Key
+                            });
                         }
 
-                        
+
                     }
                 }
 
@@ -288,6 +421,40 @@ namespace Privilegia.Controllers
                              select new[]
                              {
                          c.NifProveed, c.FechaDeCreacion, c.ComisionPago
+                    };
+
+                return Json(new
+                {
+                    iTotalRecords = listaPremios?.Count(),
+                    iTotalDisplayRecords = listaPremios.Count(),
+                    aaData = result
+                },
+                    JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new
+                {
+                    iTotalRecords = 0,
+                    iTotalDisplayRecords = 0,
+                    aaData = listaPremios
+                },
+                   JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        public ActionResult CargarInformePremiosMutualista()
+        {
+            List<FacturacionPremiosModel> listaPremios;
+
+            listaPremios = _facturacionPremiosRepository.ObtenerFacturasPremiosPorMutualista();
+
+            if (listaPremios.Count > 0)
+            {
+                var result = from c in listaPremios
+                             select new[]
+                             {
+                         c.NifProveed, c.CodigoCliente, c.CodigoPcto,c.ComisionPago , c.FechaDeCreacion
                     };
 
                 return Json(new

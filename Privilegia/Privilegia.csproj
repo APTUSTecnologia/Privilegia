@@ -175,6 +175,38 @@
     <Compile Include="Migrations\201704030824057_anadidoTemp.Designer.cs">
       <DependentUpon>201704030824057_anadidoTemp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704061419423_quitadosRequiredProducto.cs" />
+    <Compile Include="Migrations\201704061419423_quitadosRequiredProducto.Designer.cs">
+      <DependentUpon>201704061419423_quitadosRequiredProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704110657370_anadidotituloenfacturas.cs" />
+    <Compile Include="Migrations\201704110657370_anadidotituloenfacturas.Designer.cs">
+      <DependentUpon>201704110657370_anadidotituloenfacturas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704201155598_anadidoTituloFacturacionPublicidad.cs" />
+    <Compile Include="Migrations\201704201155598_anadidoTituloFacturacionPublicidad.Designer.cs">
+      <DependentUpon>201704201155598_anadidoTituloFacturacionPublicidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704210702553_anadidorequiredFacturacionPublicidad.cs" />
+    <Compile Include="Migrations\201704210702553_anadidorequiredFacturacionPublicidad.Designer.cs">
+      <DependentUpon>201704210702553_anadidorequiredFacturacionPublicidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704210733164_anadidoImporteParteEspacioPublicidad.cs" />
+    <Compile Include="Migrations\201704210733164_anadidoImporteParteEspacioPublicidad.Designer.cs">
+      <DependentUpon>201704210733164_anadidoImporteParteEspacioPublicidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704211007541_anadidoestadofacturaspublicidad.cs" />
+    <Compile Include="Migrations\201704211007541_anadidoestadofacturaspublicidad.Designer.cs">
+      <DependentUpon>201704211007541_anadidoestadofacturaspublicidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704211029293_anadidoconceptotituloytotalfacturapremios.cs" />
+    <Compile Include="Migrations\201704211029293_anadidoconceptotituloytotalfacturapremios.Designer.cs">
+      <DependentUpon>201704211029293_anadidoconceptotituloytotalfacturapremios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704240704392_anadidorequiredFacturasPremios.cs" />
+    <Compile Include="Migrations\201704240704392_anadidorequiredFacturasPremios.Designer.cs">
+      <DependentUpon>201704240704392_anadidorequiredFacturasPremios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Archivos\ILogoRepository.cs" />
     <Compile Include="Models\Archivos\Logo.cs" />
@@ -194,7 +226,9 @@
     <Compile Include="Models\FacturasPremios\FacturasPremiosModel.cs" />
     <Compile Include="Models\FacturasPremios\FacturasPremiosRepository.cs" />
     <Compile Include="Models\FacturasPremios\IFacturasPremiosRepository.cs" />
+    <Compile Include="Models\Ficheros\FicheroAxa.cs" />
     <Compile Include="Models\Ficheros\FicheroGuijuelo.cs" />
+    <Compile Include="Models\Ficheros\FicheroLaCaixa.cs" />
     <Compile Include="Models\Ficheros\FicheroYoRespondo.cs" />
     <Compile Include="Models\Incidencias\IIncidenciaRepository.cs" />
     <Compile Include="Models\Incidencias\IncidenciaModel.cs" />
@@ -222,6 +256,7 @@
     <Compile Include="Models\Partner\PartnerExternoRepository.cs" />
     <Compile Include="Models\Partner\PartnerInternoRepository.cs" />
     <Compile Include="Models\Partner\PartnerRepository.cs" />
+    <Compile Include="ViewModels\FacturaPremiosViewModel.cs" />
     <Compile Include="ViewModels\FacturaPublicidadViewModel.cs" />
     <Compile Include="ViewModels\FicheroViewModel.cs" />
     <Compile Include="ViewModels\InformePremiosPartnerViewModel.cs" />
@@ -430,6 +465,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Images\factura_privilegia.png" />
     <Content Include="Images\sort_asc.png" />
     <Content Include="Images\sort_asc_disabled.png" />
     <Content Include="Images\sort_both.png" />
@@ -554,12 +590,12 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
-    <Content Include="App_Browsers\qt.browser" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Properties\PublishProfiles\Privilegia.pubxml" />
     <Content Include="Scripts\datatables.min.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
@@ -637,6 +673,11 @@
     <Content Include="Views\Incidencias\Index.cshtml" />
     <Content Include="Views\Informes\InformePremiosPorPartner.cshtml" />
     <Content Include="Views\Informes\InformePremiosProductosPartner.cshtml" />
+    <Content Include="Views\Informes\VerFacturaPremios.cshtml" />
+    <Content Include="Views\Publicidad\EliminarPublicidad.cshtml" />
+    <Content Include="Views\Informes\EditarFacturaPublicidad.cshtml" />
+    <Content Include="Views\Informes\EditarFacturaPremios.cshtml" />
+    <Content Include="Views\Informes\InformePremiosMutualista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -660,6 +701,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704030824057_anadidoTemp.resx">
       <DependentUpon>201704030824057_anadidoTemp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704061419423_quitadosRequiredProducto.resx">
+      <DependentUpon>201704061419423_quitadosRequiredProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704110657370_anadidotituloenfacturas.resx">
+      <DependentUpon>201704110657370_anadidotituloenfacturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704201155598_anadidoTituloFacturacionPublicidad.resx">
+      <DependentUpon>201704201155598_anadidoTituloFacturacionPublicidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704210702553_anadidorequiredFacturacionPublicidad.resx">
+      <DependentUpon>201704210702553_anadidorequiredFacturacionPublicidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704210733164_anadidoImporteParteEspacioPublicidad.resx">
+      <DependentUpon>201704210733164_anadidoImporteParteEspacioPublicidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704211007541_anadidoestadofacturaspublicidad.resx">
+      <DependentUpon>201704211007541_anadidoestadofacturaspublicidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704211029293_anadidoconceptotituloytotalfacturapremios.resx">
+      <DependentUpon>201704211029293_anadidoconceptotituloytotalfacturapremios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704240704392_anadidorequiredFacturasPremios.resx">
+      <DependentUpon>201704240704392_anadidorequiredFacturasPremios.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

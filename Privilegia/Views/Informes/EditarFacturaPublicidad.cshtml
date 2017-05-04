@@ -1,0 +1,64 @@
+﻿@model Privilegia.Models.FacturacionPublicidadModel
+@using (Html.BeginForm())
+{
+        @Html.AntiForgeryToken()
+
+    <div class="modal-body">
+        <h4>Editar Factura Publicidad</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.IdFactura)
+        @Html.HiddenFor(model => model.IdPartner)
+        @Html.HiddenFor(model => model.IdPublicidad)
+        @Html.HiddenFor(model => model.PlanDeMedios)
+        @Html.HiddenFor(model => model.FechaCreacion)
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Titulo, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Titulo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Concepto, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Concepto, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Total, new { @class = "control-label" })
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.Total, new { @class = "form-control input-inset" })
+                    <span class="input-group-addon">€ / Sin Iva</span>
+                </div>
+                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+            </div>
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Estado</label>
+                    @Html.DropDownListFor(m => m.Estado,
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem {Text = "Emitida", Value = "Emitida"},
+                        new SelectListItem {Text = "Cancelada", Value = "Cancelada"},
+                        new SelectListItem {Text = "Pagada", Value = "Pagada"}
+
+                    }, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <input class="btn btn-primary" type="submit" value="Guardar" />
+            <a class="btn btn-warning" href='@Url.Action("Publicidad","Informes")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+        </div>
+    </div>
+}
+
+

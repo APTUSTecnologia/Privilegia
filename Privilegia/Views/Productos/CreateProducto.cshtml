@@ -70,7 +70,7 @@
                 @Html.LabelFor(model => model.PremioValor, new { @class = "control-label" })
                 <div class="input-group">
                     <span class="input-group-addon" id="iconopremiovalor"></span>
-                    @Html.TextBoxFor(model => model.PremioValor, new { @class = "form-control", @placeholder = "" })
+                    @Html.TextBoxFor(model => model.PremioValor, new { @class = "form-control", Value = "0" })
                 </div>
                 @Html.ValidationMessageFor(model => model.PremioValor, "", new { @class = "text-danger" })
             </div>
@@ -90,7 +90,7 @@
                 @Html.LabelFor(model => model.ComisionValor, new { @class = "control-label" })
                 <div class="input-group">
                     <span class="input-group-addon">€</span>
-                    @Html.TextBoxFor(model => model.ComisionValor, new { @class = "form-control input-inset", @placeholder = "" })
+                    @Html.TextBoxFor(model => model.ComisionValor, new { @class = "form-control input-inset", Value = "0" })
                 </div>
                 @Html.ValidationMessageFor(model => model.ComisionValor, "", new { @class = "text-danger" })
             </div>
@@ -113,7 +113,7 @@
                 @Html.LabelFor(model => model.ImporteMutualidad, new { @class = "control-label" })
                 <div class="input-group">
                     <span class="input-group-addon">%</span>
-                    @Html.TextBoxFor(model => model.ImporteMutualidad, new { @class = "form-control input-inset", @placeholder = "" })
+                    @Html.TextBoxFor(model => model.ImporteMutualidad, new { @class = "form-control input-inset", Value = "0" })
                 </div>
                 @Html.ValidationMessageFor(model => model.ImporteMutualidad, "", new { @class = "text-danger" })
             </div>
@@ -121,7 +121,7 @@
                 @Html.LabelFor(model => model.ImporteMutualista, new { @class = "control-label" })
                 <div class="input-group">
                     <span class="input-group-addon">%</span>
-                    @Html.TextBoxFor(model => model.ImporteMutualista, new { @class = "form-control input-inset", @placeholder = "" })
+                    @Html.TextBoxFor(model => model.ImporteMutualista, new { @class = "form-control input-inset", Value = "0" })
                 </div>
                 @Html.ValidationMessageFor(model => model.ImporteMutualista, "", new { @class = "text-danger" })
             </div>
@@ -130,7 +130,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     @Html.LabelFor(model => model.Descripcion, new { @class = "control-label" })
-                    @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", @placeholder = "¿Alguna observación?" })
+                    @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", @placeholder = "¿Alguna observación?", @rows="4" })
                     @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -172,8 +172,8 @@
         }
     }
     function comisionCambio() {
-        document.getElementById("ComisionValor").value = "";
         var tipoComision = $('#TipoComision').val();
+        //document.getElementById("ComisionValor").value = "0";
         if (tipoComision === 'D') {
             $("#valorcomision").show();
             $("#tipoComisionIndirecta").hide();
@@ -225,8 +225,8 @@
         $("#ImporteMutualista").hide();
         $("#ImporteMutualidad").hide();
         // $("#item").show();
-        document.getElementById("PremioValor").value = "";
-        document.getElementById("ComisionValor").value = "";
+        document.getElementById("PremioValor").value = "0";
+        document.getElementById("ComisionValor").value = "0";
 
         $("#datepickeralta").datepicker({
             format: "dd/mm/yyyy",

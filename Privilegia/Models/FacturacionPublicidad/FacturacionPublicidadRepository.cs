@@ -34,8 +34,7 @@ namespace Privilegia.Models.FacturacionPublicidad
         {
             using (Contexto context = new Contexto())
             {
-                var guid = Guid.Parse(idFactura);
-                return context.Set<FacturacionPublicidadModel>().FirstOrDefault(x => x.Id == guid);
+                return context.Set<FacturacionPublicidadModel>().FirstOrDefault(x => x.IdFactura == idFactura);
             }
         }
 

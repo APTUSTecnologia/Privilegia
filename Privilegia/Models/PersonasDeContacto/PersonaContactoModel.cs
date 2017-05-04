@@ -11,12 +11,15 @@ namespace Privilegia.Models
         public Guid Id { get; set; }
 
         [Required]
+        [RegularExpression("^((?!^Nombre$)[a-zA-Z_áéíóúñ\\s])+$", ErrorMessage = "El campo nombre no está escrito correctamente")]
         public string Nombre { get; set; }
 
         [Required]
+        [RegularExpression("^((?!^Apellidos$)[a-zA-Z_áéíóúñ\\s])+$", ErrorMessage = "El campo apellidos no está escrito correctamente")]
         public string Apellidos { get; set; }
 
         [Required]
+        [Phone]
         public string Telefono { get; set; }
 
         [Required]

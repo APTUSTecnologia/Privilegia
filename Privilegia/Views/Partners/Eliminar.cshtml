@@ -3,43 +3,43 @@
 @{
     ViewBag.Title = "Delete";
 }
+<div class="ficha">
+    <h2>Borrar Partner</h2>
+    <h4>Estas seguro de borrar este Partner con todos sus elementos?</h4>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
 
-<h2>Borrar Partner</h2>
-<h4>Estas seguro de borrar este Partner con todos sus elementos?</h4>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Cif)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Cif)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Cif)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaAlta)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cif)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaAlta)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FechaAlta)
+            </dd>
+        </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.FechaAlta)
-        </dd>
-    </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <p>
-            <a class="btn btn-danger" href='@Url.Action("EliminarConfirmed","Partners", new {id = Model.Id})'>Eliminar</a>
-            <a class="btn btn-warning" href='@Url.Action("Index","Partners")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
-        </p>
-    }
+            <p>
+                <a class="btn btn-danger" href='@Url.Action("EliminarConfirmed","Partners", new {id = Model.Id})'>Eliminar</a>
+                <a class="btn btn-warning" href='@Url.Action("Index","Partners")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+            </p>
+        }
+    </div>
 </div>
-

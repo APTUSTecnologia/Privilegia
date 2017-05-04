@@ -13,6 +13,7 @@ namespace Privilegia.ViewModels
 
         public PartnerModel Partner { get; set; }
 
+        public FacturacionPublicidadModel Factura { get; set; }
 
         public string Fecha { get; set; }
 

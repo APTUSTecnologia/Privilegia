@@ -37,7 +37,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     @Html.LabelFor(model => model.NombreParteEspacioPublicidad, new { @class = "control-label" })
-                    @Html.DropDownListFor(model => model.NombreParteEspacioPublicidad, new List<SelectListItem>(), "Selecciona...", new { @id = "partes", @class = "form-control input-inset" })
+                    @Html.DropDownListFor(model => model.NombreParteEspacioPublicidad, new List<SelectListItem>(), "Selecciona...", new { @id = "partes", @class = "form-control input-inset", @onchange = "cargarImporte(this);" })
                     @Html.ValidationMessageFor(model => model.NombreParteEspacioPublicidad, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -122,7 +122,25 @@
         }
 
     }
-
+    function cargarImporte(parte) {
+        if (parte.value !== "") {
+            $.ajax({
+                url: '/Publicidad/CargarImporte',
+                type: 'POST',
+                data: {
+                    'parte': parte.value
+                },
+                success: function (data) {
+                    // Create an Option object
+                    document.getElementById('Importe').value = data.importe;
+                    CalcularTotal();
+                },
+                error: function () {
+                    //Si hemos tenido error
+                }
+            });
+        }
+    }
 
     function cargarPartes(espacio) {
 
@@ -149,6 +167,8 @@
                         // Add an Option object to Drop Down List Box
                         document.getElementById('partes').options.add(opt);
                     }
+                    document.getElementById('Importe').value = data.lista[0].Importe;
+                    CalcularTotal();
 
                 },
                 error: function () {

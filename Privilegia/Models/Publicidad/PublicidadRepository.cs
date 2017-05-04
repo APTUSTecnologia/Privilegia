@@ -39,6 +39,14 @@ namespace Privilegia.Models.Publicidad
             }
         }
 
+        public List<ParteEspacioPublicidadModel> ObtenerPartesEspacioDePublicidad()
+        {
+            using (Contexto context = new Contexto())
+            {
+                return context.PartesEspaciosPublicidad.OfType<ParteEspacioPublicidadModel>().ToList();
+            }
+        }
+
         public List<PublicidadModel> ObtenerPublicidadPorIdPartner(string idPartner)
         {
             using (Contexto context = new Contexto())

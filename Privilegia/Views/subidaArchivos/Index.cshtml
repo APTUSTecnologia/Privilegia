@@ -22,7 +22,16 @@
                 <div class="form-group">
                     @Html.Label("Proveedor", new { @class = "control-label" })
                     <select class="form-control" name="proveedor">
-                        <option value="B85171379">Yo Respondo</option>
+                        <option value="Yo Respondo">Yo Respondo</option>
+                        <option value="La Caixa">La Caixa</option>  
+                        <option value="AXA">AXA</option>
+                        <option value="Renta 4">Renta 4</option>
+                        <option value="Woltos Kluwe">Woltos Kluwe</option>
+                        <option value="Viajes el Corte Ingles">Viajes el Corte Ingles</option>
+                        <option value="Avis">Avis</option>
+                        <option value="Haq">Haq</option>
+                        <option value="Endesa">Endesa</option>
+                       
                     </select>
                 </div>
             </div>
@@ -46,29 +55,33 @@
 {
     <script type="text/javascript">
 
+
+       
+
         function cargarNotificaciones() {
             console.log('@ViewBag.error');
             if ('@ViewBag.error' !== "null" && '@ViewBag.error' !== "") {
                 $.notify({
-                    icon: 'glyphicon glyphicon-remove',
-                    title: "Error",
-                    message: '<strong>Revise el documento.</strong> \n Puede que el Partner no exista.',
-                    newest_on_top: true
-                }, {
-                    offset: {
-                        y: 100
+                        icon: 'glyphicon glyphicon-remove',
+                        title: "Error",
+                        message: '<strong>@ViewBag.error.</strong> \n',
+                        newest_on_top: true
                     },
-                    placement: {
-                        from: "bottom",
-                        align: "center"
-                    },
-                    type: 'danger',
+                    {
+                        offset: {
+                            y: 100
+                        },
+                        placement: {
+                            from: "bottom",
+                            align: "center"
+                        },
+                        type: 'danger',
 
-                    animate: {
-                        enter: 'animated fadeInRight',
-                        exit: 'animated fadeOutRight'
-                    }
-                });
+                        animate: {
+                            enter: 'animated fadeInRight',
+                            exit: 'animated fadeOutRight'
+                        }
+                    });
             }
         };
 
@@ -88,30 +101,36 @@
 
             });
 
-            setTimeout(function () {
-                notify.update('message', '<strong>Leyendo registros...</strong>');
-            }, 2000);
+            setTimeout(function() {
+                    notify.update('message', '<strong>Leyendo registros...</strong>');
+                },
+                2000);
 
-            setTimeout(function () {
-                notify.update('message', '<strong>Procesando registros...</strong>');
-            }, 3000);
+            setTimeout(function() {
+                    notify.update('message', '<strong>Procesando registros...</strong>');
+                },
+                3000);
 
-            setTimeout(function () {
-                notify.update('message', '<strong>Guardando registros...</strong>');
-            }, 4000);
+            setTimeout(function() {
+                    notify.update('message', '<strong>Guardando registros...</strong>');
+                },
+                4000);
 
-            setTimeout(function () {
-                notify.update('message', '<strong>Finalizando...</strong>');
-                $("#myform").submit();
-            }, 4000);
+            setTimeout(function() {
+                    notify.update('message', '<strong>Finalizando...</strong>');
+                    $("#myform").submit();
+                },
+                4000);
             //do something
 
 
         }
 
         $(document)
-            .ready(function () {
+            .ready(function() {
                 cargarNotificaciones();
+
+                
             });
     </script>
 }

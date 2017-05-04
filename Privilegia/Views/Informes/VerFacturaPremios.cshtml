@@ -1,0 +1,93 @@
+﻿@Styles.Render("~/Content/css")
+@using System.Globalization
+@using System.Runtime.CompilerServices
+@model Privilegia.ViewModels.FacturaPremiosViewModel
+<div class="container doc_factura">
+    <div class="row">
+        <div class="col-md-12 encabezado">
+            <img src="/Images/logo_mutualidad_abogacia.png" alt="Mutualidad de la Abogacía">
+            <img class="pull-right" src="/Images/club_privilegia.png" alt="programa Privilegia">
+        </div>
+    </div>
+    <div class="row direcciones">
+        <div class="col-md-12">
+            <p>
+                Cif.: V28024149<br>
+                Serrano, 9<br>
+                28001 MADRID<br><br>
+                902 25 50 50<br>
+                www.mutualidadabogacia.com
+            </p>
+        </div>
+        <div class="col-md-4 pull-right">
+            <p class="facturado">
+                <strong>
+                    @Model.Partner.Nombre<br>
+                    @Model.Partner.DireccionPrincipal.Calle @Model.Partner.DireccionPrincipal.Numero<br>
+                    @Model.Partner.DireccionPrincipal.CodigoPostal @Model.Partner.DireccionPrincipal.Provincia<br><br><br>
+                    CIF.: @Model.Partner.Cif<br><br>
+                </strong>
+                @Model.Fecha
+
+            </p>
+        </div>
+    </div>
+    <h2 class="text-center"><span class="glyphicon glyphicon-list-alt"></span> <strong>@Model.Factura.Titulo</strong></h2>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table  table-striped factura">
+                <thead>
+                    <tr>
+                        <th>CONCEPTO</th>
+                        <th class="text-center"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @*@{
+                            var suma = 0.0;
+                            foreach (var premio in Model.Lista)
+                            {
+                                suma = suma + Double.Parse(premio.ImportePago, CultureInfo.InvariantCulture);
+                                <tr>
+                                    <td>@premio.CodigoPcto</td>
+                                    <td>@premio.CodigoCliente</td>
+                                    <td class="text-center">@premio.ImportePago €</td>
+                                </tr>
+                            }
+                        }*@
+                    <tr>
+                        <td>@Model.Factura.Concepto</td>
+                        <td class="text-center">@Model.Factura.Total € </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="text-right">21% I.V.A.</td>
+                        @{
+                            var iva = Double.Parse(Model.Factura.Total.Replace(".", ",")) * 0.21;
+                        }
+                        <td class="text-center">@Math.Round(iva, 2).ToString(CultureInfo.InvariantCulture) €</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right"><strong>TOTAL FACTURA</strong></td>
+                        @{
+                            var total = Double.Parse(Model.Factura.Total.Replace(".",",")) + iva;
+                        }
+                        <td class="text-center"><strong>@Math.Round(total, 2).ToString(CultureInfo.InvariantCulture) €</strong></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-12 text-center">
+            <p>
+                <strong>Condiciones de Pago.</strong> Mediante transferencia a nombre de <strong>Mutualidad de la Abogacía</strong> a la cuenta que indicamos:
+            </p>
+            <p>
+                <strong>LA CAIXA ES17 2100 5731 74 0200074265</strong>
+            </p>
+        </div>
+    </div>
+</div>
+

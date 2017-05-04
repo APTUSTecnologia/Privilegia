@@ -5,6 +5,7 @@ using System.Web;
 using FileHelpers;
 using Privilegia.Models.FacturacionPartners;
 using Privilegia.Models.FacturasPremios;
+using Privilegia.Models.Ficheros;
 using Privilegia.Models.Incidencias;
 
 namespace Privilegia.Models.FacturacionPartners
@@ -31,14 +32,25 @@ namespace Privilegia.Models.FacturacionPartners
             }
         }
 
-        public FacturacionPremiosModel ObtenerFacturaPremiosPorIdFactura(string idFactura)
+        public List<FacturacionPremiosModel> ObtenerFacturaPremiosPorIdFactura(string idFactura)
         {
-            throw new NotImplementedException();
+            using (Contexto context = new Contexto())
+            {
+                var lista = context.FacturacionPremios.OfType<FacturacionPremiosModel>().Where(d => d.IdFactura == idFactura).ToList();
+
+                return lista;
+            }
         }
 
-        public FacturacionPremiosModel ObtenerFacturasPremiosPorMutualista(string idMutualista)
+        
+        public List<FacturacionPremiosModel> ObtenerFacturasPremiosPorMutualista()
         {
-            throw new NotImplementedException();
+            using (Contexto context = new Contexto())
+            {
+                var lista = context.FacturacionPremios.OfType<FacturacionPremiosModel>().ToList();
+
+                return lista;
+            }
         }
 
         public List<FacturacionPremiosModel> ObtenerFacturacionPorMes(string mes)
@@ -46,6 +58,45 @@ namespace Privilegia.Models.FacturacionPartners
             throw new NotImplementedException();
         }
 
+
+        public List<FacturacionPremiosModel> MapearLaCaixa(Carga ficheroLaCaixa)
+        {
+            if (ficheroLaCaixa != null && ficheroLaCaixa.NumRegsProces > 0)
+            {
+                var lista = new List<FacturacionPremiosModel>();
+
+                foreach (var pedido in ficheroLaCaixa.Pedidos)
+                {
+                    
+                    if (pedido.Pagos != null && pedido.Pagos.Pago != null)
+                    {
+                        var importe = Double.Parse(pedido.Pagos.Pago.Importe);
+                        lista.Add(new FacturacionPremiosModel()
+                        {
+                            Id = Guid.NewGuid(),
+                            ImportePago = pedido.Pagos.Pago.Importe,
+                            CodigoPcto = pedido.CodigoProducto,
+                            CodigoCliente = pedido.Cliente.Nif,
+                            ComisionPago = pedido.Pagos.Pago.Importe,
+                            Descripcion = pedido.Descripcion,
+                            FechaContratacion = pedido.FechaContratacion,
+                            Observaciones = pedido.Observaciones,
+                            FechaPago = DateTime.Today.ToShortDateString(),
+                            Temp = 1,
+                            Situacion = pedido.Situacion.ToString(),
+                            SituacionPago = pedido.Pagos.Pago.Situacion.ToString(),
+                            NumeroPedido = pedido.NumPedido,
+                            Valor = pedido.Valor.ToString(),
+                            FechaDeCreacion = DateTime.Today.ToShortDateString()
+                        });
+                          
+
+                    }
+                }
+                return lista;
+            }
+            return null;
+        }
 
         public List<FacturacionPremiosModel> MapearErrores(List<ErrorInfo> errores)
         {

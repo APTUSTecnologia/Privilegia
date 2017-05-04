@@ -13,5 +13,7 @@ namespace Privilegia.Models
 
         public string IdEspacioPublicidad { get; set; }
 
+        public string Importe { get; set; }
+
     }
 }

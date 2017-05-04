@@ -106,7 +106,7 @@
                             "bSortable": false,
                             "render": function (data, type, row) {
                                 var urlEditar = '@Url.Action("EditarPublicidad", "Publicidad")/' + row[0];
-                                var urlBorrar = '@Url.Action("Detalles", "Publicidad")/' + row[0];
+                                var urlBorrar = '@Url.Action("EliminarPublicidad", "Publicidad")/' + row[0];
                                 var urlVer = '@Url.Action("Detalles", "Publicidad")/' + row[0];
 
                                 if (row[8] !== null) {

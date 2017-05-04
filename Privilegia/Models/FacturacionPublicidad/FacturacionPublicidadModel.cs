@@ -25,9 +25,18 @@ namespace Privilegia.Models
 
         public bool PlanDeMedios { get; set;  }
 
+        [Required]
         public string Total { get; set; }
 
         public string FechaCreacion { get; set; }
+
+        [Required]
+        public string Titulo { get; set; }
+
+        [Required]
+        public string Concepto { get; set; }
+
+        public string Estado { get; set; }
 
     }
 

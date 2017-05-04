@@ -70,14 +70,14 @@
             <div class="col-md-2">
                 <div class="form-group">
                     @Html.LabelFor(model => model.FechaInicio, new { @class = "control-label" })<span class="glyphicon glyphicon-calendar en_formulario"></span>
-                    @Html.TextBoxFor(model => model.FechaInicio, new { @id = "fechaInicioDatePicker", @class = "form-control" })
+                    @Html.TextBoxFor(model => model.FechaInicio, new { @id = "fechaInicioDatePicker", @class = "form-control", @Value = Model.FechaInicio })
                     @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     @Html.LabelFor(model => model.FechaFin, new { @class = "control-label" })<span class="glyphicon glyphicon-calendar en_formulario"></span>
-                    @Html.TextBoxFor(model => model.FechaFin, new { @id = "fechaFinDatePicker", @class = "form-control" })
+                    @Html.TextBoxFor(model => model.FechaFin, new { @id = "fechaFinDatePicker", @class = "form-control", @Value = Model.FechaFin })
                     @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -118,7 +118,7 @@
         }else if (importe !== "") {
             document.getElementById('Total').value = importe;
         } else {
-            console.log("nada");
+
         }
 
     }
@@ -138,8 +138,6 @@
                     // Create an Option object
                     $('#partes').html('');
                     for (var i = 0; i < data.lista.length; i++) {
-                        console.log(data.lista[i]);
-
                         var opt = document.createElement("option");
 
                         // Assign text and value to Option object
@@ -149,7 +147,7 @@
                         // Add an Option object to Drop Down List Box
                         document.getElementById('partes').options.add(opt);
                     }
-
+                    $('#partes').val("@Model.NombreParteEspacioPublicidad");
                 },
                 error: function () {
                     //Si hemos tenido error
@@ -175,6 +173,20 @@
             changeMonth: true,
             changeYear: true
         });
+
+
+        document.getElementById('PlanDeMedios').style.display = 'block';
+
+        if ('@Model.PlanDeMedios' === "True") {
+            document.getElementById('PlanDeMedios').checked = true;
+        } else {
+            document.getElementById('PlanDeMedios').checked = false;
+        }
+
+       
+
+        cargarPartes(document.getElementById('NombreEspacioPublicidad'));
+
 
 
     });

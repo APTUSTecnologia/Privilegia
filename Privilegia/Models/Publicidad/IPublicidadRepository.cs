@@ -20,5 +20,7 @@ namespace Privilegia.Models.Publicidad
         List<EspacioPublicidadModel> ObtenerEspaciosDePublicidad();
 
         List<ParteEspacioPublicidadModel> ObtenerPartesEspacioDePublicidadPorIdEspacio(string idEspacio);
+
+        List<ParteEspacioPublicidadModel> ObtenerPartesEspacioDePublicidad();
     }
 }

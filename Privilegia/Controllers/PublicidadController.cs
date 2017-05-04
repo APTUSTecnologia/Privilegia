@@ -8,6 +8,7 @@ using System.Web.Script.Serialization;
 using JQueryDataTables.Models;
 using Privilegia.Helpers;
 using Privilegia.Models;
+using Privilegia.Models.FacturacionPublicidad;
 using Privilegia.Models.Partner;
 using Privilegia.Models.Productos;
 using Privilegia.Models.Publicidad;
@@ -20,13 +21,13 @@ namespace Privilegia.Controllers
         private IPartnerRepository _partnerRepository;
         private IProductosRespository _productosRespository;
         private IPublicidadRepository _publicidadRepository;
+        private IFacturacionPublicidadRepository _facturacionPublicidadRepository;
 
         public PublicidadController()
         {
             _partnerRepository = new PartnerRepository();
             _productosRespository = new ProductosRespository();
             _publicidadRepository = new PublicidadRepository();
-
         }
 
         // GET: Publicidad
@@ -101,7 +102,23 @@ namespace Privilegia.Controllers
             }
 
         }
+        [HttpPost]
+        public ActionResult CargarImporte(string parte)
+        {
 
+            try
+            {
+                var importe =  _publicidadRepository.ObtenerPartesEspacioDePublicidad().First(m => m.Nombre == parte).Importe;
+
+                return Json(new { importe = importe, success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false });
+                throw;
+            }
+
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -190,6 +207,40 @@ namespace Privilegia.Controllers
             return View();
         }
 
+        // GET: People/Delete/5
+        public ActionResult EliminarPublicidad(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PublicidadModel publicidad = _publicidadRepository.ObtenerPublicidadPorId(id);
+
+            if (publicidad == null)
+            {
+                return HttpNotFound();
+            }
+
+            var partner = _partnerRepository.ObtenerPartnerPorId(publicidad.IdPartner);
+
+            publicidad.Partner = partner;
+
+            return View(publicidad);
+        }
+
+        // POST: People/Delete/5
+        public ActionResult EliminarPublicidadConfirmed(string idPublicidad)
+        {
+            var publicidad = _publicidadRepository.ObtenerPublicidadPorId(idPublicidad);
+
+            if (publicidad != null)
+            {
+                
+                _publicidadRepository.Eliminar(publicidad);
+            }
+
+            return RedirectToAction("Index");
+        }
 
         public ActionResult GetEventosCalendario()
         {
@@ -349,6 +400,23 @@ namespace Privilegia.Controllers
                 aaData = result
             },
                         JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ExisteFactura(string idPublicidad)
+        {
+            var Publicidad = _publicidadRepository.ObtenerPublicidadPorId(idPublicidad);
+
+            
+            if (Publicidad.IdFactura != null)
+            {
+                return Json(new { success = true, responseText = "Tiene Factura", idFactura = Publicidad.IdFactura },
+                    JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, responseText = "Podemos crear factura" }, JsonRequestBehavior.AllowGet);
+            }
+
         }
 
     }

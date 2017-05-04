@@ -1,6 +1,6 @@
 ﻿@model Privilegia.Models.Productos.ProductoModel
 
-<div>
+<div class="ficha">
     <h2>Producto: @Html.DisplayFor(model => model.Codigo)</h2>
     <hr />
     <dl class="dl-horizontal">
@@ -54,15 +54,13 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PremioValor)
+            @Html.DisplayFor(model => model.PremioValor) @(Model.TipoPremio.Equals("E") ? " €" : " %")
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.TipoPremio)
+            @Html.DisplayNameFor(model => model.TipoComision)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.TipoPremio)
+            @(Model.TipoPremio.Equals("I") ? "Indirecta" : " Directa")
         </dd>
 
         <dt>
@@ -70,16 +68,18 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ComisionValor)
+            @(Model.TipoComision.Equals("I") ? "Importe Mutualidad: " + Html.DisplayFor(model => model.ImporteMutualidad) + " %" + " - Importe Mutualista: " + Html.DisplayFor(model => model.ImporteMutualista) + " %" : "" + Html.DisplayFor(model => model.ComisionValor) + " €")
+
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoComision)
-        </dt>
+        @*
+            <dt>
+                @Html.DisplayNameFor(model => model.TipoComision)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TipoComision)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.TipoComision)
+            </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.FechaCreacion)
@@ -90,8 +90,9 @@
         </dd>
 
     </dl>
+
+    <p>
+        <a class="btn btn-primary" href='@Url.Action("EditarProducto","Productos", new {id = Model.Id})'>Editar</a>
+        <a class="btn btn-warning" href='@Url.Action("Index","Productos")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+    </p>
 </div>
-<p>
-    <a class="btn btn-primary" href='@Url.Action("EditarProducto","Productos", new {id = Model.Id})'>Editar</a>
-    <a class="btn btn-warning" href='@Url.Action("Index","Productos")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
-</p>

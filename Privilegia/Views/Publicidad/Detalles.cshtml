@@ -1,6 +1,6 @@
 ﻿@model Privilegia.Models.PublicidadModel
 
-<div>
+<div class="ficha">
     <h2>Publicidad: @Html.DisplayFor(model => model.Partner.Nombre)</h2>
     <hr />
     <dl class="dl-horizontal">
@@ -61,8 +61,9 @@
         </dd>
 
     </dl>
+
+    <p>
+        <a class="btn btn-primary" href='@Url.Action("EditarPublicidad","Publicidad", new {id = Model.Id})'>Editar</a>
+        <a class="btn btn-warning" href='@Url.Action("Index","Publicidad")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+    </p>
 </div>
-<p>
-    <a class="btn btn-primary" href='@Url.Action("EditarPublicidad","Publicidad", new {id = Model.Id})'>Editar</a>
-    <a class="btn btn-warning" href='@Url.Action("Index","Publicidad")'>Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
-</p>

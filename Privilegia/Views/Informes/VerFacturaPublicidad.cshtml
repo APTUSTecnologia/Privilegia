@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12 encabezado">
             <img src="/Images/logo_mutualidad_abogacia.png" alt="Mutualidad de la Abogacía">
-            <img class="pull-right" src="/Images/club_privilegia.png" alt="programa Privilegia">
+            <img class="pull-right" src="/Images/factura_privilegia.png" alt="programa Privilegia">
         </div>
     </div>
     <div class="row direcciones">
@@ -31,7 +31,7 @@
             </p>
         </div>
     </div>
-    <h2 class="text-center"><span class="glyphicon glyphicon-list-alt"></span> <strong>Factura Nº PUB12-2016</strong></h2>
+    <h2 class="text-center"><span class="glyphicon glyphicon-list-alt"></span> <strong>@Model.Factura.Titulo</strong></h2>
     <div class="row">
         <div class="col-md-12">
             <table class="table  table-striped factura">
@@ -44,34 +44,58 @@
 
                 <tbody>
                     @{
-                        var suma = 0.0;
-                        foreach (var publicidad in Model.ListadePublicidad)
+                        //var suma = 0.0;
+                        //foreach (var publicidad in Model.ListadePublicidad)
+                        //{
+                        //    suma = suma + Double.Parse(publicidad.Total, CultureInfo.InvariantCulture);
+
+                        //}
+                        if (Model.ListadePublicidad[0].PlanDeMedios)
                         {
-                            suma = suma + Double.Parse(publicidad.Total, CultureInfo.InvariantCulture);
                             <tr>
-                                <td>@publicidad.NombreEspacioPublicidad - @publicidad.NombreParteEspacioPublicidad</td>
-                                <td class="text-center">@publicidad.Total €</td>
+                                <td>@Model.Factura.Concepto</td>
+                                <td class="text-center">@Model.Factura.Total € </td>
                             </tr>
                         }
+                        else
+                        {
+                            foreach (var publicidad in Model.ListadePublicidad)
+                            {
+                                <tr>
+                                    <td>@publicidad.NombreEspacioPublicidad - @publicidad.NombreParteEspacioPublicidad</td>
+                                    <td class="text-center">@Model.Factura.Total € </td>
+                                </tr>
+                            }
+                        }
+
                     }
-                    <tr>
-                        <td></td>
-                        <td class="text-center"></td>
-                    </tr>
-                    <tr class="borde_oscuro" >
-                        <td class="text-right prueba">SUMA</td>
-                        <td class="text-center">@suma €</td>
-                    </tr>
-                    <tr>
+                   
+                   <tr>
                         <td class="text-right">21% I.V.A.</td>
-                        @{ var iva = Math.Round(suma * 0.21, 2);}
-                        <td class="text-center">@iva €</td>
+                        @{
+                            var iva = Double.Parse(Model.Factura.Total.Replace(".", ",")) * 0.21;
+                        }
+                        <td class="text-center">@Math.Round(iva, 2).ToString(CultureInfo.InvariantCulture) €</td>
                     </tr>
                     <tr>
                         <td class="text-right"><strong>TOTAL FACTURA</strong></td>
-                        @{ var total = Math.Round(suma + iva, 2);}
-                        <td class="text-center"><strong>@total €</strong></td>
+                        @{
+                            var total = Double.Parse(Model.Factura.Total.Replace(".", ",")) + iva;
+                        }
+                        <td class="text-center"><strong>@Math.Round(total, 2).ToString(CultureInfo.InvariantCulture) €</strong></td>
                     </tr>
+
+
+
+                    @*<tr>
+                        <td class="text-right">Aplicado 21% I.V.A.</td>
+                        <td class="text-center"></td>
+                    </tr>
+                    <tr>
+                        <td class="text-right"><strong>TOTAL FACTURA</strong></td>
+
+                        <td class="text-center"><strong>@Model.Factura.Total €</strong></td>
+                    </tr>*@
                 </tbody>
             </table>
         </div>

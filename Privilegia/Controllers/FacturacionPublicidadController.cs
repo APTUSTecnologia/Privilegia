@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using JQueryDataTables.Models;
@@ -35,6 +36,8 @@ namespace Privilegia.Controllers
 
             return View();
         }
+
+       
 
         public ActionResult CargarPublicidad(string idPartner, bool medios)
         {
@@ -137,7 +140,7 @@ namespace Privilegia.Controllers
 
             try
             {
-                total = total + (total*0.21);
+                //total = total + (total*0.21);
                 total = Math.Round(total, 2);
                 if (existeFactura)
                 {
@@ -167,7 +170,10 @@ namespace Privilegia.Controllers
                             FechaCreacion = DateTime.Today.ToShortDateString(),
                             IdPublicidad = publi.Id.ToString(),
                             PlanDeMedios = medios,
-                            Total = total.ToString("##.##")
+                            Titulo = "Factura: " + DateTime.Today.ToShortDateString(),
+                            Concepto = medios ? "Plan de Medios " : publi.NombreEspacioPublicidad+ " " + publi.NombreParteEspacioPublicidad,
+                            Total = total.ToString("##.##"),
+                            Estado = "Emitida"
                         };
 
                         //Insertamos los registros de la factura 
@@ -197,7 +203,10 @@ namespace Privilegia.Controllers
                             FechaCreacion = DateTime.Today.ToShortDateString(),
                             IdPublicidad = publi.Id.ToString(),
                             PlanDeMedios = medios,
-                            Total = total.ToString("##.###")
+                            Titulo = "Factura: " + DateTime.Today.ToShortDateString(),
+                            Concepto = medios ? "Plan de Medios " : publi.NombreEspacioPublicidad + " " + publi.NombreParteEspacioPublicidad,
+                            Total = total.ToString("##.###"),
+                            Estado = "Emitida"
                         };
 
                         //Insertamos los registros de la factura 

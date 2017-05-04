@@ -23,15 +23,12 @@ namespace Privilegia.Models.Productos
         [Required]
         public string Estado { get; set; }
 
-        [Required]
         [Display(Name = "Codigo de producto")]
         public string Codigo { get; set; }
 
-        [Required]
         [Display(Name = "Valor del premio")]
         public float PremioValor { get; set; }
 
-        [Required]
         [StringLength(1)]
         [Display(Name = "Tipo de premio")]
         public string TipoPremio { get; set; }
@@ -51,7 +48,6 @@ namespace Privilegia.Models.Productos
 
         [Display(Name = "Tipo de comisión")]
         [StringLength(1)]
-        [Required]
         public string TipoComision { get; set; }
 
         [Required]

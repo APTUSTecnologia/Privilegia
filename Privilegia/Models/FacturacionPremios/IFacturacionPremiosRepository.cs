@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using FileHelpers;
+using Privilegia.Models.Ficheros;
 using Privilegia.Models.Incidencias;
 
 namespace Privilegia.Models.FacturacionPartners
@@ -13,13 +14,15 @@ namespace Privilegia.Models.FacturacionPartners
 
         List<FacturacionPremiosModel> ObtenerFacturasPremiosPorNifPartner(string nifPartner);
 
-        FacturacionPremiosModel ObtenerFacturaPremiosPorIdFactura(string idFactura);
+        List<FacturacionPremiosModel> ObtenerFacturaPremiosPorIdFactura(string idFactura);
 
-        FacturacionPremiosModel ObtenerFacturasPremiosPorMutualista(string idMutualista);
+        List<FacturacionPremiosModel> ObtenerFacturasPremiosPorMutualista();
 
         List<FacturacionPremiosModel> ObtenerFacturacionPorMes(string mes);
 
         List<FacturacionPremiosModel> MapearStandar(List<FicheroYoRespondo> ficheroYoRespondo);
+
+        List<FacturacionPremiosModel> MapearLaCaixa(Carga ficheroLaCaixa);
 
         List<FacturacionPremiosModel> MapearErrores(List<ErrorInfo> errores);
 

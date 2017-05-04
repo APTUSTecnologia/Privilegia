@@ -6,9 +6,10 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Partner @Model.Nombre</h2>
-<div>
-    <hr />
+
+<div class="ficha">
+    <h2>Partner @Model.Nombre</h2>
+    <hr/>
     <dl class="dl-horizontal">
         @if (Model.Logo != null && Model.Logo.FileType == FileType.Logo)
         {
@@ -16,7 +17,7 @@
                 Logo
             </dt>
             <dd>
-                <img src="~/Logos?id=@Model.Logo.Id" alt="logo"  width="150px" height="50px"/>
+                <img src="~/Logos?id=@Model.Logo.Id" alt="logo" width="150px" height="50px"/>
             </dd>
         }
 
@@ -47,20 +48,20 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions">          
+        <div class="form-actions">
 
             @{
                 var modelo = Model.GetType().ToString();
                 if (Model.GetType() == typeof(Privilegia.Models.PartnerInterno))
                 {
-                    <a class="btn btn-primary" href='@Url.Action("EditarPartnerInterno","Partners", new {id = Model.Id})'>Editar</a>
+                    <a class="btn btn-primary" href='@Url.Action("EditarPartnerInterno", "Partners", new {id = Model.Id})'>Editar</a>
                 }
-                else if(Model.GetType() == typeof(Privilegia.Models.PartnerExterno))
+                else if (Model.GetType() == typeof(Privilegia.Models.PartnerExterno))
                 {
-                    <a class="btn btn-primary" href='@Url.Action("EditarPartnerExterno","Partners", new {id = Model.Id})'>Editar</a>
+                    <a class="btn btn-primary" href='@Url.Action("EditarPartnerExterno", "Partners", new {id = Model.Id})'>Editar</a>
                 }
             }
-            <a class="btn btn-warning " href="@Url.Action("Index","Partners")">Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+            <a class="btn btn-warning " href="@Url.Action("Index", "Partners")">Volver al listado <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
         </div>
     }
 </div>
